@@ -1,0 +1,194 @@
+header {
+    position: fixed;
+    width: 100%;
+    height: 70px;
+    background: rgba(0, 0, 0, 0.15);
+    z-index: 99999999;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+.header {
+    width: 100%;
+    max-width: 1250px;
+    height: 110px;
+    margin: 0 auto;
+    display: flex;
+}
+
+.logoBox {
+    width: 360px;
+    height: 70px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.logoBox a {
+    float: left;
+    width: 360px;
+    height: 100%;
+}
+
+.logoBox .logo {
+    width: 100%;
+    height: 100%;
+}
+
+.logoBox .logo.textCN {
+    background: url("../images/index/logo1.png") no-repeat center;
+}
+
+.logoBox .logo.textEN {
+    background: url("../images/index/logo1-EN.png") no-repeat center;
+}
+
+.header .lx-nav {
+    flex: 1;
+    vertical-align: top;
+    height: 70px;
+    line-height: 70px;
+    text-align: right;
+    font-size: 0;
+    color: white;
+}
+
+.header .lx-nav span {
+    display: block;
+    font-size: 1.4rem;
+    height: 100%;
+    padding: 0 25px;
+    transition: color .3s;
+}
+
+.header .lx-nav > div {
+    display: inline-block;
+    vertical-align: top;
+    text-align: center;
+    position: relative;
+}
+
+.header .lx-nav .lx-nav-link-btn {
+    cursor: pointer;
+}
+
+.header .lx-nav > div > .lx-nav-link-btn {
+    position: relative;
+    display: block;
+    height: 70px;
+    overflow: hidden;
+}
+
+.header .lx-nav > div:hover > .lx-nav-link-btn::before {
+    bottom: 0;
+}
+
+.header .lx-nav > div > .lx-nav-link-btn::before {
+    display: block;
+    content: '';
+    height: 100%;
+    width: 100%;
+    background: #ba0c2f;
+
+    /* 定位 */
+    position: absolute;
+    left: 0;
+    bottom: -70px;
+    z-index: -1;
+    transition: bottom .3s;
+}
+
+.header .lx-nav > div > .lx-nav-link-btn.active::before {
+    bottom: 0;
+}
+
+.header .lx-nav .second-lx-nav {
+    position: absolute;
+    top: 100%;
+    height: 0;
+    width: 300px;
+    overflow: hidden;
+}
+
+.header .lx-nav .second-lx-nav .second-lx-nav-box {
+    height: 165px;
+    font-size: 0;
+    position: absolute;
+    top: -160px;
+    transition: top .3s;
+}
+
+.header .lx-nav .second-lx-nav .second-lx-nav-box div {
+    display: table-row;
+    height: 55px;
+    line-height: 55px;
+    background: rgba(0, 0, 0, 0.15);
+}
+
+.header .lx-nav > div:hover .second-lx-nav {
+    height: 165px;
+}
+
+.header .lx-nav > div:hover .second-lx-nav .second-lx-nav-box {
+    top: 0;
+}
+
+.header .lx-nav .second-lx-nav .second-lx-nav-box .lx-nav-link-btn:hover span {
+    color: #ba0c2f;
+}
+
+.language {
+    cursor: default;
+}
+.language::after {
+    display: block;
+    content: '';
+    height: 25px;
+    width: 1px;
+    background: white;
+
+    /* 定位 */
+    position: absolute;
+    left: 0;
+    top: 22px;
+}
+.header .lx-nav .language div{
+    display: block!important;
+    width: 100%;
+}
+
+header.scroll {
+    background: white;
+}
+
+header.scroll span {
+    color: black;
+}
+
+header.scroll .language::after {
+    background: black;
+}
+
+header.scroll .header .lx-nav .second-lx-nav .second-lx-nav-box div {
+    background: white;
+}
+
+header.scroll .logoBox .logo.textCN {
+    background: url("../images/index/logo2.png") no-repeat center;
+}
+
+header.scroll .logoBox .logo.textEN {
+    background: url("../images/index/logo2-EN.png") no-repeat center;
+}
+
+@media screen and (max-width: 1110px) {
+    header {
+        width: 1100px;
+        position: absolute;
+        top: 0;
+        left: 0;
+    }
+    .header {
+    }
+}

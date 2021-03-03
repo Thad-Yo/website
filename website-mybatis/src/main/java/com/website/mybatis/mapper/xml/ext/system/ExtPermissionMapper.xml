@@ -1,0 +1,160 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.system.ExtPermissionMapper">
+    <resultMap id="selectPermissionResultMap" type="com.website.mybatis.bean.ext.system.ExtPermissionModel">
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="menu_id" property="menuId" jdbcType="VARCHAR"/>
+        <result column="permission" property="permission" jdbcType="VARCHAR"/>
+        <result column="menu_ctrl" property="menuCtrl" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectPermission" resultMap="selectPermissionResultMap"
+            parameterType="com.website.mybatis.bean.ext.system.ExtPermissionModel">
+	SELECT DISTINCT
+		mrp.role_id,
+		mrp.menu_id,
+		mrp.permission,
+	    m.menu_controllor menu_ctrl
+	FROM
+		c_m_user u
+	INNER JOIN c_m_user_role ur ON u.user_id = ur.user_id AND ur.del_flag = '0'
+	INNER JOIN c_m_role_menu_permission mrp ON ur.role_id = mrp.role_id AND mrp.del_flag = '0'
+	INNER JOIN c_m_menu m ON m.menu_id = mrp.menu_id AND m.del_flag = '0'
+	WHERE
+		u.del_flag = '0'
+	AND u.user_id = #{userId, jdbcType=VARCHAR}
+  </select>
+
+    <resultMap id="selectRoleMenuPermissionResultMap" type="com.website.mybatis.bean.ext.system.ExtRoleMenuPermissionModel">
+        <result column="parent_menu_id" property="parentMenuId" jdbcType="VARCHAR"/>
+        <result column="menu_id" property="menuId" jdbcType="VARCHAR"/>
+        <result column="menu_name" property="menuName" jdbcType="VARCHAR"/>
+        <result column="menu_icon" property="menuIcon" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="flag" property="flag" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectRoleMenuPermission" resultMap="selectRoleMenuPermissionResultMap"
+            parameterType="com.website.mybatis.bean.ext.system.ExtRoleMenuPermissionModel">
+        SELECT
+            parent_menu_id,
+            menu_id,
+            menu_name,
+            menu_icon,
+            role_id,
+            flag
+        FROM
+            (
+                SELECT DISTINCT
+                    m.parent_menu_id AS parent_menu_id,
+                    m.menu_id AS menu_id,
+                    m.menu_name AS menu_name,
+                    m.menu_icon AS menu_icon,
+                    '' AS role_id,
+                    '1' AS flag,
+                    m.sort_key
+                FROM
+                    c_m_menu m
+                INNER JOIN c_m_menu_permission mp ON mp.menu_id = m.menu_id
+                AND mp.del_flag = '0'
+                WHERE
+                    m.del_flag = '0'
+                UNION ALL
+                    SELECT
+                        mp.menu_id AS parent_menu_id,
+                        mp.permission AS menu_id,
+                        mp.permission_name AS menu_name,
+                        '' AS menu_icon,
+                        rmp.role_id,
+                        '2' AS flag,
+                        99999 AS sort_key
+                    FROM
+                        c_m_menu_permission mp
+                    LEFT JOIN c_m_role_menu_permission rmp ON mp.menu_id = rmp.menu_id
+                    AND rmp.permission = mp.permission
+                    AND rmp.role_id = #{roleId, jdbcType=VARCHAR}
+                    WHERE
+                        mp.del_flag = '0'
+            ) A
+        ORDER BY
+            a.flag,
+            a.sort_key
+    </select>
+
+
+    <resultMap id="selectUserResultMap" type="com.website.mybatis.bean.ext.system.ExtUserModel">
+        <id column="user_id" property="userId" jdbcType="INTEGER"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="des3" property="des3" jdbcType="VARCHAR"/>
+        <result column="mobile_number" property="mobileNumber" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="email_address" property="emailAddress" jdbcType="VARCHAR"/>
+        <result column="user_flag" property="userFlag" jdbcType="VARCHAR"/>
+        <result column="notes" property="notes" jdbcType="VARCHAR"/>
+        <result column="del_flag" property="delFlag" jdbcType="VARCHAR"/>
+        <result column="create_group_cd" property="createGroupCd" jdbcType="VARCHAR"/>
+        <result column="create_user_cd" property="createUserCd" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="VARCHAR"/>
+        <result column="update_group_cd" property="updateGroupCd" jdbcType="VARCHAR"/>
+        <result column="update_user_cd" property="updateUserCd" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="VARCHAR"/>
+        <result column="role_id" property="roleId" jdbcType="INTEGER"/>
+        <result column="role" property="role" jdbcType="VARCHAR"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Example_Where_Clause">
+        <where>
+            <foreach collection="oredCriteria" item="criteria" separator="or">
+                <if test="criteria.valid">
+                    <trim prefix="(" suffix=")" prefixOverrides="and">
+                        <foreach collection="criteria.criteria" item="criterion">
+                            <choose>
+                                <when test="criterion.noValue">
+                                    and ${criterion.condition}
+                                </when>
+                                <when test="criterion.singleValue">
+                                    and ${criterion.condition} #{criterion.value}
+                                </when>
+                                <when test="criterion.betweenValue">
+                                    and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                                </when>
+                                <when test="criterion.listValue">
+                                    and ${criterion.condition}
+                                    <foreach collection="criterion.value" item="listItem" open="(" close=")"
+                                             separator=",">
+                                        #{listItem}
+                                    </foreach>
+                                </when>
+                            </choose>
+                        </foreach>
+                    </trim>
+                </if>
+            </foreach>
+        </where>
+    </sql>
+
+    <select id="selectUserByExample" resultMap="selectUserResultMap"
+            parameterType="com.website.mybatis.bean.auto.system.CMUserExample">
+        select
+        <if test="distinct">
+            distinct
+        </if>
+        *
+        FROM
+        (select u.*, role.role_id, role.role, role.role_name from
+        c_m_user u
+        LEFT JOIN c_m_user_role ur ON u.user_id = ur.user_id AND ur.del_flag = '0'
+        LEFT JOIN c_m_role role ON ur.role_id = role.role_id AND role.del_flag = '0'
+        ) u
+        <if test="_parameter != null">
+            <include refid="Example_Where_Clause"/>
+        </if>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limitStart >= 0">
+            limit #{limitStart} , #{limitEnd}
+        </if>
+    </select>
+</mapper>

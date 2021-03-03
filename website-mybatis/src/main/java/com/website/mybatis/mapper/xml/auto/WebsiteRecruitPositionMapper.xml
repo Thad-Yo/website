@@ -1,0 +1,454 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.WebsiteRecruitPositionMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteRecruitPosition" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="recruit_position_id" property="recruitPositionId" jdbcType="INTEGER" />
+    <result column="recruit_position" property="recruitPosition" jdbcType="VARCHAR" />
+    <result column="salary" property="salary" jdbcType="VARCHAR" />
+    <result column="recruit_city" property="recruitCity" jdbcType="VARCHAR" />
+    <result column="recruit_city_name" property="recruitCityName" jdbcType="VARCHAR" />
+    <result column="recruit_type" property="recruitType" jdbcType="CHAR" />
+    <result column="position_type" property="positionType" jdbcType="VARCHAR" />
+    <result column="position_type_name" property="positionTypeName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.website.mybatis.bean.auto.WebsiteRecruitPosition" extends="BaseResultMap" >
+    <result column="position_introduce" property="positionIntroduce" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, recruit_position_id, recruit_position, salary, recruit_city, recruit_city_name, 
+    recruit_type, position_type, position_type_name, `status`, del_flag, create_user, 
+    create_time, update_user, update_time
+  </sql>
+  <sql id="Blob_Column_List" >
+    position_introduce
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.website.mybatis.bean.auto.WebsiteRecruitPositionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_recruit_position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.WebsiteRecruitPositionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from website_recruit_position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_recruit_position
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from website_recruit_position
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.WebsiteRecruitPositionExample" >
+    delete from website_recruit_position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.WebsiteRecruitPosition" >
+    insert into website_recruit_position (id, recruit_position_id, recruit_position, 
+      salary, recruit_city, recruit_city_name, 
+      recruit_type, position_type, position_type_name, 
+      `status`, del_flag, create_user, 
+      create_time, update_user, update_time, 
+      position_introduce)
+    values (#{id,jdbcType=INTEGER}, #{recruitPositionId,jdbcType=INTEGER}, #{recruitPosition,jdbcType=VARCHAR}, 
+      #{salary,jdbcType=VARCHAR}, #{recruitCity,jdbcType=VARCHAR}, #{recruitCityName,jdbcType=VARCHAR}, 
+      #{recruitType,jdbcType=CHAR}, #{positionType,jdbcType=VARCHAR}, #{positionTypeName,jdbcType=VARCHAR}, 
+      #{status,jdbcType=CHAR}, #{delFlag,jdbcType=CHAR}, #{createUser,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+      #{positionIntroduce,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.WebsiteRecruitPosition" >
+    insert into website_recruit_position
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="recruitPositionId != null" >
+        recruit_position_id,
+      </if>
+      <if test="recruitPosition != null" >
+        recruit_position,
+      </if>
+      <if test="salary != null" >
+        salary,
+      </if>
+      <if test="recruitCity != null" >
+        recruit_city,
+      </if>
+      <if test="recruitCityName != null" >
+        recruit_city_name,
+      </if>
+      <if test="recruitType != null" >
+        recruit_type,
+      </if>
+      <if test="positionType != null" >
+        position_type,
+      </if>
+      <if test="positionTypeName != null" >
+        position_type_name,
+      </if>
+      <if test="status != null" >
+        `status`,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="positionIntroduce != null" >
+        position_introduce,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="recruitPositionId != null" >
+        #{recruitPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="recruitPosition != null" >
+        #{recruitPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitCity != null" >
+        #{recruitCity,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitCityName != null" >
+        #{recruitCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitType != null" >
+        #{recruitType,jdbcType=CHAR},
+      </if>
+      <if test="positionType != null" >
+        #{positionType,jdbcType=VARCHAR},
+      </if>
+      <if test="positionTypeName != null" >
+        #{positionTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="positionIntroduce != null" >
+        #{positionIntroduce,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.WebsiteRecruitPositionExample" resultType="java.lang.Integer" >
+    select count(*) from website_recruit_position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update website_recruit_position
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.recruitPositionId != null" >
+        recruit_position_id = #{record.recruitPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="record.recruitPosition != null" >
+        recruit_position = #{record.recruitPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.salary != null" >
+        salary = #{record.salary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recruitCity != null" >
+        recruit_city = #{record.recruitCity,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recruitCityName != null" >
+        recruit_city_name = #{record.recruitCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.recruitType != null" >
+        recruit_type = #{record.recruitType,jdbcType=CHAR},
+      </if>
+      <if test="record.positionType != null" >
+        position_type = #{record.positionType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionTypeName != null" >
+        position_type_name = #{record.positionTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        `status` = #{record.status,jdbcType=CHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionIntroduce != null" >
+        position_introduce = #{record.positionIntroduce,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update website_recruit_position
+    set id = #{record.id,jdbcType=INTEGER},
+      recruit_position_id = #{record.recruitPositionId,jdbcType=INTEGER},
+      recruit_position = #{record.recruitPosition,jdbcType=VARCHAR},
+      salary = #{record.salary,jdbcType=VARCHAR},
+      recruit_city = #{record.recruitCity,jdbcType=VARCHAR},
+      recruit_city_name = #{record.recruitCityName,jdbcType=VARCHAR},
+      recruit_type = #{record.recruitType,jdbcType=CHAR},
+      position_type = #{record.positionType,jdbcType=VARCHAR},
+      position_type_name = #{record.positionTypeName,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=CHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
+      position_introduce = #{record.positionIntroduce,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update website_recruit_position
+    set id = #{record.id,jdbcType=INTEGER},
+      recruit_position_id = #{record.recruitPositionId,jdbcType=INTEGER},
+      recruit_position = #{record.recruitPosition,jdbcType=VARCHAR},
+      salary = #{record.salary,jdbcType=VARCHAR},
+      recruit_city = #{record.recruitCity,jdbcType=VARCHAR},
+      recruit_city_name = #{record.recruitCityName,jdbcType=VARCHAR},
+      recruit_type = #{record.recruitType,jdbcType=CHAR},
+      position_type = #{record.positionType,jdbcType=VARCHAR},
+      position_type_name = #{record.positionTypeName,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=CHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.WebsiteRecruitPosition" >
+    update website_recruit_position
+    <set >
+      <if test="recruitPositionId != null" >
+        recruit_position_id = #{recruitPositionId,jdbcType=INTEGER},
+      </if>
+      <if test="recruitPosition != null" >
+        recruit_position = #{recruitPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="salary != null" >
+        salary = #{salary,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitCity != null" >
+        recruit_city = #{recruitCity,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitCityName != null" >
+        recruit_city_name = #{recruitCityName,jdbcType=VARCHAR},
+      </if>
+      <if test="recruitType != null" >
+        recruit_type = #{recruitType,jdbcType=CHAR},
+      </if>
+      <if test="positionType != null" >
+        position_type = #{positionType,jdbcType=VARCHAR},
+      </if>
+      <if test="positionTypeName != null" >
+        position_type_name = #{positionTypeName,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="positionIntroduce != null" >
+        position_introduce = #{positionIntroduce,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.website.mybatis.bean.auto.WebsiteRecruitPosition" >
+    update website_recruit_position
+    set recruit_position_id = #{recruitPositionId,jdbcType=INTEGER},
+      recruit_position = #{recruitPosition,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=VARCHAR},
+      recruit_city = #{recruitCity,jdbcType=VARCHAR},
+      recruit_city_name = #{recruitCityName,jdbcType=VARCHAR},
+      recruit_type = #{recruitType,jdbcType=CHAR},
+      position_type = #{positionType,jdbcType=VARCHAR},
+      position_type_name = #{positionTypeName,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      position_introduce = #{positionIntroduce,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.WebsiteRecruitPosition" >
+    update website_recruit_position
+    set recruit_position_id = #{recruitPositionId,jdbcType=INTEGER},
+      recruit_position = #{recruitPosition,jdbcType=VARCHAR},
+      salary = #{salary,jdbcType=VARCHAR},
+      recruit_city = #{recruitCity,jdbcType=VARCHAR},
+      recruit_city_name = #{recruitCityName,jdbcType=VARCHAR},
+      recruit_type = #{recruitType,jdbcType=CHAR},
+      position_type = #{positionType,jdbcType=VARCHAR},
+      position_type_name = #{positionTypeName,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

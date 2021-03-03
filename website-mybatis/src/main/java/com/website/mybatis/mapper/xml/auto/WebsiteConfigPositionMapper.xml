@@ -1,0 +1,309 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.WebsiteConfigPositionMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteConfigPosition" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="position_name" property="positionName" jdbcType="VARCHAR" />
+    <result column="matching_position_ids" property="matchingPositionIds" jdbcType="VARCHAR" />
+    <result column="matching_position" property="matchingPosition" jdbcType="VARCHAR" />
+    <result column="position_introduce" property="positionIntroduce" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="sort_number" property="sortNumber" jdbcType="INTEGER" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, position_name, matching_position_ids, matching_position, position_introduce, 
+    del_flag, create_user, create_time, update_user, update_time, sort_number
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.WebsiteConfigPositionExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from website_config_position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from website_config_position
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from website_config_position
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.WebsiteConfigPositionExample" >
+    delete from website_config_position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.WebsiteConfigPosition" >
+    insert into website_config_position (id, position_name, matching_position_ids, 
+      matching_position, position_introduce, del_flag, 
+      create_user, create_time, update_user, 
+      update_time, sort_number)
+    values (#{id,jdbcType=VARCHAR}, #{positionName,jdbcType=VARCHAR}, #{matchingPositionIds,jdbcType=VARCHAR}, 
+      #{matchingPosition,jdbcType=VARCHAR}, #{positionIntroduce,jdbcType=VARCHAR}, #{delFlag,jdbcType=CHAR}, 
+      #{createUser,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{updateUser,jdbcType=VARCHAR}, 
+      #{updateTime,jdbcType=VARCHAR}, #{sortNumber,jdbcType=INTEGER})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.WebsiteConfigPosition" >
+    insert into website_config_position
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="positionName != null" >
+        position_name,
+      </if>
+      <if test="matchingPositionIds != null" >
+        matching_position_ids,
+      </if>
+      <if test="matchingPosition != null" >
+        matching_position,
+      </if>
+      <if test="positionIntroduce != null" >
+        position_introduce,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="sortNumber != null" >
+        sort_number,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="positionName != null" >
+        #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchingPositionIds != null" >
+        #{matchingPositionIds,jdbcType=VARCHAR},
+      </if>
+      <if test="matchingPosition != null" >
+        #{matchingPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="positionIntroduce != null" >
+        #{positionIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNumber != null" >
+        #{sortNumber,jdbcType=INTEGER},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.WebsiteConfigPositionExample" resultType="java.lang.Integer" >
+    select count(*) from website_config_position
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update website_config_position
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionName != null" >
+        position_name = #{record.positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchingPositionIds != null" >
+        matching_position_ids = #{record.matchingPositionIds,jdbcType=VARCHAR},
+      </if>
+      <if test="record.matchingPosition != null" >
+        matching_position = #{record.matchingPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.positionIntroduce != null" >
+        position_introduce = #{record.positionIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortNumber != null" >
+        sort_number = #{record.sortNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update website_config_position
+    set id = #{record.id,jdbcType=VARCHAR},
+      position_name = #{record.positionName,jdbcType=VARCHAR},
+      matching_position_ids = #{record.matchingPositionIds,jdbcType=VARCHAR},
+      matching_position = #{record.matchingPosition,jdbcType=VARCHAR},
+      position_introduce = #{record.positionIntroduce,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
+      sort_number = #{record.sortNumber,jdbcType=INTEGER}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.WebsiteConfigPosition" >
+    update website_config_position
+    <set >
+      <if test="positionName != null" >
+        position_name = #{positionName,jdbcType=VARCHAR},
+      </if>
+      <if test="matchingPositionIds != null" >
+        matching_position_ids = #{matchingPositionIds,jdbcType=VARCHAR},
+      </if>
+      <if test="matchingPosition != null" >
+        matching_position = #{matchingPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="positionIntroduce != null" >
+        position_introduce = #{positionIntroduce,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNumber != null" >
+        sort_number = #{sortNumber,jdbcType=INTEGER},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.WebsiteConfigPosition" >
+    update website_config_position
+    set position_name = #{positionName,jdbcType=VARCHAR},
+      matching_position_ids = #{matchingPositionIds,jdbcType=VARCHAR},
+      matching_position = #{matchingPosition,jdbcType=VARCHAR},
+      position_introduce = #{positionIntroduce,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      sort_number = #{sortNumber,jdbcType=INTEGER}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

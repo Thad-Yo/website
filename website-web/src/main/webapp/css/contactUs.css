@@ -1,0 +1,392 @@
+input,textarea,button,select{
+	outline:none;
+}
+.hide {
+    display: none;
+}
+.contactUs{
+	position: relative;
+}
+.banner img{
+    display: block;
+    border: none;
+}
+/*第一部分*/
+.panel1{
+    width: 1100px;
+    margin: auto;
+    padding-bottom: 46px;
+}
+.panel-title{
+    text-align: center;
+    padding-top: 40px;
+}
+.panel-text{
+	font-size: 2.4rem;
+    color: #000000;
+    font-weight: bold;
+    text-align: center;
+    padding-bottom: 40px;
+    padding-top: 10px;
+}
+.panel-content{
+	position: relative;
+	height: 494px;
+    margin: 0 0 40px;
+}
+.panel-content > div{
+	position: absolute;
+}
+.panel-content > div > img{
+	position: absolute;
+}
+.panel-contact1{
+	width:276px;
+	height: 284px;
+	top:0;
+	left:19px;
+}
+.panel-contact2{
+	width:254px;
+	height: 280px;
+	bottom:0;
+	left:166px;
+}
+.panel-contact3{
+    width: 278px;
+    height: 280px;
+	bottom:0;
+	left:397px;
+}
+.panel-contact4{
+    width: 283px;
+    height: 284px;
+	top:0;
+	right:296px;
+}
+.panel-contact5{
+    width: 284px;
+    height: 283px;
+	top: 146px;
+	right:33px;
+}
+.panel-infor{
+	position: relative;
+	text-align: center;
+}
+.panel-infor p{
+	margin:0 auto 10px;
+	font-size: 1.35rem;
+}
+.panel-line{
+	width:25px;
+	height:2px;
+}
+.panel-infor p:first-child{
+	font-size: 1.8rem;
+}
+.panel-contact1 .panel-line, .panel-contact2 .panel-line, .panel-contact4 .panel-line{
+	background: #ba0c2f;
+}
+.panel-contact3 .panel-line{
+	background: #fff;
+}
+.panel-infor1{
+	margin-top:40px;
+    padding-left: 16px;
+}
+.panel-infor2{
+	color:#000;
+	margin-top:50px;
+}
+.panel-infor3{
+	color:#fff;
+	margin-top:50px;
+	padding-left:23px;
+}
+.panel-infor4{
+	margin-top:35px;
+    padding-left: 25px;
+}
+.panel-infor5{
+	color:#fff;
+	margin-top:55px;
+	padding-left:26px;
+}
+.panel-infor5 p:first-child{
+    margin-bottom: 15px;
+}
+.panel-infor5 > img{
+	margin-bottom: 5px;
+}
+/*第二部分*/
+.panel-map{
+	background: #f7f7f7;
+    width: 100%;
+}
+.panel2{
+	width: 60%;
+	margin:auto;
+}
+.panel-search{
+	text-align: center;
+}
+.panel-search > img{
+	width:29px;
+	height:31px;
+	vertical-align: middle;
+	margin-right: 10px;
+}
+#panel-select{
+	width:390px;
+	height:40px;
+	border:1px solid #E1DFDA;
+	padding-left:10px;
+}
+#panel-btn{
+	width:92px;
+	height:40px;
+	background: #ba0c2f;	
+	color:#fff;
+	border:none;
+	cursor: pointer;
+	margin-left: 10px;
+}
+
+/*第三部分 意见*/
+.panel3{
+	width: 60%;
+	margin:auto;
+}
+.suggestionsInfor{
+	overflow: hidden;
+}
+.suggestionsInfor ul li{
+	width:calc(30% - 3px);
+	height:40px;
+	margin-right:5%;
+	border: 1px solid #E1DFDA;
+	float: left;
+	position: relative;
+}
+.suggestionsInfor ul li:last-child{
+	margin-right:0;
+}
+.suggestionsInfor ul li span{
+	display: inline-block;
+    font-size: 1.4rem;
+    margin-left: 20px;
+}
+.suggestionsInfor ul li input{
+	border:none;
+	height:40px;
+	display: inline-block;
+    width: calc(100% - 31px);
+    padding-left:20px;
+}
+.liLine{
+	width:2px;
+	height:20px;
+	background: #ba0c2f;
+	display: inline-block;
+	position: absolute;
+	left:-1px;
+	top:11px;
+}
+.suggestionsInfor ul li i{
+    color: #ba0c2f;
+    margin-left: 8px;
+    font-size: 20px;
+    display: inline-block;
+    vertical-align: middle;
+    float: left;
+    margin-top: 6px;
+}
+.suggestionsContent{
+	margin-top:20px;
+	border: 1px solid #E1DFDA;
+}
+.suggestionsContent textarea{
+	width: 100%;
+	min-height: 100px;
+	resize:none;
+	border:none;
+	padding:10px;
+	line-height: 20px;
+}
+.suggestionsBtn{
+	text-align: center;
+	margin-top:15px;
+	height: 70px;
+}
+.suggestionsBtn p{
+	color:#ba0c2f;
+	display:none;
+	margin: 7px 0;
+}
+.suggestionsBtn .successCN, .suggestionsBtn .successEN{
+	color:#6CB346!important;
+}
+.suggestionsBtn button{
+	width:260px;
+	height:40px;
+	color:#fff;
+	background: #ba0c2f;
+	line-height: 40px;
+	border:none;
+	cursor: pointer;
+	border-radius: 5px;
+	font-size: 1.4rem;
+}
+#container{
+	width: 100%;
+	height:310px;
+}
+/*地图*/
+.amap-logo, .amap-copyright{
+	display: none!important;
+}
+.info {
+    border: solid 1px silver;
+}
+div.info-top {
+    position: relative;
+    background: none repeat scroll 0 0 #F9F9F9;
+    border-bottom: 1px solid #CCC;
+    border-radius: 5px 5px 0 0;
+}
+div.info-top > div {
+    display: inline-block;
+    color: #333333;
+    font-size: 14px;
+    font-weight: bold;
+    line-height: 31px;
+    padding-left: 6px;
+}
+div.info-top img {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    transition-duration: 0.25s;
+}
+div.info-top img:hover {
+    box-shadow: 0px 0px 5px #000;
+}
+div.info-middle {
+    font-size: 12px;
+    padding: 6px;
+    line-height: 20px;
+}
+div.info-bottom {
+    height: 0px;
+    width: 100%;
+    clear: both;
+    text-align: center;
+}
+div.info-bottom img {
+    position: relative;
+    z-index: 104;
+}
+.info-middle img {
+    float: left;
+    margin-right: 6px;
+}
+/*地图*/
+/*遮罩框*/
+.maskBox{
+	position: fixed;
+	background: rgba(0,0,0,.5);
+	width:100%;
+	height: 100%;
+	left: 0;
+	top: 0;
+	z-index: 999999999;
+	display: none;
+}
+.maskBoxContent{
+	width:700px;
+	background: #fff;
+	border-radius: 5px;
+	position: absolute;    
+    top: 50%;
+    left: 50%;
+    margin-left: -350px;
+	
+}
+.maskBoxTitle{
+	width:100%;
+	height:50px;
+	text-align: center;
+	line-height: 50px;
+    font-size: 18px;
+}
+.bottomLine{
+	overflow: hidden;
+}
+.bottomLine > div{
+	display: inline-block;
+	width:337px;
+	height:6px;
+	float: left;
+}
+.bottomLine > span{
+	display: inline-block;
+	width:6px;
+	height:6px;
+	background: #ba0c2f;
+	border-radius: 50%;
+	margin:0 10px;
+	float: left;
+}
+.bottomLine > div > p{
+	height:2px;
+	background: #D0CCC7;
+	margin-top: 2px;
+}
+.maskBoxClose{
+	position: absolute;
+	right:-15px;
+	top:-15px;
+	width:30px;
+	height:30px;
+	background: #ba0c2f;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 30px;
+	cursor: pointer;
+}
+.maskBoxClose i{
+	font-size: 16px;
+	color:#fff;
+}
+.maskBoxInfor{
+	overflow: hidden;
+}
+.maskBoxInfor ul li{
+	width: 40%;
+	text-align: left;
+	padding: 15px 0 15px 10%;
+	float: left;
+}
+.maskBoxInfor ul li div{
+	display: inline-block;
+	font-size:1.4rem;
+}
+.liMark{
+	width:20px;
+	height:20px;
+	background: #ba0c2f;
+	border-radius: 50%;
+	text-align: center;
+	line-height: 20px;
+}
+.liMark i{
+	font-size: 14px;
+	color:#fff;
+}
+.liPhone{
+	margin-left: 10px;
+}
+#mapMain{
+	height:500px;
+}

@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.system.CTAttachmentMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.system.CTAttachment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="file_id" property="fileId" jdbcType="VARCHAR" />
+    <result column="item_id" property="itemId" jdbcType="VARCHAR" />
+    <result column="file_order" property="fileOrder" jdbcType="INTEGER" />
+    <result column="file_name" property="fileName" jdbcType="VARCHAR" />
+    <result column="att_type" property="attType" jdbcType="VARCHAR" />
+    <result column="file_type" property="fileType" jdbcType="VARCHAR" />
+    <result column="extension" property="extension" jdbcType="VARCHAR" />
+    <result column="file_size" property="fileSize" jdbcType="BIGINT" />
+    <result column="save_path" property="savePath" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="create_group_cd" property="createGroupCd" jdbcType="VARCHAR" />
+    <result column="create_user_cd" property="createUserCd" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+    <result column="update_group_cd" property="updateGroupCd" jdbcType="VARCHAR" />
+    <result column="update_user_cd" property="updateUserCd" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, file_id, item_id, file_order, file_name, att_type, file_type, extension, file_size, 
+    save_path, del_flag, create_group_cd, create_user_cd, create_date, update_group_cd, 
+    update_user_cd, update_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.system.CTAttachmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_t_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_t_attachment
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_t_attachment
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.system.CTAttachmentExample" >
+    delete from c_t_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.system.CTAttachment" >
+    insert into c_t_attachment (id, file_id, item_id, 
+      file_order, file_name, att_type, 
+      file_type, extension, file_size, 
+      save_path, del_flag, create_group_cd, 
+      create_user_cd, create_date, update_group_cd, 
+      update_user_cd, update_date)
+    values (#{id,jdbcType=INTEGER}, #{fileId,jdbcType=VARCHAR}, #{itemId,jdbcType=VARCHAR}, 
+      #{fileOrder,jdbcType=INTEGER}, #{fileName,jdbcType=VARCHAR}, #{attType,jdbcType=VARCHAR}, 
+      #{fileType,jdbcType=VARCHAR}, #{extension,jdbcType=VARCHAR}, #{fileSize,jdbcType=BIGINT}, 
+      #{savePath,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{createGroupCd,jdbcType=VARCHAR}, 
+      #{createUserCd,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, #{updateGroupCd,jdbcType=VARCHAR}, 
+      #{updateUserCd,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.system.CTAttachment" >
+    insert into c_t_attachment
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="fileId != null" >
+        file_id,
+      </if>
+      <if test="itemId != null" >
+        item_id,
+      </if>
+      <if test="fileOrder != null" >
+        file_order,
+      </if>
+      <if test="fileName != null" >
+        file_name,
+      </if>
+      <if test="attType != null" >
+        att_type,
+      </if>
+      <if test="fileType != null" >
+        file_type,
+      </if>
+      <if test="extension != null" >
+        extension,
+      </if>
+      <if test="fileSize != null" >
+        file_size,
+      </if>
+      <if test="savePath != null" >
+        save_path,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createGroupCd != null" >
+        create_group_cd,
+      </if>
+      <if test="createUserCd != null" >
+        create_user_cd,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateGroupCd != null" >
+        update_group_cd,
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="fileId != null" >
+        #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileOrder != null" >
+        #{fileOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null" >
+        #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="attType != null" >
+        #{attType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="extension != null" >
+        #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        #{fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="savePath != null" >
+        #{savePath,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createGroupCd != null" >
+        #{createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserCd != null" >
+        #{createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateGroupCd != null" >
+        #{updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.system.CTAttachmentExample" resultType="java.lang.Integer" >
+    select count(*) from c_t_attachment
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_t_attachment
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileId != null" >
+        file_id = #{record.fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.itemId != null" >
+        item_id = #{record.itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileOrder != null" >
+        file_order = #{record.fileOrder,jdbcType=INTEGER},
+      </if>
+      <if test="record.fileName != null" >
+        file_name = #{record.fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attType != null" >
+        att_type = #{record.attType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileType != null" >
+        file_type = #{record.fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extension != null" >
+        extension = #{record.extension,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fileSize != null" >
+        file_size = #{record.fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="record.savePath != null" >
+        save_path = #{record.savePath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createGroupCd != null" >
+        create_group_cd = #{record.createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserCd != null" >
+        create_user_cd = #{record.createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateGroupCd != null" >
+        update_group_cd = #{record.updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserCd != null" >
+        update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_t_attachment
+    set id = #{record.id,jdbcType=INTEGER},
+      file_id = #{record.fileId,jdbcType=VARCHAR},
+      item_id = #{record.itemId,jdbcType=VARCHAR},
+      file_order = #{record.fileOrder,jdbcType=INTEGER},
+      file_name = #{record.fileName,jdbcType=VARCHAR},
+      att_type = #{record.attType,jdbcType=VARCHAR},
+      file_type = #{record.fileType,jdbcType=VARCHAR},
+      extension = #{record.extension,jdbcType=VARCHAR},
+      file_size = #{record.fileSize,jdbcType=BIGINT},
+      save_path = #{record.savePath,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      create_group_cd = #{record.createGroupCd,jdbcType=VARCHAR},
+      create_user_cd = #{record.createUserCd,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=VARCHAR},
+      update_group_cd = #{record.updateGroupCd,jdbcType=VARCHAR},
+      update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.system.CTAttachment" >
+    update c_t_attachment
+    <set >
+      <if test="fileId != null" >
+        file_id = #{fileId,jdbcType=VARCHAR},
+      </if>
+      <if test="itemId != null" >
+        item_id = #{itemId,jdbcType=VARCHAR},
+      </if>
+      <if test="fileOrder != null" >
+        file_order = #{fileOrder,jdbcType=INTEGER},
+      </if>
+      <if test="fileName != null" >
+        file_name = #{fileName,jdbcType=VARCHAR},
+      </if>
+      <if test="attType != null" >
+        att_type = #{attType,jdbcType=VARCHAR},
+      </if>
+      <if test="fileType != null" >
+        file_type = #{fileType,jdbcType=VARCHAR},
+      </if>
+      <if test="extension != null" >
+        extension = #{extension,jdbcType=VARCHAR},
+      </if>
+      <if test="fileSize != null" >
+        file_size = #{fileSize,jdbcType=BIGINT},
+      </if>
+      <if test="savePath != null" >
+        save_path = #{savePath,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createGroupCd != null" >
+        create_group_cd = #{createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserCd != null" >
+        create_user_cd = #{createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateGroupCd != null" >
+        update_group_cd = #{updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.system.CTAttachment" >
+    update c_t_attachment
+    set file_id = #{fileId,jdbcType=VARCHAR},
+      item_id = #{itemId,jdbcType=VARCHAR},
+      file_order = #{fileOrder,jdbcType=INTEGER},
+      file_name = #{fileName,jdbcType=VARCHAR},
+      att_type = #{attType,jdbcType=VARCHAR},
+      file_type = #{fileType,jdbcType=VARCHAR},
+      extension = #{extension,jdbcType=VARCHAR},
+      file_size = #{fileSize,jdbcType=BIGINT},
+      save_path = #{savePath,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      create_group_cd = #{createGroupCd,jdbcType=VARCHAR},
+      create_user_cd = #{createUserCd,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_group_cd = #{updateGroupCd,jdbcType=VARCHAR},
+      update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,103 @@
+<!DOCTYPE web-app PUBLIC
+        "-//Sun Microsystems, Inc.//DTD Web Application 2.3//EN"
+        "http://java.sun.com/dtd/web-app_2_3.dtd" >
+
+<web-app version="2.5" xmlns="http://java.sun.com/xml/ns/javaee"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://java.sun.com/xml/ns/javaee
+	http://java.sun.com/xml/ns/javaee/web-app_2_5.xsd">
+    <display-name>Archetype Created Web Application</display-name>
+
+    <!-- logback配置    -->
+    <context-param>
+        <param-name>logbackConfigLocation</param-name>
+        <param-value>classpath:logback.xml</param-value>
+    </context-param>
+    <listener>
+        <listener-class>ch.qos.logback.ext.spring.web.LogbackConfigListener</listener-class>
+    </listener>
+
+    <!-- 读取spring配置文件 -->
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>
+            classpath:conf/spring.xml;
+            classpath:conf/spring-mybatis.xml
+        </param-value>
+    </context-param>
+
+    <listener>
+        <listener-class>
+            org.springframework.web.context.ContextLoaderListener
+        </listener-class>
+    </listener>
+
+    <listener>
+        <listener-class>org.springframework.web.util.IntrospectorCleanupListener</listener-class>
+    </listener>
+
+    <!-- Listener for Tiles -->
+    <listener>
+        <listener-class>org.apache.tiles.extras.complete.CompleteAutoloadTilesListener</listener-class>
+    </listener>
+    <!-- 设计路径变量值 -->
+    <context-param>
+        <param-name>webAppRootKey</param-name>
+        <param-value>ubr-admin</param-value>
+    </context-param>
+
+    <!-- 字符集过滤器 -->
+    <filter>
+        <filter-name>encodingFilter</filter-name>
+        <filter-class>org.springframework.web.filter.CharacterEncodingFilter</filter-class>
+        <init-param>
+            <param-name>encoding</param-name>
+            <param-value>UTF-8</param-value>
+        </init-param>
+        <init-param>
+            <param-name>forceEncoding</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>encodingFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+
+    <!-- springMVC核心配置 -->
+    <servlet>
+        <servlet-name>spring</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <init-param>
+            <param-name>contextConfigLocation</param-name>
+            <param-value>
+                classpath:conf/spring-mvc.xml;
+            </param-value>
+        </init-param>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>spring</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+
+    <!-- 错误跳转页面 -->
+    <!--<error-page>-->
+        <!--<error-code>404</error-code>-->
+        <!--<location>/jsp/error/404.jsp</location>-->
+        <!--&lt;!&ndash; 表示当系统发生404就是不存在请求地址的错误的时候，页面跳转到Exception.html页面。 &ndash;&gt;-->
+    <!--</error-page>-->
+    <!--<error-page>-->
+        <!--<error-code>500</error-code>-->
+        <!--<location>/jsp/error/500.jsp</location>-->
+        <!--&lt;!&ndash; 表示当系统发生500也就是操作异常错误的时候，页面跳转到Exception.html页面。 &ndash;&gt;-->
+    <!--</error-page>-->
+    <!--<error-page>-->
+        <!--<exception-type>org.apache.shiro.session.UnknownSessionException</exception-type>-->
+        <!--<location>/jsp/www/login/login.jsp</location>-->
+    <!--</error-page>-->
+    <!--<welcome-file-list>-->
+        <!--<welcome-file>/index.jsp</welcome-file>-->
+    <!--</welcome-file-list>-->
+</web-app>

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.ExtWebsiteScopeMapper" >
+ <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteScope" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="year" property="year" jdbcType="VARCHAR" />
+    <result column="fgs_count" property="fgsCount" jdbcType="VARCHAR" />
+    <result column="kh_count" property="khCount" jdbcType="VARCHAR" />
+    <result column="ry_count" property="ryCount" jdbcType="VARCHAR" />
+    <result column="show" property="show" jdbcType="VARCHAR" />
+  </resultMap>
+  
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    *
+    from website_scope
+    where `show`= '1'
+    ORDER BY `year` DESC
+  </select>
+  
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from website_scope
+    where 1=1
+  </delete>
+</mapper>

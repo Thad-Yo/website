@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.ExtWebsiteFeedbackMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.ext.ExtWebsiteFeedbackModel" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="mailbox" property="mailbox" jdbcType="VARCHAR" />
+    <result column="feedback_time" property="feedbackTime" jdbcType="VARCHAR" />
+    <result column="feedback_ip" property="feedbackIp" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Base_Column_List" >
+    id, `name`, tel, mailbox, feedback_time, feedback_ip, content
+  </sql>
+  <select id="findWebsiteFeedbackList" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.ext.ExtWebsiteFeedbackModel" >
+    select
+    <include refid="Base_Column_List" />
+    from website_feedback di
+    where 1=1
+    <if test="tel != null and tel != ''">
+      and di.tel LIKE CONCAT('%',#{tel, jdbcType=VARCHAR},'%')
+    </if>
+    <if test="feedbackTime != null and feedbackTime != ''">
+      and di.feedback_time LIKE CONCAT('%',#{feedbackTime, jdbcType=VARCHAR},'%')
+    </if>
+    GROUP BY
+    di.id
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+</mapper>

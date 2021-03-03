@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.ExtWebsiteCompanyNewsMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.ext.ExtWebsiteCompanyNewsModel" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="cnId" property="cnid" jdbcType="VARCHAR" />
+    <result column="news_title" property="newsTitle" jdbcType="VARCHAR" />
+    <result column="publish_time" property="publishTime" jdbcType="VARCHAR" />
+    <result column="type" property="type" jdbcType="CHAR" />
+    <result column="is_top" property="isTop" jdbcType="CHAR" />
+    <result column="main_content" property="mainContent" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+    <result column="cover_page_url" property="coverPageUrl" jdbcType="VARCHAR" />
+    <result column="cn_en_flag" property="cnEnFlag" jdbcType="CHAR" />
+    <result column="has_en_flag" property="hasEnFlag" jdbcType="CHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="content" property="content" jdbcType="LONGVARCHAR" />
+
+  </resultMap>
+
+  <sql id="Base_Column_List" >
+    id, cnId, news_title, publish_time, `type`, is_top, summary,main_content, cover_page_url, cn_en_flag, 
+    has_en_flag, del_flag, create_user, create_time, update_user, update_time ,content
+  </sql>
+  <select id="findNewsList" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.ext.ExtWebsiteCompanyNewsModel" >
+    select
+    <include refid="Base_Column_List" />
+    from website_company_news ws
+    where ws.del_flag = '0'
+    <if test="isTop != null and isTop != ''">
+      and ws.is_top = #{isTop}
+    </if>
+    <if test="cnEnFlag != null and cnEnFlag != ''">
+      and ws.cn_en_flag = #{cnEnFlag}
+    </if>
+    <if test="newsTitle != null and newsTitle != ''">
+      and ws.news_title LIKE CONCAT('%',#{newsTitle, jdbcType=VARCHAR},'%')
+    </if>
+    <if test="publishTime != null and publishTime != ''">
+      and ws.publish_time LIKE CONCAT('%',#{publishTime, jdbcType=VARCHAR},'%')
+    </if>
+    <if test="type != null and type != ''">
+      and ws.type = #{type}
+    </if>
+    <if test="hasEnFlag != null and hasEnFlag != ''">
+      and ws.has_en_flag = #{hasEnFlag}
+    </if>
+    GROUP BY
+    ws.id
+      order by publish_time DESC
+    <if test="limitStart >= 0">
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+</mapper>

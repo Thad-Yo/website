@@ -1,0 +1,610 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.system.CMUserMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.system.CMUser" >
+    <id column="user_id" property="userId" jdbcType="VARCHAR" />
+    <result column="user_name" property="userName" jdbcType="VARCHAR" />
+    <result column="company_name" property="companyName" jdbcType="VARCHAR" />
+    <result column="real_name" property="realName" jdbcType="VARCHAR" />
+    <result column="password" property="password" jdbcType="VARCHAR" />
+    <result column="des3" property="des3" jdbcType="VARCHAR" />
+    <result column="mobile_number" property="mobileNumber" jdbcType="VARCHAR" />
+    <result column="extension_number" property="extensionNumber" jdbcType="VARCHAR" />
+    <result column="address" property="address" jdbcType="VARCHAR" />
+    <result column="email_address" property="emailAddress" jdbcType="VARCHAR" />
+    <result column="user_flag" property="userFlag" jdbcType="VARCHAR" />
+    <result column="notes" property="notes" jdbcType="VARCHAR" />
+    <result column="user_no" property="userNo" jdbcType="VARCHAR" />
+    <result column="position" property="position" jdbcType="VARCHAR" />
+    <result column="sex" property="sex" jdbcType="VARCHAR" />
+    <result column="join_date" property="joinDate" jdbcType="VARCHAR" />
+    <result column="birthday" property="birthday" jdbcType="VARCHAR" />
+    <result column="id_no" property="idNo" jdbcType="VARCHAR" />
+    <result column="user_type" property="userType" jdbcType="VARCHAR" />
+    <result column="user_icon" property="userIcon" jdbcType="VARCHAR" />
+    <result column="card_no" property="cardNo" jdbcType="VARCHAR" />
+    <result column="user_sort_key" property="userSortKey" jdbcType="INTEGER" />
+    <result column="is_agree_agreement" property="isAgreeAgreement" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="create_group_cd" property="createGroupCd" jdbcType="VARCHAR" />
+    <result column="create_user_cd" property="createUserCd" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+    <result column="update_group_cd" property="updateGroupCd" jdbcType="VARCHAR" />
+    <result column="update_user_cd" property="updateUserCd" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    user_id, user_name, company_name, real_name, `password`, des3, mobile_number, extension_number, 
+    address, email_address, user_flag, notes, user_no, `position`, sex, join_date, birthday, 
+    id_no, user_type, user_icon, card_no, user_sort_key, is_agree_agreement, del_flag, 
+    create_group_cd, create_user_cd, create_date, update_group_cd, update_user_cd, update_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.system.CMUserExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_m_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_m_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from c_m_user
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.system.CMUserExample" >
+    delete from c_m_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.system.CMUser" >
+    insert into c_m_user (user_id, user_name, company_name, 
+      real_name, `password`, des3, 
+      mobile_number, extension_number, address, 
+      email_address, user_flag, notes, 
+      user_no, `position`, sex, 
+      join_date, birthday, id_no, 
+      user_type, user_icon, card_no, 
+      user_sort_key, is_agree_agreement, del_flag, 
+      create_group_cd, create_user_cd, create_date, 
+      update_group_cd, update_user_cd, update_date
+      )
+    values (#{userId,jdbcType=VARCHAR}, #{userName,jdbcType=VARCHAR}, #{companyName,jdbcType=VARCHAR}, 
+      #{realName,jdbcType=VARCHAR}, #{password,jdbcType=VARCHAR}, #{des3,jdbcType=VARCHAR}, 
+      #{mobileNumber,jdbcType=VARCHAR}, #{extensionNumber,jdbcType=VARCHAR}, #{address,jdbcType=VARCHAR}, 
+      #{emailAddress,jdbcType=VARCHAR}, #{userFlag,jdbcType=VARCHAR}, #{notes,jdbcType=VARCHAR}, 
+      #{userNo,jdbcType=VARCHAR}, #{position,jdbcType=VARCHAR}, #{sex,jdbcType=VARCHAR}, 
+      #{joinDate,jdbcType=VARCHAR}, #{birthday,jdbcType=VARCHAR}, #{idNo,jdbcType=VARCHAR}, 
+      #{userType,jdbcType=VARCHAR}, #{userIcon,jdbcType=VARCHAR}, #{cardNo,jdbcType=VARCHAR}, 
+      #{userSortKey,jdbcType=INTEGER}, #{isAgreeAgreement,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, 
+      #{createGroupCd,jdbcType=VARCHAR}, #{createUserCd,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, 
+      #{updateGroupCd,jdbcType=VARCHAR}, #{updateUserCd,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.system.CMUser" >
+    insert into c_m_user
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        user_id,
+      </if>
+      <if test="userName != null" >
+        user_name,
+      </if>
+      <if test="companyName != null" >
+        company_name,
+      </if>
+      <if test="realName != null" >
+        real_name,
+      </if>
+      <if test="password != null" >
+        `password`,
+      </if>
+      <if test="des3 != null" >
+        des3,
+      </if>
+      <if test="mobileNumber != null" >
+        mobile_number,
+      </if>
+      <if test="extensionNumber != null" >
+        extension_number,
+      </if>
+      <if test="address != null" >
+        address,
+      </if>
+      <if test="emailAddress != null" >
+        email_address,
+      </if>
+      <if test="userFlag != null" >
+        user_flag,
+      </if>
+      <if test="notes != null" >
+        notes,
+      </if>
+      <if test="userNo != null" >
+        user_no,
+      </if>
+      <if test="position != null" >
+        `position`,
+      </if>
+      <if test="sex != null" >
+        sex,
+      </if>
+      <if test="joinDate != null" >
+        join_date,
+      </if>
+      <if test="birthday != null" >
+        birthday,
+      </if>
+      <if test="idNo != null" >
+        id_no,
+      </if>
+      <if test="userType != null" >
+        user_type,
+      </if>
+      <if test="userIcon != null" >
+        user_icon,
+      </if>
+      <if test="cardNo != null" >
+        card_no,
+      </if>
+      <if test="userSortKey != null" >
+        user_sort_key,
+      </if>
+      <if test="isAgreeAgreement != null" >
+        is_agree_agreement,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createGroupCd != null" >
+        create_group_cd,
+      </if>
+      <if test="createUserCd != null" >
+        create_user_cd,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateGroupCd != null" >
+        update_group_cd,
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="userId != null" >
+        #{userId,jdbcType=VARCHAR},
+      </if>
+      <if test="userName != null" >
+        #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="des3 != null" >
+        #{des3,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNumber != null" >
+        #{mobileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionNumber != null" >
+        #{extensionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAddress != null" >
+        #{emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userFlag != null" >
+        #{userFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="userNo != null" >
+        #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDate != null" >
+        #{joinDate,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="userIcon != null" >
+        #{userIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userSortKey != null" >
+        #{userSortKey,jdbcType=INTEGER},
+      </if>
+      <if test="isAgreeAgreement != null" >
+        #{isAgreeAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createGroupCd != null" >
+        #{createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserCd != null" >
+        #{createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateGroupCd != null" >
+        #{updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.system.CMUserExample" resultType="java.lang.Integer" >
+    select count(*) from c_m_user
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_m_user
+    <set >
+      <if test="record.userId != null" >
+        user_id = #{record.userId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userName != null" >
+        user_name = #{record.userName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.companyName != null" >
+        company_name = #{record.companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.realName != null" >
+        real_name = #{record.realName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.password != null" >
+        `password` = #{record.password,jdbcType=VARCHAR},
+      </if>
+      <if test="record.des3 != null" >
+        des3 = #{record.des3,jdbcType=VARCHAR},
+      </if>
+      <if test="record.mobileNumber != null" >
+        mobile_number = #{record.mobileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.extensionNumber != null" >
+        extension_number = #{record.extensionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.address != null" >
+        address = #{record.address,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailAddress != null" >
+        email_address = #{record.emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userFlag != null" >
+        user_flag = #{record.userFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notes != null" >
+        notes = #{record.notes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userNo != null" >
+        user_no = #{record.userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.position != null" >
+        `position` = #{record.position,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sex != null" >
+        sex = #{record.sex,jdbcType=VARCHAR},
+      </if>
+      <if test="record.joinDate != null" >
+        join_date = #{record.joinDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.birthday != null" >
+        birthday = #{record.birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="record.idNo != null" >
+        id_no = #{record.idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userType != null" >
+        user_type = #{record.userType,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userIcon != null" >
+        user_icon = #{record.userIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cardNo != null" >
+        card_no = #{record.cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="record.userSortKey != null" >
+        user_sort_key = #{record.userSortKey,jdbcType=INTEGER},
+      </if>
+      <if test="record.isAgreeAgreement != null" >
+        is_agree_agreement = #{record.isAgreeAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createGroupCd != null" >
+        create_group_cd = #{record.createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserCd != null" >
+        create_user_cd = #{record.createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateGroupCd != null" >
+        update_group_cd = #{record.updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserCd != null" >
+        update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_m_user
+    set user_id = #{record.userId,jdbcType=VARCHAR},
+      user_name = #{record.userName,jdbcType=VARCHAR},
+      company_name = #{record.companyName,jdbcType=VARCHAR},
+      real_name = #{record.realName,jdbcType=VARCHAR},
+      `password` = #{record.password,jdbcType=VARCHAR},
+      des3 = #{record.des3,jdbcType=VARCHAR},
+      mobile_number = #{record.mobileNumber,jdbcType=VARCHAR},
+      extension_number = #{record.extensionNumber,jdbcType=VARCHAR},
+      address = #{record.address,jdbcType=VARCHAR},
+      email_address = #{record.emailAddress,jdbcType=VARCHAR},
+      user_flag = #{record.userFlag,jdbcType=VARCHAR},
+      notes = #{record.notes,jdbcType=VARCHAR},
+      user_no = #{record.userNo,jdbcType=VARCHAR},
+      `position` = #{record.position,jdbcType=VARCHAR},
+      sex = #{record.sex,jdbcType=VARCHAR},
+      join_date = #{record.joinDate,jdbcType=VARCHAR},
+      birthday = #{record.birthday,jdbcType=VARCHAR},
+      id_no = #{record.idNo,jdbcType=VARCHAR},
+      user_type = #{record.userType,jdbcType=VARCHAR},
+      user_icon = #{record.userIcon,jdbcType=VARCHAR},
+      card_no = #{record.cardNo,jdbcType=VARCHAR},
+      user_sort_key = #{record.userSortKey,jdbcType=INTEGER},
+      is_agree_agreement = #{record.isAgreeAgreement,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      create_group_cd = #{record.createGroupCd,jdbcType=VARCHAR},
+      create_user_cd = #{record.createUserCd,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=VARCHAR},
+      update_group_cd = #{record.updateGroupCd,jdbcType=VARCHAR},
+      update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.system.CMUser" >
+    update c_m_user
+    <set >
+      <if test="userName != null" >
+        user_name = #{userName,jdbcType=VARCHAR},
+      </if>
+      <if test="companyName != null" >
+        company_name = #{companyName,jdbcType=VARCHAR},
+      </if>
+      <if test="realName != null" >
+        real_name = #{realName,jdbcType=VARCHAR},
+      </if>
+      <if test="password != null" >
+        `password` = #{password,jdbcType=VARCHAR},
+      </if>
+      <if test="des3 != null" >
+        des3 = #{des3,jdbcType=VARCHAR},
+      </if>
+      <if test="mobileNumber != null" >
+        mobile_number = #{mobileNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="extensionNumber != null" >
+        extension_number = #{extensionNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="address != null" >
+        address = #{address,jdbcType=VARCHAR},
+      </if>
+      <if test="emailAddress != null" >
+        email_address = #{emailAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="userFlag != null" >
+        user_flag = #{userFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        notes = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="userNo != null" >
+        user_no = #{userNo,jdbcType=VARCHAR},
+      </if>
+      <if test="position != null" >
+        `position` = #{position,jdbcType=VARCHAR},
+      </if>
+      <if test="sex != null" >
+        sex = #{sex,jdbcType=VARCHAR},
+      </if>
+      <if test="joinDate != null" >
+        join_date = #{joinDate,jdbcType=VARCHAR},
+      </if>
+      <if test="birthday != null" >
+        birthday = #{birthday,jdbcType=VARCHAR},
+      </if>
+      <if test="idNo != null" >
+        id_no = #{idNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userType != null" >
+        user_type = #{userType,jdbcType=VARCHAR},
+      </if>
+      <if test="userIcon != null" >
+        user_icon = #{userIcon,jdbcType=VARCHAR},
+      </if>
+      <if test="cardNo != null" >
+        card_no = #{cardNo,jdbcType=VARCHAR},
+      </if>
+      <if test="userSortKey != null" >
+        user_sort_key = #{userSortKey,jdbcType=INTEGER},
+      </if>
+      <if test="isAgreeAgreement != null" >
+        is_agree_agreement = #{isAgreeAgreement,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createGroupCd != null" >
+        create_group_cd = #{createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserCd != null" >
+        create_user_cd = #{createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateGroupCd != null" >
+        update_group_cd = #{updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.system.CMUser" >
+    update c_m_user
+    set user_name = #{userName,jdbcType=VARCHAR},
+      company_name = #{companyName,jdbcType=VARCHAR},
+      real_name = #{realName,jdbcType=VARCHAR},
+      `password` = #{password,jdbcType=VARCHAR},
+      des3 = #{des3,jdbcType=VARCHAR},
+      mobile_number = #{mobileNumber,jdbcType=VARCHAR},
+      extension_number = #{extensionNumber,jdbcType=VARCHAR},
+      address = #{address,jdbcType=VARCHAR},
+      email_address = #{emailAddress,jdbcType=VARCHAR},
+      user_flag = #{userFlag,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=VARCHAR},
+      user_no = #{userNo,jdbcType=VARCHAR},
+      `position` = #{position,jdbcType=VARCHAR},
+      sex = #{sex,jdbcType=VARCHAR},
+      join_date = #{joinDate,jdbcType=VARCHAR},
+      birthday = #{birthday,jdbcType=VARCHAR},
+      id_no = #{idNo,jdbcType=VARCHAR},
+      user_type = #{userType,jdbcType=VARCHAR},
+      user_icon = #{userIcon,jdbcType=VARCHAR},
+      card_no = #{cardNo,jdbcType=VARCHAR},
+      user_sort_key = #{userSortKey,jdbcType=INTEGER},
+      is_agree_agreement = #{isAgreeAgreement,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      create_group_cd = #{createGroupCd,jdbcType=VARCHAR},
+      create_user_cd = #{createUserCd,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_group_cd = #{updateGroupCd,jdbcType=VARCHAR},
+      update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR}
+    where user_id = #{userId,jdbcType=VARCHAR}
+  </update>
+</mapper>

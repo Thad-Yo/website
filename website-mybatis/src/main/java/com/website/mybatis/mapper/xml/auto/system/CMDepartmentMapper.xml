@@ -1,0 +1,658 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.system.CMDepartmentMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.system.CMDepartment" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="department_cd" property="departmentCd" jdbcType="VARCHAR" />
+    <result column="department_name" property="departmentName" jdbcType="VARCHAR" />
+    <result column="department_code" property="departmentCode" jdbcType="VARCHAR" />
+    <result column="department_leader_id" property="departmentLeaderId" jdbcType="VARCHAR" />
+    <result column="department_leader_name" property="departmentLeaderName" jdbcType="VARCHAR" />
+    <result column="department_type" property="departmentType" jdbcType="CHAR" />
+    <result column="department_level" property="departmentLevel" jdbcType="TINYINT" />
+    <result column="department_p_cd" property="departmentPCd" jdbcType="VARCHAR" />
+    <result column="department_regtime" property="departmentRegtime" jdbcType="CHAR" />
+    <result column="department_workstation" property="departmentWorkstation" jdbcType="INTEGER" />
+    <result column="department_area" property="departmentArea" jdbcType="DECIMAL" />
+    <result column="province_id" property="provinceId" jdbcType="CHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="city_id" property="cityId" jdbcType="CHAR" />
+    <result column="city" property="city" jdbcType="VARCHAR" />
+    <result column="district_id" property="districtId" jdbcType="CHAR" />
+    <result column="district" property="district" jdbcType="VARCHAR" />
+    <result column="complete_address" property="completeAddress" jdbcType="VARCHAR" />
+    <result column="notes" property="notes" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="VARCHAR" />
+    <result column="sort_key" property="sortKey" jdbcType="INTEGER" />
+    <result column="sms_user_id" property="smsUserId" jdbcType="VARCHAR" />
+    <result column="sms_password" property="smsPassword" jdbcType="VARCHAR" />
+    <result column="sms_url" property="smsUrl" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="create_group_cd" property="createGroupCd" jdbcType="VARCHAR" />
+    <result column="create_user_cd" property="createUserCd" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+    <result column="update_group_cd" property="updateGroupCd" jdbcType="VARCHAR" />
+    <result column="update_user_cd" property="updateUserCd" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+    <result column="report_company_name" property="reportCompanyName" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, department_cd, department_name, department_code, department_leader_id, department_leader_name, 
+    department_type, department_level, department_p_cd, department_regtime, department_workstation, 
+    department_area, province_id, province, city_id, city, district_id, district, complete_address, 
+    notes, `status`, sort_key, sms_user_id, sms_password, sms_url, del_flag, create_group_cd, 
+    create_user_cd, create_date, update_group_cd, update_user_cd, update_date, report_company_name
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.system.CMDepartmentExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_m_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_m_department
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_m_department
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.system.CMDepartmentExample" >
+    delete from c_m_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.system.CMDepartment" >
+    insert into c_m_department (id, department_cd, department_name, 
+      department_code, department_leader_id, department_leader_name, 
+      department_type, department_level, department_p_cd, 
+      department_regtime, department_workstation, 
+      department_area, province_id, province, 
+      city_id, city, district_id, 
+      district, complete_address, notes, 
+      `status`, sort_key, sms_user_id, 
+      sms_password, sms_url, del_flag, 
+      create_group_cd, create_user_cd, create_date, 
+      update_group_cd, update_user_cd, update_date, 
+      report_company_name)
+    values (#{id,jdbcType=INTEGER}, #{departmentCd,jdbcType=VARCHAR}, #{departmentName,jdbcType=VARCHAR}, 
+      #{departmentCode,jdbcType=VARCHAR}, #{departmentLeaderId,jdbcType=VARCHAR}, #{departmentLeaderName,jdbcType=VARCHAR}, 
+      #{departmentType,jdbcType=CHAR}, #{departmentLevel,jdbcType=TINYINT}, #{departmentPCd,jdbcType=VARCHAR}, 
+      #{departmentRegtime,jdbcType=CHAR}, #{departmentWorkstation,jdbcType=INTEGER}, 
+      #{departmentArea,jdbcType=DECIMAL}, #{provinceId,jdbcType=CHAR}, #{province,jdbcType=VARCHAR}, 
+      #{cityId,jdbcType=CHAR}, #{city,jdbcType=VARCHAR}, #{districtId,jdbcType=CHAR}, 
+      #{district,jdbcType=VARCHAR}, #{completeAddress,jdbcType=VARCHAR}, #{notes,jdbcType=VARCHAR}, 
+      #{status,jdbcType=VARCHAR}, #{sortKey,jdbcType=INTEGER}, #{smsUserId,jdbcType=VARCHAR}, 
+      #{smsPassword,jdbcType=VARCHAR}, #{smsUrl,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, 
+      #{createGroupCd,jdbcType=VARCHAR}, #{createUserCd,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, 
+      #{updateGroupCd,jdbcType=VARCHAR}, #{updateUserCd,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}, 
+      #{reportCompanyName,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.system.CMDepartment" >
+    insert into c_m_department
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="departmentCd != null" >
+        department_cd,
+      </if>
+      <if test="departmentName != null" >
+        department_name,
+      </if>
+      <if test="departmentCode != null" >
+        department_code,
+      </if>
+      <if test="departmentLeaderId != null" >
+        department_leader_id,
+      </if>
+      <if test="departmentLeaderName != null" >
+        department_leader_name,
+      </if>
+      <if test="departmentType != null" >
+        department_type,
+      </if>
+      <if test="departmentLevel != null" >
+        department_level,
+      </if>
+      <if test="departmentPCd != null" >
+        department_p_cd,
+      </if>
+      <if test="departmentRegtime != null" >
+        department_regtime,
+      </if>
+      <if test="departmentWorkstation != null" >
+        department_workstation,
+      </if>
+      <if test="departmentArea != null" >
+        department_area,
+      </if>
+      <if test="provinceId != null" >
+        province_id,
+      </if>
+      <if test="province != null" >
+        province,
+      </if>
+      <if test="cityId != null" >
+        city_id,
+      </if>
+      <if test="city != null" >
+        city,
+      </if>
+      <if test="districtId != null" >
+        district_id,
+      </if>
+      <if test="district != null" >
+        district,
+      </if>
+      <if test="completeAddress != null" >
+        complete_address,
+      </if>
+      <if test="notes != null" >
+        notes,
+      </if>
+      <if test="status != null" >
+        `status`,
+      </if>
+      <if test="sortKey != null" >
+        sort_key,
+      </if>
+      <if test="smsUserId != null" >
+        sms_user_id,
+      </if>
+      <if test="smsPassword != null" >
+        sms_password,
+      </if>
+      <if test="smsUrl != null" >
+        sms_url,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createGroupCd != null" >
+        create_group_cd,
+      </if>
+      <if test="createUserCd != null" >
+        create_user_cd,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateGroupCd != null" >
+        update_group_cd,
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="reportCompanyName != null" >
+        report_company_name,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="departmentCd != null" >
+        #{departmentCd,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null" >
+        #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null" >
+        #{departmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentLeaderId != null" >
+        #{departmentLeaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentLeaderName != null" >
+        #{departmentLeaderName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentType != null" >
+        #{departmentType,jdbcType=CHAR},
+      </if>
+      <if test="departmentLevel != null" >
+        #{departmentLevel,jdbcType=TINYINT},
+      </if>
+      <if test="departmentPCd != null" >
+        #{departmentPCd,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentRegtime != null" >
+        #{departmentRegtime,jdbcType=CHAR},
+      </if>
+      <if test="departmentWorkstation != null" >
+        #{departmentWorkstation,jdbcType=INTEGER},
+      </if>
+      <if test="departmentArea != null" >
+        #{departmentArea,jdbcType=DECIMAL},
+      </if>
+      <if test="provinceId != null" >
+        #{provinceId,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        #{cityId,jdbcType=CHAR},
+      </if>
+      <if test="city != null" >
+        #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="districtId != null" >
+        #{districtId,jdbcType=CHAR},
+      </if>
+      <if test="district != null" >
+        #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="completeAddress != null" >
+        #{completeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortKey != null" >
+        #{sortKey,jdbcType=INTEGER},
+      </if>
+      <if test="smsUserId != null" >
+        #{smsUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="smsPassword != null" >
+        #{smsPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="smsUrl != null" >
+        #{smsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createGroupCd != null" >
+        #{createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserCd != null" >
+        #{createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateGroupCd != null" >
+        #{updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="reportCompanyName != null" >
+        #{reportCompanyName,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.system.CMDepartmentExample" resultType="java.lang.Integer" >
+    select count(*) from c_m_department
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_m_department
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentCd != null" >
+        department_cd = #{record.departmentCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentName != null" >
+        department_name = #{record.departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentCode != null" >
+        department_code = #{record.departmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentLeaderId != null" >
+        department_leader_id = #{record.departmentLeaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentLeaderName != null" >
+        department_leader_name = #{record.departmentLeaderName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentType != null" >
+        department_type = #{record.departmentType,jdbcType=CHAR},
+      </if>
+      <if test="record.departmentLevel != null" >
+        department_level = #{record.departmentLevel,jdbcType=TINYINT},
+      </if>
+      <if test="record.departmentPCd != null" >
+        department_p_cd = #{record.departmentPCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.departmentRegtime != null" >
+        department_regtime = #{record.departmentRegtime,jdbcType=CHAR},
+      </if>
+      <if test="record.departmentWorkstation != null" >
+        department_workstation = #{record.departmentWorkstation,jdbcType=INTEGER},
+      </if>
+      <if test="record.departmentArea != null" >
+        department_area = #{record.departmentArea,jdbcType=DECIMAL},
+      </if>
+      <if test="record.provinceId != null" >
+        province_id = #{record.provinceId,jdbcType=CHAR},
+      </if>
+      <if test="record.province != null" >
+        province = #{record.province,jdbcType=VARCHAR},
+      </if>
+      <if test="record.cityId != null" >
+        city_id = #{record.cityId,jdbcType=CHAR},
+      </if>
+      <if test="record.city != null" >
+        city = #{record.city,jdbcType=VARCHAR},
+      </if>
+      <if test="record.districtId != null" >
+        district_id = #{record.districtId,jdbcType=CHAR},
+      </if>
+      <if test="record.district != null" >
+        district = #{record.district,jdbcType=VARCHAR},
+      </if>
+      <if test="record.completeAddress != null" >
+        complete_address = #{record.completeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notes != null" >
+        notes = #{record.notes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.status != null" >
+        `status` = #{record.status,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortKey != null" >
+        sort_key = #{record.sortKey,jdbcType=INTEGER},
+      </if>
+      <if test="record.smsUserId != null" >
+        sms_user_id = #{record.smsUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smsPassword != null" >
+        sms_password = #{record.smsPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="record.smsUrl != null" >
+        sms_url = #{record.smsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createGroupCd != null" >
+        create_group_cd = #{record.createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserCd != null" >
+        create_user_cd = #{record.createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateGroupCd != null" >
+        update_group_cd = #{record.updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserCd != null" >
+        update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reportCompanyName != null" >
+        report_company_name = #{record.reportCompanyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_m_department
+    set id = #{record.id,jdbcType=INTEGER},
+      department_cd = #{record.departmentCd,jdbcType=VARCHAR},
+      department_name = #{record.departmentName,jdbcType=VARCHAR},
+      department_code = #{record.departmentCode,jdbcType=VARCHAR},
+      department_leader_id = #{record.departmentLeaderId,jdbcType=VARCHAR},
+      department_leader_name = #{record.departmentLeaderName,jdbcType=VARCHAR},
+      department_type = #{record.departmentType,jdbcType=CHAR},
+      department_level = #{record.departmentLevel,jdbcType=TINYINT},
+      department_p_cd = #{record.departmentPCd,jdbcType=VARCHAR},
+      department_regtime = #{record.departmentRegtime,jdbcType=CHAR},
+      department_workstation = #{record.departmentWorkstation,jdbcType=INTEGER},
+      department_area = #{record.departmentArea,jdbcType=DECIMAL},
+      province_id = #{record.provinceId,jdbcType=CHAR},
+      province = #{record.province,jdbcType=VARCHAR},
+      city_id = #{record.cityId,jdbcType=CHAR},
+      city = #{record.city,jdbcType=VARCHAR},
+      district_id = #{record.districtId,jdbcType=CHAR},
+      district = #{record.district,jdbcType=VARCHAR},
+      complete_address = #{record.completeAddress,jdbcType=VARCHAR},
+      notes = #{record.notes,jdbcType=VARCHAR},
+      `status` = #{record.status,jdbcType=VARCHAR},
+      sort_key = #{record.sortKey,jdbcType=INTEGER},
+      sms_user_id = #{record.smsUserId,jdbcType=VARCHAR},
+      sms_password = #{record.smsPassword,jdbcType=VARCHAR},
+      sms_url = #{record.smsUrl,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      create_group_cd = #{record.createGroupCd,jdbcType=VARCHAR},
+      create_user_cd = #{record.createUserCd,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=VARCHAR},
+      update_group_cd = #{record.updateGroupCd,jdbcType=VARCHAR},
+      update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=VARCHAR},
+      report_company_name = #{record.reportCompanyName,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.system.CMDepartment" >
+    update c_m_department
+    <set >
+      <if test="departmentCd != null" >
+        department_cd = #{departmentCd,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentName != null" >
+        department_name = #{departmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentCode != null" >
+        department_code = #{departmentCode,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentLeaderId != null" >
+        department_leader_id = #{departmentLeaderId,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentLeaderName != null" >
+        department_leader_name = #{departmentLeaderName,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentType != null" >
+        department_type = #{departmentType,jdbcType=CHAR},
+      </if>
+      <if test="departmentLevel != null" >
+        department_level = #{departmentLevel,jdbcType=TINYINT},
+      </if>
+      <if test="departmentPCd != null" >
+        department_p_cd = #{departmentPCd,jdbcType=VARCHAR},
+      </if>
+      <if test="departmentRegtime != null" >
+        department_regtime = #{departmentRegtime,jdbcType=CHAR},
+      </if>
+      <if test="departmentWorkstation != null" >
+        department_workstation = #{departmentWorkstation,jdbcType=INTEGER},
+      </if>
+      <if test="departmentArea != null" >
+        department_area = #{departmentArea,jdbcType=DECIMAL},
+      </if>
+      <if test="provinceId != null" >
+        province_id = #{provinceId,jdbcType=CHAR},
+      </if>
+      <if test="province != null" >
+        province = #{province,jdbcType=VARCHAR},
+      </if>
+      <if test="cityId != null" >
+        city_id = #{cityId,jdbcType=CHAR},
+      </if>
+      <if test="city != null" >
+        city = #{city,jdbcType=VARCHAR},
+      </if>
+      <if test="districtId != null" >
+        district_id = #{districtId,jdbcType=CHAR},
+      </if>
+      <if test="district != null" >
+        district = #{district,jdbcType=VARCHAR},
+      </if>
+      <if test="completeAddress != null" >
+        complete_address = #{completeAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        notes = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="status != null" >
+        `status` = #{status,jdbcType=VARCHAR},
+      </if>
+      <if test="sortKey != null" >
+        sort_key = #{sortKey,jdbcType=INTEGER},
+      </if>
+      <if test="smsUserId != null" >
+        sms_user_id = #{smsUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="smsPassword != null" >
+        sms_password = #{smsPassword,jdbcType=VARCHAR},
+      </if>
+      <if test="smsUrl != null" >
+        sms_url = #{smsUrl,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createGroupCd != null" >
+        create_group_cd = #{createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserCd != null" >
+        create_user_cd = #{createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateGroupCd != null" >
+        update_group_cd = #{updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="reportCompanyName != null" >
+        report_company_name = #{reportCompanyName,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.system.CMDepartment" >
+    update c_m_department
+    set department_cd = #{departmentCd,jdbcType=VARCHAR},
+      department_name = #{departmentName,jdbcType=VARCHAR},
+      department_code = #{departmentCode,jdbcType=VARCHAR},
+      department_leader_id = #{departmentLeaderId,jdbcType=VARCHAR},
+      department_leader_name = #{departmentLeaderName,jdbcType=VARCHAR},
+      department_type = #{departmentType,jdbcType=CHAR},
+      department_level = #{departmentLevel,jdbcType=TINYINT},
+      department_p_cd = #{departmentPCd,jdbcType=VARCHAR},
+      department_regtime = #{departmentRegtime,jdbcType=CHAR},
+      department_workstation = #{departmentWorkstation,jdbcType=INTEGER},
+      department_area = #{departmentArea,jdbcType=DECIMAL},
+      province_id = #{provinceId,jdbcType=CHAR},
+      province = #{province,jdbcType=VARCHAR},
+      city_id = #{cityId,jdbcType=CHAR},
+      city = #{city,jdbcType=VARCHAR},
+      district_id = #{districtId,jdbcType=CHAR},
+      district = #{district,jdbcType=VARCHAR},
+      complete_address = #{completeAddress,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=VARCHAR},
+      `status` = #{status,jdbcType=VARCHAR},
+      sort_key = #{sortKey,jdbcType=INTEGER},
+      sms_user_id = #{smsUserId,jdbcType=VARCHAR},
+      sms_password = #{smsPassword,jdbcType=VARCHAR},
+      sms_url = #{smsUrl,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      create_group_cd = #{createGroupCd,jdbcType=VARCHAR},
+      create_user_cd = #{createUserCd,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_group_cd = #{updateGroupCd,jdbcType=VARCHAR},
+      update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      report_company_name = #{reportCompanyName,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

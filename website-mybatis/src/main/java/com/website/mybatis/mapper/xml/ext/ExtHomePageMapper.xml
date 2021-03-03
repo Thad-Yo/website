@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.ExtHomePageMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.ext.ExtWebsiteConfigBannerModel" >
+    <id column="id" property="id" jdbcType="CHAR" />
+    <result column="img_Chinese_adress" property="imgChineseAdress" jdbcType="VARCHAR" />
+    <result column="img_English_adress" property="imgEnglishAdress" jdbcType="VARCHAR" />
+    <result column="banner_number" property="bannerNumber" jdbcType="CHAR" />
+    <result column="image_link" property="imageLink" jdbcType="CHAR" />
+    <result column="link_share" property="linkShare" jdbcType="VARCHAR" />
+    <result column="link_Chinese" property="linkChinese" jdbcType="VARCHAR" />
+    <result column="link_English" property="linkEnglish" jdbcType="VARCHAR" />
+    <result column="issue" property="issue" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="update_user_name" property="updateUserName" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectBannerList" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.ext.ExtWebsiteConfigBannerModel">
+  		select b.id,b.img_Chinese_adress,b.img_English_adress,b.banner_number,b.image_link,b.link_share,b.link_Chinese,
+  		b.link_English,b.issue,FROM_UNIXTIME(b.update_time,'%Y-%m-%d') update_time,b.update_user_name
+		from website_config_banner b
+		where b.delete_flag = '0'
+		<if test="issue!=null and issue != '' ">
+			and b.issue = #{issue}
+		</if>
+		order by b.issue desc,b.banner_number asc,b.update_time desc
+  </select>
+</mapper>

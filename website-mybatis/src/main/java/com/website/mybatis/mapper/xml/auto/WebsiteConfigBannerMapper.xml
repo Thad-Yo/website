@@ -1,0 +1,413 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.WebsiteConfigBannerMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteConfigBanner" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="img_Chinese_adress" property="imgChineseAdress" jdbcType="VARCHAR" />
+    <result column="img_English_adress" property="imgEnglishAdress" jdbcType="VARCHAR" />
+    <result column="banner_number" property="bannerNumber" jdbcType="CHAR" />
+    <result column="image_link" property="imageLink" jdbcType="CHAR" />
+    <result column="issue" property="issue" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="update_user_name" property="updateUserName" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.website.mybatis.bean.auto.WebsiteConfigBannerWithBLOBs" extends="BaseResultMap" >
+    <result column="link_share" property="linkShare" jdbcType="LONGVARCHAR" />
+    <result column="link_Chinese" property="linkChinese" jdbcType="LONGVARCHAR" />
+    <result column="link_English" property="linkEnglish" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, img_Chinese_adress, img_English_adress, banner_number, image_link, issue, create_time, 
+    update_time, update_user_id, update_user_name, delete_flag
+  </sql>
+  <sql id="Blob_Column_List" >
+    link_share, link_Chinese, link_English
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.website.mybatis.bean.auto.WebsiteConfigBannerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_config_banner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.WebsiteConfigBannerExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from website_config_banner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_config_banner
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from website_config_banner
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.WebsiteConfigBannerExample" >
+    delete from website_config_banner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.WebsiteConfigBannerWithBLOBs" >
+    insert into website_config_banner (id, img_Chinese_adress, img_English_adress, 
+      banner_number, image_link, issue, 
+      create_time, update_time, update_user_id, 
+      update_user_name, delete_flag, link_share, 
+      link_Chinese, link_English)
+    values (#{id,jdbcType=INTEGER}, #{imgChineseAdress,jdbcType=VARCHAR}, #{imgEnglishAdress,jdbcType=VARCHAR}, 
+      #{bannerNumber,jdbcType=CHAR}, #{imageLink,jdbcType=CHAR}, #{issue,jdbcType=CHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{updateUserId,jdbcType=VARCHAR}, 
+      #{updateUserName,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=CHAR}, #{linkShare,jdbcType=LONGVARCHAR}, 
+      #{linkChinese,jdbcType=LONGVARCHAR}, #{linkEnglish,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.WebsiteConfigBannerWithBLOBs" >
+    insert into website_config_banner
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="imgChineseAdress != null" >
+        img_Chinese_adress,
+      </if>
+      <if test="imgEnglishAdress != null" >
+        img_English_adress,
+      </if>
+      <if test="bannerNumber != null" >
+        banner_number,
+      </if>
+      <if test="imageLink != null" >
+        image_link,
+      </if>
+      <if test="issue != null" >
+        issue,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="linkShare != null" >
+        link_share,
+      </if>
+      <if test="linkChinese != null" >
+        link_Chinese,
+      </if>
+      <if test="linkEnglish != null" >
+        link_English,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="imgChineseAdress != null" >
+        #{imgChineseAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="imgEnglishAdress != null" >
+        #{imgEnglishAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerNumber != null" >
+        #{bannerNumber,jdbcType=CHAR},
+      </if>
+      <if test="imageLink != null" >
+        #{imageLink,jdbcType=CHAR},
+      </if>
+      <if test="issue != null" >
+        #{issue,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=CHAR},
+      </if>
+      <if test="linkShare != null" >
+        #{linkShare,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="linkChinese != null" >
+        #{linkChinese,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="linkEnglish != null" >
+        #{linkEnglish,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.WebsiteConfigBannerExample" resultType="java.lang.Integer" >
+    select count(*) from website_config_banner
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update website_config_banner
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.imgChineseAdress != null" >
+        img_Chinese_adress = #{record.imgChineseAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgEnglishAdress != null" >
+        img_English_adress = #{record.imgEnglishAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.bannerNumber != null" >
+        banner_number = #{record.bannerNumber,jdbcType=CHAR},
+      </if>
+      <if test="record.imageLink != null" >
+        image_link = #{record.imageLink,jdbcType=CHAR},
+      </if>
+      <if test="record.issue != null" >
+        issue = #{record.issue,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserId != null" >
+        update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserName != null" >
+        update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.linkShare != null" >
+        link_share = #{record.linkShare,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.linkChinese != null" >
+        link_Chinese = #{record.linkChinese,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.linkEnglish != null" >
+        link_English = #{record.linkEnglish,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update website_config_banner
+    set id = #{record.id,jdbcType=INTEGER},
+      img_Chinese_adress = #{record.imgChineseAdress,jdbcType=VARCHAR},
+      img_English_adress = #{record.imgEnglishAdress,jdbcType=VARCHAR},
+      banner_number = #{record.bannerNumber,jdbcType=CHAR},
+      image_link = #{record.imageLink,jdbcType=CHAR},
+      issue = #{record.issue,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
+      update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      delete_flag = #{record.deleteFlag,jdbcType=CHAR},
+      link_share = #{record.linkShare,jdbcType=LONGVARCHAR},
+      link_Chinese = #{record.linkChinese,jdbcType=LONGVARCHAR},
+      link_English = #{record.linkEnglish,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update website_config_banner
+    set id = #{record.id,jdbcType=INTEGER},
+      img_Chinese_adress = #{record.imgChineseAdress,jdbcType=VARCHAR},
+      img_English_adress = #{record.imgEnglishAdress,jdbcType=VARCHAR},
+      banner_number = #{record.bannerNumber,jdbcType=CHAR},
+      image_link = #{record.imageLink,jdbcType=CHAR},
+      issue = #{record.issue,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
+      update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      delete_flag = #{record.deleteFlag,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.WebsiteConfigBannerWithBLOBs" >
+    update website_config_banner
+    <set >
+      <if test="imgChineseAdress != null" >
+        img_Chinese_adress = #{imgChineseAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="imgEnglishAdress != null" >
+        img_English_adress = #{imgEnglishAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="bannerNumber != null" >
+        banner_number = #{bannerNumber,jdbcType=CHAR},
+      </if>
+      <if test="imageLink != null" >
+        image_link = #{imageLink,jdbcType=CHAR},
+      </if>
+      <if test="issue != null" >
+        issue = #{issue,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=CHAR},
+      </if>
+      <if test="linkShare != null" >
+        link_share = #{linkShare,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="linkChinese != null" >
+        link_Chinese = #{linkChinese,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="linkEnglish != null" >
+        link_English = #{linkEnglish,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.website.mybatis.bean.auto.WebsiteConfigBannerWithBLOBs" >
+    update website_config_banner
+    set img_Chinese_adress = #{imgChineseAdress,jdbcType=VARCHAR},
+      img_English_adress = #{imgEnglishAdress,jdbcType=VARCHAR},
+      banner_number = #{bannerNumber,jdbcType=CHAR},
+      image_link = #{imageLink,jdbcType=CHAR},
+      issue = #{issue,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=CHAR},
+      link_share = #{linkShare,jdbcType=LONGVARCHAR},
+      link_Chinese = #{linkChinese,jdbcType=LONGVARCHAR},
+      link_English = #{linkEnglish,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.WebsiteConfigBanner" >
+    update website_config_banner
+    set img_Chinese_adress = #{imgChineseAdress,jdbcType=VARCHAR},
+      img_English_adress = #{imgEnglishAdress,jdbcType=VARCHAR},
+      banner_number = #{bannerNumber,jdbcType=CHAR},
+      image_link = #{imageLink,jdbcType=CHAR},
+      issue = #{issue,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=CHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.ExtWebsiteIntroduceMapper" >
+ <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteIntroduce" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="introduce" property="introduce" jdbcType="LONGVARCHAR" />
+    <result column="introduce_eng" property="introduceEng" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+ <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    id,introduce,introduce_eng
+    from website_introduce
+    where id =(select max(id) from website_introduce)
+  </select>
+  
+</mapper>

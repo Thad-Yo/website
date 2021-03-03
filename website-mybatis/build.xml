@@ -1,0 +1,9 @@
+<project name="intranet-mybatis" basedir="." default="main">
+	<target name="main" description="Generate the files">
+		<delete includeEmptyDirs="true">
+			<fileset dir="${basedir}/src/main/java/com/website/mybatis/mapper/xml/auto" includes="**/*.*" />
+			<fileset dir="${basedir}/src/main/java/com/website/mybatis/bean/auto" includes="**/*.*" />
+			<fileset dir="${basedir}/src/main/java/com/website/mybatis/mapper/auto" includes="**/*.*" />
+		</delete>
+	</target>
+</project>

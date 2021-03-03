@@ -1,0 +1,148 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE generatorConfiguration PUBLIC "-//mybatis.org//DTD MyBatis Generator Configuration 1.0//EN"
+        "http://mybatis.org/dtd/mybatis-generator-config_1_0.dtd">
+<generatorConfiguration>
+
+    <classPathEntry
+            location="D:/workspace-website-trunk/website/website-mybatis-generator/src/main/resources/mysql-connector-java-5.1.30.jar"/>
+
+    <context id="doyumDB" targetRuntime="MyBatis3">
+        <property name="autoDelimitKeywords" value="true"/>
+        <property name="beginningDelimiter" value="`"/>
+        <property name="endingDelimiter" value="`"/>
+        <plugin type="com.website.mybatis.generator.mysql.plugins.MysqlPagingPlugin">
+            <property name="isMergeable" value="false"></property>
+        </plugin>
+        <plugin type="org.mybatis.generator.plugins.SerializablePlugin"/>
+        <commentGenerator>
+            <property name="suppressAllComments" value="true"/>
+            <property name="suppressDate" value="true"/>
+        </commentGenerator>
+
+        <jdbcConnection driverClass="com.mysql.jdbc.Driver"
+                        connectionURL="jdbc:mysql://172.16.110.196:3306/website?characterEncoding=utf8"
+                        userId="lianxin" password="LX@789023234"></jdbcConnection>
+
+        <javaTypeResolver>
+            <property name="forceBigDecimals" value="false"/>
+        </javaTypeResolver>
+
+        <javaModelGenerator targetPackage="com.website.mybatis.bean.auto"
+                            targetProject="D:/workspace-website-trunk/website/website-mybatis/src/main/java">
+            <property name="enableSubPackages" value="false"/>
+            <property name="trimStrings" value="true"/>
+        </javaModelGenerator>
+
+        <sqlMapGenerator targetPackage="com.website.mybatis.mapper.xml.auto"
+                         targetProject="D:/workspace-website-trunk/website/website-mybatis/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </sqlMapGenerator>
+
+        <javaClientGenerator type="XMLMAPPER"
+                             targetPackage="com.website.mybatis.mapper.auto"
+                             targetProject="D:/workspace-website-trunk/website/website-mybatis/src/main/java">
+            <property name="enableSubPackages" value="true"/>
+        </javaClientGenerator>
+
+        <!--&lt;!&ndash; 角色权限 &ndash;&gt;-->
+        <!-- <table tableName="website_config_banner" domainObjectName="WebsiteConfigBanner">
+           <property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>
+        </table> -->
+        <!--<table tableName="c_m_menu_permission" domainObjectName="CMMenuPermission">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="c_m_name" domainObjectName="CMName">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="c_m_role" domainObjectName="CMRole">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="c_m_role_menu_permission" domainObjectName="CMRoleMenuPermission">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="c_m_user" domainObjectName="CMUser">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="c_m_user_role" domainObjectName="CMUserRole">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+
+        <!--&lt;!&ndash; 部门 &ndash;&gt;-->
+        <!--<table tableName="c_m_department" domainObjectName="CMDepartment">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="c_m_department_user" domainObjectName="CMDepartmentUser">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+
+
+        <!--<table tableName="c_t_attachment" domainObjectName="CTAttachment">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="c_t_attachment" domainObjectName="CTAttachment">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="website_area" domainObjectName="Area">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="c_m_department_area" domainObjectName="CMDepartmentArea">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="website_order" domainObjectName="websiteOrder">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="website_order_type" domainObjectName="websiteOrderType">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="website_order_type_content" domainObjectName="websiteOrderTypeContent">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="website_sms_mail_template" domainObjectName="SmsMailTemplate">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!--<table tableName="website_order_type_content_detail" domainObjectName="websiteOrderTypeContentDetail">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        <!-- <table tableName="website_workorder" domainObjectName="websiteWorkorder">
+            <property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>
+        </table>  -->
+        <!--<table tableName="website_version" domainObjectName="websiteVersion">-->
+            <!--<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>-->
+        <!--</table>-->
+        
+            <!-- <table tableName="website_flow" domainObjectName="Flow">
+            	<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>
+        	</table> -->
+<!--             <table tableName="website_flow_reason" domainObjectName="FlowReason">
+            	<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>
+        	</table> -->
+
+<!--         <table tableName="c_m_user_custom" domainObjectName="CMUserCustom">
+            <property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>
+        </table> -->
+        
+        <!-- <table tableName="website_notice" domainObjectName="websiteNotice">
+           	<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>
+       	</table> -->
+        	
+        <!-- <table tableName="website_introduce" domainObjectName="WebsiteIntroduce">
+           	<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>
+       	</table> -->
+       	<!-- <table tableName="website_consult" domainObjectName="WebsiteConsult">
+           	<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>
+       	</table> -->
+<!--        	<table tableName="website_basic" domainObjectName="WebsiteBasic">
+           	<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>
+       	</table> -->
+<!--         <table tableName="website_company_news" domainObjectName="WebsiteCompanyNews">
+           	<property name="rootClass" value="com.website.mybatis.bean.BaseBean"></property>
+           	<columnOverride column="content" javaType="java.lang.String" jdbcType="VARCHAR" /> 
+       	</table> 	 -->
+        	
+
+    </context>
+</generatorConfiguration>
+        <!-- CMD下执行 -->
+        <!-- mvn install:install-file -Dfile=E:/workspace/website/website-mybatis-generator/target/website-mybatis-generator-1.0-SNAPSHOT.jar -DgroupId=website -DartifactId=website-mybatis-generator -Dversion=1.0-SNAPSHOT -Dpackaging=jar -->
+        <!-- ta-mybatis-generator 工程上右键->Run As->Maven Build打开窗口后在Goals栏填写： mybatis-generator:generate -->
+        <!-- 然后run可生成代码 -->

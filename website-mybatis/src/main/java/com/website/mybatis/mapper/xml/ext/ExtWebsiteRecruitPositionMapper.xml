@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.ExtWebsiteRecruitPositionMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteRecruitPosition" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="recruit_position_id" property="recruitPositionId" jdbcType="INTEGER" />
+    <result column="recruit_position" property="recruitPosition" jdbcType="VARCHAR" />
+    <result column="salary" property="salary" jdbcType="VARCHAR" />
+    <result column="recruit_city" property="recruitCity" jdbcType="VARCHAR" />
+    <result column="recruit_city_name" property="recruitCityName" jdbcType="VARCHAR" />
+    <result column="recruit_type" property="recruitType" jdbcType="CHAR" />
+    <result column="position_type" property="positionType" jdbcType="VARCHAR" />
+    <result column="position_type_name" property="positionTypeName" jdbcType="VARCHAR" />
+    <result column="status" property="status" jdbcType="CHAR" />
+    <result column="position_introduce" property="positionIntroduce" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="findRecruitPositinList" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.ext.ExtWebsiteRecruitPositionModel" >
+    select
+    id, recruit_position_id, recruit_position, salary, recruit_city, recruit_city_name,
+    recruit_type, position_type, position_type_name, `status`, position_introduce, del_flag,
+    create_user, create_time, update_user, update_time
+    from website_recruit_position di
+    where 1=1
+     and di.del_flag = 0
+    <if test="recruitCityName != null and recruitCityName != ''">
+      and di.recruit_city_name LIKE CONCAT('%',#{recruitCityName, jdbcType=VARCHAR},'%')
+    </if>
+    <if test="status != null and status != ''">
+      and di.status = #{status}
+    </if>
+    <if test="positionType != null and positionType != ''">
+      and di.position_type = #{positionType}
+    </if>
+    <if test="recruitType != null and recruitType != ''">
+      and di.recruit_type = #{recruitType}
+    </if>
+    <if test="id != null and id != ''">
+      and di.id = #{id}
+    </if>
+  </select>
+
+  <select id="findProvinceList" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.ext.ExtWebsiteRecruitPositionModel" >
+    select
+      distinct(di.city) as recruit_city_name,
+      di.id as recruit_city
+    from c_m_department di
+    where
+    <choose >
+      <when test="cityList != null and cityList.size() > 0">
+        di.id in
+        <foreach collection="cityList" item="listItem" open="(" close=")" separator=",">
+          #{listItem}
+        </foreach>
+      </when>
+      <otherwise>
+        1=0
+      </otherwise>
+    </choose>
+  </select>
+
+</mapper>

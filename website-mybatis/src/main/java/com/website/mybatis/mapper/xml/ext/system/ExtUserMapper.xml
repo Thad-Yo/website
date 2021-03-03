@@ -1,0 +1,276 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.system.ExtUserMapper">
+    <resultMap id="BaseResultMap" type="com.website.mybatis.bean.ext.system.ExtUserModel">
+        <id column="user_id" property="userId" jdbcType="VARCHAR"/>
+        <result column="user_name" property="userName" jdbcType="VARCHAR"/>
+        <result column="company_name" property="companyName" jdbcType="VARCHAR"/>
+        <result column="real_name" property="realName" jdbcType="VARCHAR"/>
+        <result column="password" property="password" jdbcType="VARCHAR"/>
+        <result column="des3" property="des3" jdbcType="VARCHAR"/>
+        <result column="mobile_number" property="mobileNumber" jdbcType="VARCHAR"/>
+        <result column="extension_number" property="extensionNumber" jdbcType="VARCHAR"/>
+        <result column="address" property="address" jdbcType="VARCHAR"/>
+        <result column="email_address" property="emailAddress" jdbcType="VARCHAR"/>
+        <result column="user_flag" property="userFlag" jdbcType="VARCHAR"/>
+        <result column="notes" property="notes" jdbcType="VARCHAR"/>
+        <result column="old_user_no" property="oldUserNo" jdbcType="VARCHAR"/>
+        <result column="user_no" property="userNo" jdbcType="VARCHAR"/>
+        <result column="position" property="position" jdbcType="VARCHAR"/>
+        <result column="sex" property="sex" jdbcType="VARCHAR"/>
+        <result column="join_date" property="joinDate" jdbcType="VARCHAR"/>
+        <result column="birthday" property="birthday" jdbcType="VARCHAR"/>
+        <result column="id_no" property="idNo" jdbcType="VARCHAR"/>
+        <result column="del_flag" property="delFlag" jdbcType="VARCHAR"/>
+        <result column="create_group_cd" property="createGroupCd" jdbcType="VARCHAR"/>
+        <result column="create_user_cd" property="createUserCd" jdbcType="VARCHAR"/>
+        <result column="create_date" property="createDate" jdbcType="VARCHAR"/>
+        <result column="update_group_cd" property="updateGroupCd" jdbcType="VARCHAR"/>
+        <result column="update_user_cd" property="updateUserCd" jdbcType="VARCHAR"/>
+        <result column="update_date" property="updateDate" jdbcType="VARCHAR"/>
+        <result column="department_id" property="departmentId" jdbcType="VARCHAR"/>
+        <result column="department_cd" property="departmentCd" jdbcType="VARCHAR"/>
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
+        <result column="department_p_cd" property="departmentPCd" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="user_sort_key" property="userSortKey" jdbcType="INTEGER"/>
+        <result column="sort_key" property="sortKey" jdbcType="INTEGER"/>
+        <result column="role_id" property="roleId" jdbcType="VARCHAR"/>
+        <result column="role_name" property="roleName" jdbcType="VARCHAR"/>
+        <result column="user_flag_name" property="userFlagName" jdbcType="VARCHAR"/>
+        <result column="province" property="province" jdbcType="VARCHAR"/>
+        <result column="city" property="city" jdbcType="VARCHAR"/>
+    </resultMap>
+    <sql id="Base_Column_List">
+		u.user_id, u.user_name, u.company_name, u.real_name, u.`password`, u.des3, u.mobile_number, u.address,
+        u.extension_number,
+    u.email_address, u.user_flag, u.notes, u.user_no, u.`position`, u.sex,u.user_sort_key,
+    u.join_date, u.birthday, u.id_no, u.del_flag, u.create_group_cd, u.create_user_cd, u.create_date,
+    u.update_group_cd, u.update_user_cd, u.update_date, d.id as department_id, d.department_cd, d.department_name, d.department_p_cd,d.status,d.sort_key,
+    r.role_id,r.role_name
+	</sql>
+
+    <sql id="Where_Clause">
+        <where>
+            u.del_flag = '0'
+            <if test="userId != null and userId != ''">
+                and u.user_id = #{userId}
+            </if>
+            <if test="userName != null and userName != ''">
+                and u.user_name like CONCAT('%',#{userName},'%')
+            </if>
+            <if test="realName != null and realName != ''">
+                and u.real_name like CONCAT('%',#{realName},'%')
+            </if>
+            <if test="mobileNumber != null and mobileNumber != ''">
+                and u.mobile_number like CONCAT('%',#{mobileNumber},'%')
+            </if>
+            <if test="emailAddress != null and emailAddress != ''">
+                and u.email_address like CONCAT('%',#{emailAddress},'%')
+            </if>
+            <if test="roleName != null and roleName != ''">
+                and r.role_name like CONCAT('%',#{roleName},'%')
+            </if>
+            <if test="role != null and role != ''">
+                and r.role = #{role}
+            </if>
+            <if test="listDepartmentCd != null and listDepartmentCd.size() > 0">
+                and d.id in
+                <foreach collection="listDepartmentCd" item="listItem" open="(" close=")" separator=",">
+                    #{listItem}
+                </foreach>
+            </if>
+        </where>
+    </sql>
+
+    <select id="selectUserListCount" resultType="java.lang.Integer" parameterType="com.website.mybatis.bean.ext.system.ExtUserModel">
+        select
+        count(*)
+        from c_m_user u left join c_m_department_user du on u.user_id = du.user_id and du.del_flag = '0' left join
+        c_m_department d on du.department_cd = d.department_cd and du.del_flag = '0'
+        left join c_m_user_role ur on ur.user_id = u.user_id and ur.del_flag = '0' left join c_m_role r on r.role_id =
+        ur.role_id and r.del_flag = '0'
+        <include refid="Where_Clause"/>
+    </select>
+    <select id="selectUserList" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.ext.system.ExtUserModel">
+        SELECT DISTINCT
+            u.user_id,
+            u.user_name,
+            u.real_name,
+            u.mobile_number,
+            u.email_address,
+            u.extension_number,
+            department.department_name,
+            r.role_name
+        FROM
+            c_m_user u
+        LEFT JOIN c_m_user_role ur ON ur.user_id = u.user_id
+        AND ur.del_flag = '0'
+        LEFT JOIN c_m_role r ON r.role_id = ur.role_id
+        AND r.del_flag = '0'
+        LEFT JOIN (
+            SELECT
+                user_id,
+                GROUP_CONCAT(
+                    CONCAT(
+                        department_p_name, IF(department_name IS NULL OR department_name = '', '', '-'),
+                        department_name
+                    )
+                ) AS department_name
+            FROM
+                (
+                    SELECT
+                        d.id,
+                        du.user_id,
+                        CASE
+                    WHEN dp.department_name IS NULL
+                    OR dp.department_name = '' THEN
+                        d.department_name
+                    ELSE
+                        dp.department_name
+                    END AS department_p_name,
+                    CASE
+                WHEN dp.department_name IS NULL
+                OR dp.department_name = '' THEN
+                    ''
+                ELSE
+                    d.department_name
+                END AS department_name
+                FROM
+                    c_m_department_user du
+                LEFT JOIN c_m_department d ON du.department_cd = d.department_cd
+                AND du.del_flag = '0'
+                LEFT JOIN c_m_department dp ON dp.department_cd = d.department_p_cd
+                AND du.del_flag = '0'
+                <!--<where>-->
+                    <!--<if test="listDepartmentCd != null and listDepartmentCd.size() > 0">-->
+                        <!--and d.id in-->
+                        <!--<foreach collection="listDepartmentCd" item="listItem" open="(" close=")" separator=",">-->
+                            <!--#{listItem}-->
+                        <!--</foreach>-->
+                    <!--</if>-->
+                <!--</where>-->
+                ) department_user
+            GROUP BY
+                department_user.user_id
+        ) department ON department.user_id = u.user_id
+        LEFT JOIN c_m_department_user du ON u.user_id = du.user_id
+        AND du.del_flag = '0'
+        LEFT JOIN c_m_department d ON du.department_cd = d.department_cd
+        AND du.del_flag = '0'
+        <include refid="Where_Clause"/>
+        <if test="orderByClause != null">
+            order by ${orderByClause}
+        </if>
+        <if test="limitStart >= 0">
+            limit #{limitStart} , #{limitEnd}
+        </if>
+    </select>
+    <select id="selectUserById" resultMap="BaseResultMap" parameterType="java.lang.String">
+        select
+        u.user_id, u.user_name, u.company_name, u.real_name, u.`password`, u.des3, u.sex, u.mobile_number, u.address,
+        u.email_address,
+        u.extension_number,
+        r.role_id,r.role_name
+        from c_m_user u
+        left join c_m_user_role ur on ur.user_id = u.user_id and ur.del_flag = '0' left join c_m_role r on r.role_id =
+        ur.role_id and r.del_flag = '0'
+        where u.user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+
+    <select id="selectAuthorizationUserList" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.ext.system.ExtUserModel">
+        select
+        d.department_cd,
+        d.department_name,
+        u.user_id,
+        u.real_name,
+        u.position
+        FROM
+        c_m_user u LEFT JOIN c_m_department_user du ON u.user_id = du.user_id
+        LEFT JOIN c_m_department d ON du.department_cd = d.department_cd
+        <where>
+            <if test="userName != null and userName != ''">
+                and u.user_name = #{userName}
+            </if>
+            <if test="realName != null and realName != ''">
+                and u.real_name LIKE concat('%', #{realName,jdbcType=VARCHAR}, '%')
+            </if>
+        </where>
+        ORDER BY
+        u.join_date DESC
+        <if test="limitStart >= 0">
+            limit #{limitStart} , #{limitEnd}
+        </if>
+    </select>
+
+    <select id="selectInviteUserList" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.ext.system.ExtUserModel">
+        SELECT DISTINCT
+            u.user_id,
+            u.user_name,
+            u.real_name,
+            u.mobile_number
+        FROM
+            c_m_user u
+            INNER JOIN c_m_user_role ur ON ur.user_id = u.user_id
+            INNER JOIN c_m_role r ON r.role_id = ur.role_id
+            INNER JOIN c_m_department_user du ON du.user_id = u.user_id
+        <where>
+            u.del_flag = '0'
+
+            <if test='userFlag == "01"'>
+                AND r.role = 'INVITE'
+            </if>
+            <if test='userFlag == "02"'>
+                AND r.role = 'VISIT'
+                <if test="listDepartmentCd != null and listDepartmentCd.size() > 0">
+                    and du.department_cd in
+                    <foreach collection="listDepartmentCd" item="listItem" open="(" close=")" separator=",">
+                        #{listItem}
+                    </foreach>
+                </if>
+            </if>
+
+            <if test='userFlag == "03"'>
+                AND r.role = 'CHECK'
+                <!--<if test="listDepartmentCd != null and listDepartmentCd.size() > 0">-->
+                    <!--and du.department_cd in-->
+                    <!--<foreach collection="listDepartmentCd" item="listItem" open="(" close=")" separator=",">-->
+                        <!--#{listItem}-->
+                    <!--</foreach>-->
+                <!--</if>-->
+            </if>
+
+            <if test="realName != null and realName != ''">
+                and u.real_name like CONCAT('%',#{realName},'%')
+            </if>
+            <if test="mobileNumber != null and mobileNumber != ''">
+                and u.mobile_number like CONCAT('%',#{mobileNumber},'%')
+            </if>
+        </where>
+    </select>
+
+    <select id="selectLoginUserDepartment" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.ext.system.ExtUserModel">
+        SELECT
+        d.department_cd,
+        d.department_name,
+        '1' AS user_type
+        FROM
+        c_m_user u
+        INNER JOIN c_m_department_user du ON u.user_id = du.user_id
+        INNER JOIN c_m_department d ON du.department_cd = d.department_cd
+        WHERE
+        u.user_id = #{userId,jdbcType=VARCHAR}
+        UNION ALL
+        SELECT
+        d.department_cd,
+        d.department_name,
+        '2' AS user_type
+        FROM
+        c_m_user u
+        LEFT JOIN c_m_department_user du ON u.user_id = du.user_id
+        LEFT JOIN c_m_department d ON du.department_cd = d.department_cd
+        LEFT JOIN c_m_department pd ON d.department_cd = pd.department_p_cd
+        WHERE
+        u.user_id = #{userId,jdbcType=VARCHAR}
+    </select>
+</mapper>

@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.system.ExtDepartmentMapper">
+    <resultMap id="ResultMap" type="com.website.mybatis.bean.ext.system.ExtDepartmentModel">
+        <id column="id" property="id" jdbcType="INTEGER"/>
+        <result column="department_cd" property="departmentCd" jdbcType="VARCHAR"/>
+        <result column="department_name" property="departmentName" jdbcType="VARCHAR"/>
+        <result column="department_p_cd" property="departmentPCd" jdbcType="VARCHAR"/>
+        <result column="status" property="status" jdbcType="VARCHAR"/>
+        <result column="sort_key" property="sortKey" jdbcType="INTEGER"/>
+        <result column="del_flag" property="delFlag" jdbcType="VARCHAR"/>
+        <result column="areas" property="areas" jdbcType="VARCHAR"/>
+        <result column="save_path" property="savePath" jdbcType="VARCHAR"/>
+        <result column="user_cnt" property="userCnt" jdbcType="VARCHAR"/>
+    </resultMap>
+    <select id="selectDepartment" resultMap="ResultMap"
+            parameterType="com.website.mybatis.bean.ext.system.ExtDepartmentModel">
+        SELECT
+            d.id,
+            d.department_cd,
+            d.department_name,
+            d.department_p_cd,
+            d.`status`,
+            d.sort_key,
+            d.del_flag,
+            CONCAT(d.district,'/', d.city,'/',d.province) as areas,
+            a.save_path
+        FROM
+            c_m_department d
+        LEFT JOIN c_t_attachment a ON d.department_cd = a.file_id
+        WHERE
+          d.del_flag = '0'
+        <if test="id != null and id != ''">
+            AND d.id = #{id, jdbcType=VARCHAR}
+        </if>
+        <if test="departmentCd != null and departmentCd != ''">
+            AND d.department_cd = #{departmentCd, jdbcType=VARCHAR}
+        </if>
+        <if test="departmentPCd != null and departmentPCd != ''">
+            AND d.department_p_cd = #{departmentPCd, jdbcType=VARCHAR}
+        </if>
+        ORDER BY
+            sort_key
+    </select>
+
+    <select id="selectDepartmentWithUserCnt" resultMap="ResultMap"
+            parameterType="com.website.mybatis.bean.ext.system.ExtDepartmentModel">
+        SELECT
+        d.id,
+        d.department_cd,
+        d.department_name,
+        d.department_p_cd,
+        d.`status`,
+        d.sort_key,
+        d.del_flag,
+        a.save_path,
+        (select count(*) from c_m_department_user du where du.department_cd = d.department_cd and du.del_flag = '0') as user_cnt
+        FROM
+        c_m_department d
+        LEFT JOIN c_t_attachment a ON d.department_cd = a.file_id
+        WHERE
+        d.del_flag = '0'
+        <if test="id != null and id != ''">
+            AND d.id = #{id, jdbcType=VARCHAR}
+        </if>
+        <if test="departmentCd != null and departmentCd != ''">
+            AND d.department_cd = #{departmentCd, jdbcType=VARCHAR}
+        </if>
+        <if test="departmentPCd != null and departmentPCd != ''">
+            AND d.department_p_cd = #{departmentPCd, jdbcType=VARCHAR}
+        </if>
+        <if test="departmentName != null and departmentName != ''">
+            AND d.department_name like CONCAT('%',#{departmentName},'%')
+        </if>
+        ORDER BY
+        sort_key
+    </select>
+    
+    <select id="selectDepartmentByDepartmentPCd" resultMap="ResultMap"
+            parameterType="com.website.mybatis.bean.ext.system.ExtDepartmentModel">
+        SELECT
+            d.id,
+            d.department_cd,
+            d.department_name,
+            d.department_p_cd,
+            d.`status`,
+            d.sort_key,
+            d.del_flag,
+            d.city as areas,
+            a.save_path
+        FROM
+            c_m_department d
+        LEFT JOIN c_t_attachment a ON d.department_cd = a.file_id
+        WHERE
+          d.del_flag = '0' 
+          AND d.department_name LIKE '%分公司%' 
+        <if test="id != null and id != ''">
+            AND d.id = #{id, jdbcType=VARCHAR}
+        </if>
+        <if test="departmentCd != null and departmentCd != ''">
+            AND d.department_cd = #{departmentCd, jdbcType=VARCHAR}
+        </if>
+        <if test="departmentPCd != null and departmentPCd != ''">
+            AND d.department_p_cd = #{departmentPCd, jdbcType=VARCHAR}
+        </if>
+        ORDER BY
+            sort_key
+    </select>
+    
+</mapper>

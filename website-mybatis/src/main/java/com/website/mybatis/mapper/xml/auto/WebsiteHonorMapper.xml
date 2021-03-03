@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.WebsiteHonorMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteHonor" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="img_address_eng" property="imgAddressEng" jdbcType="VARCHAR" />
+    <result column="img_address" property="imgAddress" jdbcType="VARCHAR" />
+    <result column="honor_number_eng" property="honorNumberEng" jdbcType="VARCHAR" />
+    <result column="honor_number" property="honorNumber" jdbcType="VARCHAR" />
+    <result column="honor_name_eng" property="honorNameEng" jdbcType="VARCHAR" />
+    <result column="honor_name" property="honorName" jdbcType="VARCHAR" />
+    <result column="honor_state_eng" property="honorStateEng" jdbcType="VARCHAR" />
+    <result column="honor_state" property="honorState" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="update_user_name" property="updateUserName" jdbcType="VARCHAR" />
+    <result column="honor_details_eng" property="honorDetailsEng" jdbcType="VARCHAR" />
+    <result column="honor_details" property="honorDetails" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="has_eng" property="hasEng" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, img_address_eng, img_address, honor_number_eng, honor_number, honor_name_eng, 
+    honor_name, honor_state_eng, honor_state, create_time, update_time, update_user_id, 
+    update_user_name, honor_details_eng, honor_details, delete_flag, has_eng
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.WebsiteHonorExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from website_honor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from website_honor
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from website_honor
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.WebsiteHonorExample" >
+    delete from website_honor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.WebsiteHonor" >
+    insert into website_honor (id, img_address_eng, img_address, 
+      honor_number_eng, honor_number, honor_name_eng, 
+      honor_name, honor_state_eng, honor_state, 
+      create_time, update_time, update_user_id, 
+      update_user_name, honor_details_eng, honor_details, 
+      delete_flag, has_eng)
+    values (#{id,jdbcType=VARCHAR}, #{imgAddressEng,jdbcType=VARCHAR}, #{imgAddress,jdbcType=VARCHAR}, 
+      #{honorNumberEng,jdbcType=VARCHAR}, #{honorNumber,jdbcType=VARCHAR}, #{honorNameEng,jdbcType=VARCHAR}, 
+      #{honorName,jdbcType=VARCHAR}, #{honorStateEng,jdbcType=VARCHAR}, #{honorState,jdbcType=VARCHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, #{updateUserId,jdbcType=VARCHAR}, 
+      #{updateUserName,jdbcType=VARCHAR}, #{honorDetailsEng,jdbcType=VARCHAR}, #{honorDetails,jdbcType=VARCHAR}, 
+      #{deleteFlag,jdbcType=VARCHAR}, #{hasEng,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.WebsiteHonor" >
+    insert into website_honor
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="imgAddressEng != null" >
+        img_address_eng,
+      </if>
+      <if test="imgAddress != null" >
+        img_address,
+      </if>
+      <if test="honorNumberEng != null" >
+        honor_number_eng,
+      </if>
+      <if test="honorNumber != null" >
+        honor_number,
+      </if>
+      <if test="honorNameEng != null" >
+        honor_name_eng,
+      </if>
+      <if test="honorName != null" >
+        honor_name,
+      </if>
+      <if test="honorStateEng != null" >
+        honor_state_eng,
+      </if>
+      <if test="honorState != null" >
+        honor_state,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name,
+      </if>
+      <if test="honorDetailsEng != null" >
+        honor_details_eng,
+      </if>
+      <if test="honorDetails != null" >
+        honor_details,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="hasEng != null" >
+        has_eng,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="imgAddressEng != null" >
+        #{imgAddressEng,jdbcType=VARCHAR},
+      </if>
+      <if test="imgAddress != null" >
+        #{imgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="honorNumberEng != null" >
+        #{honorNumberEng,jdbcType=VARCHAR},
+      </if>
+      <if test="honorNumber != null" >
+        #{honorNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="honorNameEng != null" >
+        #{honorNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="honorName != null" >
+        #{honorName,jdbcType=VARCHAR},
+      </if>
+      <if test="honorStateEng != null" >
+        #{honorStateEng,jdbcType=VARCHAR},
+      </if>
+      <if test="honorState != null" >
+        #{honorState,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="honorDetailsEng != null" >
+        #{honorDetailsEng,jdbcType=VARCHAR},
+      </if>
+      <if test="honorDetails != null" >
+        #{honorDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="hasEng != null" >
+        #{hasEng,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.WebsiteHonorExample" resultType="java.lang.Integer" >
+    select count(*) from website_honor
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update website_honor
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgAddressEng != null" >
+        img_address_eng = #{record.imgAddressEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgAddress != null" >
+        img_address = #{record.imgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.honorNumberEng != null" >
+        honor_number_eng = #{record.honorNumberEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.honorNumber != null" >
+        honor_number = #{record.honorNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.honorNameEng != null" >
+        honor_name_eng = #{record.honorNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.honorName != null" >
+        honor_name = #{record.honorName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.honorStateEng != null" >
+        honor_state_eng = #{record.honorStateEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.honorState != null" >
+        honor_state = #{record.honorState,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserId != null" >
+        update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserName != null" >
+        update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.honorDetailsEng != null" >
+        honor_details_eng = #{record.honorDetailsEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.honorDetails != null" >
+        honor_details = #{record.honorDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasEng != null" >
+        has_eng = #{record.hasEng,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update website_honor
+    set id = #{record.id,jdbcType=VARCHAR},
+      img_address_eng = #{record.imgAddressEng,jdbcType=VARCHAR},
+      img_address = #{record.imgAddress,jdbcType=VARCHAR},
+      honor_number_eng = #{record.honorNumberEng,jdbcType=VARCHAR},
+      honor_number = #{record.honorNumber,jdbcType=VARCHAR},
+      honor_name_eng = #{record.honorNameEng,jdbcType=VARCHAR},
+      honor_name = #{record.honorName,jdbcType=VARCHAR},
+      honor_state_eng = #{record.honorStateEng,jdbcType=VARCHAR},
+      honor_state = #{record.honorState,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
+      update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      honor_details_eng = #{record.honorDetailsEng,jdbcType=VARCHAR},
+      honor_details = #{record.honorDetails,jdbcType=VARCHAR},
+      delete_flag = #{record.deleteFlag,jdbcType=VARCHAR},
+      has_eng = #{record.hasEng,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.WebsiteHonor" >
+    update website_honor
+    <set >
+      <if test="imgAddressEng != null" >
+        img_address_eng = #{imgAddressEng,jdbcType=VARCHAR},
+      </if>
+      <if test="imgAddress != null" >
+        img_address = #{imgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="honorNumberEng != null" >
+        honor_number_eng = #{honorNumberEng,jdbcType=VARCHAR},
+      </if>
+      <if test="honorNumber != null" >
+        honor_number = #{honorNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="honorNameEng != null" >
+        honor_name_eng = #{honorNameEng,jdbcType=VARCHAR},
+      </if>
+      <if test="honorName != null" >
+        honor_name = #{honorName,jdbcType=VARCHAR},
+      </if>
+      <if test="honorStateEng != null" >
+        honor_state_eng = #{honorStateEng,jdbcType=VARCHAR},
+      </if>
+      <if test="honorState != null" >
+        honor_state = #{honorState,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="honorDetailsEng != null" >
+        honor_details_eng = #{honorDetailsEng,jdbcType=VARCHAR},
+      </if>
+      <if test="honorDetails != null" >
+        honor_details = #{honorDetails,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="hasEng != null" >
+        has_eng = #{hasEng,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.WebsiteHonor" >
+    update website_honor
+    set img_address_eng = #{imgAddressEng,jdbcType=VARCHAR},
+      img_address = #{imgAddress,jdbcType=VARCHAR},
+      honor_number_eng = #{honorNumberEng,jdbcType=VARCHAR},
+      honor_number = #{honorNumber,jdbcType=VARCHAR},
+      honor_name_eng = #{honorNameEng,jdbcType=VARCHAR},
+      honor_name = #{honorName,jdbcType=VARCHAR},
+      honor_state_eng = #{honorStateEng,jdbcType=VARCHAR},
+      honor_state = #{honorState,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      honor_details_eng = #{honorDetailsEng,jdbcType=VARCHAR},
+      honor_details = #{honorDetails,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      has_eng = #{hasEng,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

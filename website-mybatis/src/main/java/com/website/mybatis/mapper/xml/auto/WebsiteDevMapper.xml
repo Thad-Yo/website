@@ -1,0 +1,389 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.WebsiteDevMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteDev" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="img_address_eng" property="imgAddressEng" jdbcType="VARCHAR" />
+    <result column="img_address" property="imgAddress" jdbcType="VARCHAR" />
+    <result column="dev_number" property="devNumber" jdbcType="VARCHAR" />
+    <result column="dev_date_eng" property="devDateEng" jdbcType="VARCHAR" />
+    <result column="dev_date" property="devDate" jdbcType="VARCHAR" />
+    <result column="dev_title_eng" property="devTitleEng" jdbcType="VARCHAR" />
+    <result column="dev_title" property="devTitle" jdbcType="VARCHAR" />
+    <result column="dev_text_eng" property="devTextEng" jdbcType="VARCHAR" />
+    <result column="dev_text" property="devText" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="update_user_name" property="updateUserName" jdbcType="VARCHAR" />
+    <result column="delete_flag" property="deleteFlag" jdbcType="VARCHAR" />
+    <result column="has_eng" property="hasEng" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, img_address_eng, img_address, dev_number, dev_date_eng, dev_date, dev_title_eng, 
+    dev_title, dev_text_eng, dev_text, create_time, update_time, update_user_id, update_user_name, 
+    delete_flag, has_eng
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.WebsiteDevExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from website_dev
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    from website_dev
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from website_dev
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.WebsiteDevExample" >
+    delete from website_dev
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.WebsiteDev" >
+    insert into website_dev (id, img_address_eng, img_address, 
+      dev_number, dev_date_eng, dev_date, 
+      dev_title_eng, dev_title, dev_text_eng, 
+      dev_text, create_time, update_time, 
+      update_user_id, update_user_name, delete_flag, 
+      has_eng)
+    values (#{id,jdbcType=VARCHAR}, #{imgAddressEng,jdbcType=VARCHAR}, #{imgAddress,jdbcType=VARCHAR}, 
+      #{devNumber,jdbcType=VARCHAR}, #{devDateEng,jdbcType=VARCHAR}, #{devDate,jdbcType=VARCHAR}, 
+      #{devTitleEng,jdbcType=VARCHAR}, #{devTitle,jdbcType=VARCHAR}, #{devTextEng,jdbcType=VARCHAR}, 
+      #{devText,jdbcType=VARCHAR}, #{createTime,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{updateUserName,jdbcType=VARCHAR}, #{deleteFlag,jdbcType=VARCHAR}, 
+      #{hasEng,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.WebsiteDev" >
+    insert into website_dev
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="imgAddressEng != null" >
+        img_address_eng,
+      </if>
+      <if test="imgAddress != null" >
+        img_address,
+      </if>
+      <if test="devNumber != null" >
+        dev_number,
+      </if>
+      <if test="devDateEng != null" >
+        dev_date_eng,
+      </if>
+      <if test="devDate != null" >
+        dev_date,
+      </if>
+      <if test="devTitleEng != null" >
+        dev_title_eng,
+      </if>
+      <if test="devTitle != null" >
+        dev_title,
+      </if>
+      <if test="devTextEng != null" >
+        dev_text_eng,
+      </if>
+      <if test="devText != null" >
+        dev_text,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name,
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag,
+      </if>
+      <if test="hasEng != null" >
+        has_eng,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="imgAddressEng != null" >
+        #{imgAddressEng,jdbcType=VARCHAR},
+      </if>
+      <if test="imgAddress != null" >
+        #{imgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="devNumber != null" >
+        #{devNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="devDateEng != null" >
+        #{devDateEng,jdbcType=VARCHAR},
+      </if>
+      <if test="devDate != null" >
+        #{devDate,jdbcType=VARCHAR},
+      </if>
+      <if test="devTitleEng != null" >
+        #{devTitleEng,jdbcType=VARCHAR},
+      </if>
+      <if test="devTitle != null" >
+        #{devTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="devTextEng != null" >
+        #{devTextEng,jdbcType=VARCHAR},
+      </if>
+      <if test="devText != null" >
+        #{devText,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="hasEng != null" >
+        #{hasEng,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.WebsiteDevExample" resultType="java.lang.Integer" >
+    select count(*) from website_dev
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update website_dev
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgAddressEng != null" >
+        img_address_eng = #{record.imgAddressEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgAddress != null" >
+        img_address = #{record.imgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devNumber != null" >
+        dev_number = #{record.devNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devDateEng != null" >
+        dev_date_eng = #{record.devDateEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devDate != null" >
+        dev_date = #{record.devDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devTitleEng != null" >
+        dev_title_eng = #{record.devTitleEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devTitle != null" >
+        dev_title = #{record.devTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devTextEng != null" >
+        dev_text_eng = #{record.devTextEng,jdbcType=VARCHAR},
+      </if>
+      <if test="record.devText != null" >
+        dev_text = #{record.devText,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserId != null" >
+        update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserName != null" >
+        update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.deleteFlag != null" >
+        delete_flag = #{record.deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasEng != null" >
+        has_eng = #{record.hasEng,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update website_dev
+    set id = #{record.id,jdbcType=VARCHAR},
+      img_address_eng = #{record.imgAddressEng,jdbcType=VARCHAR},
+      img_address = #{record.imgAddress,jdbcType=VARCHAR},
+      dev_number = #{record.devNumber,jdbcType=VARCHAR},
+      dev_date_eng = #{record.devDateEng,jdbcType=VARCHAR},
+      dev_date = #{record.devDate,jdbcType=VARCHAR},
+      dev_title_eng = #{record.devTitleEng,jdbcType=VARCHAR},
+      dev_title = #{record.devTitle,jdbcType=VARCHAR},
+      dev_text_eng = #{record.devTextEng,jdbcType=VARCHAR},
+      dev_text = #{record.devText,jdbcType=VARCHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
+      update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      delete_flag = #{record.deleteFlag,jdbcType=VARCHAR},
+      has_eng = #{record.hasEng,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.WebsiteDev" >
+    update website_dev
+    <set >
+      <if test="imgAddressEng != null" >
+        img_address_eng = #{imgAddressEng,jdbcType=VARCHAR},
+      </if>
+      <if test="imgAddress != null" >
+        img_address = #{imgAddress,jdbcType=VARCHAR},
+      </if>
+      <if test="devNumber != null" >
+        dev_number = #{devNumber,jdbcType=VARCHAR},
+      </if>
+      <if test="devDateEng != null" >
+        dev_date_eng = #{devDateEng,jdbcType=VARCHAR},
+      </if>
+      <if test="devDate != null" >
+        dev_date = #{devDate,jdbcType=VARCHAR},
+      </if>
+      <if test="devTitleEng != null" >
+        dev_title_eng = #{devTitleEng,jdbcType=VARCHAR},
+      </if>
+      <if test="devTitle != null" >
+        dev_title = #{devTitle,jdbcType=VARCHAR},
+      </if>
+      <if test="devTextEng != null" >
+        dev_text_eng = #{devTextEng,jdbcType=VARCHAR},
+      </if>
+      <if test="devText != null" >
+        dev_text = #{devText,jdbcType=VARCHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="deleteFlag != null" >
+        delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="hasEng != null" >
+        has_eng = #{hasEng,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.WebsiteDev" >
+    update website_dev
+    set img_address_eng = #{imgAddressEng,jdbcType=VARCHAR},
+      img_address = #{imgAddress,jdbcType=VARCHAR},
+      dev_number = #{devNumber,jdbcType=VARCHAR},
+      dev_date_eng = #{devDateEng,jdbcType=VARCHAR},
+      dev_date = #{devDate,jdbcType=VARCHAR},
+      dev_title_eng = #{devTitleEng,jdbcType=VARCHAR},
+      dev_title = #{devTitle,jdbcType=VARCHAR},
+      dev_text_eng = #{devTextEng,jdbcType=VARCHAR},
+      dev_text = #{devText,jdbcType=VARCHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      delete_flag = #{deleteFlag,jdbcType=VARCHAR},
+      has_eng = #{hasEng,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

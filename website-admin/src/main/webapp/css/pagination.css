@@ -1,0 +1,166 @@
+/* ---------------------------------------------------------------------- */
+/*  Pagination
+/* ---------------------------------------------------------------------- */
+.pagination-info {
+    line-height: 2.3;
+    position: relative;
+}
+.pagination-info .pagination {
+    position: absolute;
+    right: 10px;
+    margin: 0;
+}
+.pagination > li > a, .pagination > li > span {
+    margin-left: 5px;
+    padding: 5px 10px;
+    /*border-radius: 5px;*/
+    cursor: pointer;
+    color: #46b8da;
+}
+
+.pagination > .active > a,
+.pagination > .active > a:hover, .pagination > .active > span:hover,
+.pagination > .active > a:focus, .pagination > .active > span:focus {
+    background-color: #007AFF;
+    border-color: #007AFF;
+    color: #ffffff;
+}
+
+.pagination input {
+    width: 40px;
+    text-align: right;
+    margin-left: 5px;
+    border-radius: 3px;
+}
+.pagination [type=number] {
+    width: 58px;
+}
+
+.pagination.squared {
+    border-radius: 0 !important;
+}
+
+.pagination.squared li:first-child a, .pagination.squared li:first-child > span {
+    border-bottom-left-radius: 0px !important;
+    border-left-width: 1px;
+    border-top-left-radius: 0px !important;
+}
+
+.pagination.squared li:last-child > a, .pagination.squared li:last-child > span {
+    border-bottom-right-radius: 0px !important;
+    border-top-right-radius: 0px !important;
+}
+
+.pagination-blue li a {
+    background: #f7f7f8;
+    border: none !important;
+    color: #8e8e93;
+    display: inline-block;
+    margin-right: 1px;
+}
+.pagination-blue li a:hover {
+    background: #e7e7e9;
+    color: #424246;
+    cursor: pointer;
+}
+.pagination-blue li:first-child a {
+    border: none !important;
+}
+.pagination-blue li.disabled a {
+    background: #f7f7f8;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+    opacity: 0.2;
+}
+.pagination-blue li.disabled a:hover, .pagination-blue li.disabled a:focus {
+    background: #f7f7f8;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+    opacity: 0.2;
+    cursor: default !important;
+}
+.pagination-blue li.active a {
+    background: #5F8295 !important;
+    border: none !important;
+    color: #ffffff !important;
+    cursor: default !important;
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+}
+.pagination-blue li [class^="fa-"], .pagination-blue li [class*=" fa-"], .pagination-blue li [class*="ti-"] {
+    color: #5F8295;
+}
+
+.pagination-green li a {
+    background: #f7f7f8;
+    border: none !important;
+    color: #8e8e93;
+    display: inline-block;
+    margin-right: 1px;
+}
+.pagination-green li a:hover {
+    background: #e7e7e9;
+    color: #424246;
+    cursor: pointer;
+}
+.pagination-green li:first-child a {
+    border: none !important;
+}
+.pagination-green li.disabled a {
+    background: #f7f7f8;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+    opacity: 0.2;
+}
+.pagination-green li.disabled a:hover, .pagination-green li.disabled a:focus {
+    background: #f7f7f8;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+    opacity: 0.2;
+    cursor: default !important;
+}
+.pagination-green li.active a {
+    background: #1FBBA6 !important;
+    border: none !important;
+    color: #ffffff !important;
+    cursor: default !important;
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+}
+.pagination-green li [class^="fa-"], .pagination-green li [class*=" fa-"], .pagination-green li [class*="ti-"] {
+    color: #1FBBA6;
+}
+
+.pagination-red li a {
+    background: #f7f7f8;
+    border: none !important;
+    color: #8e8e93;
+    display: inline-block;
+    margin-right: 1px;
+}
+.pagination-red li a:hover {
+    background: #e7e7e9;
+    color: #424246;
+    cursor: pointer;
+}
+.pagination-red li:first-child a {
+    border: none !important;
+}
+.pagination-red li.disabled a {
+    background: #f7f7f8;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+    opacity: 0.2;
+}
+.pagination-red li.disabled a:hover, .pagination-red li.disabled a:focus {
+    background: #f7f7f8;
+    filter: progid:DXImageTransform.Microsoft.Alpha(Opacity=20);
+    opacity: 0.2;
+    cursor: default !important;
+}
+.pagination-red li.active a {
+    background: #C82E29 !important;
+    border: none !important;
+    color: #ffffff !important;
+    cursor: default !important;
+    filter: progid:DXImageTransform.Microsoft.Alpha(enabled=false);
+    opacity: 1;
+}
+.pagination-red li [class^="fa-"], .pagination-red li [class*=" fa-"], .pagination-red li [class*="ti-"] {
+    color: #C82E29;
+}

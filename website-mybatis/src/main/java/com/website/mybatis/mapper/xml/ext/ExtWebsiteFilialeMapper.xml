@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.ExtWebsiteFilialeMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteFiliale" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="filiale_name" property="filialeName" jdbcType="VARCHAR" />
+    <result column="tel" property="tel" jdbcType="VARCHAR" />
+    <result column="province" property="province" jdbcType="VARCHAR" />
+    <result column="longitude" property="longitude" jdbcType="VARCHAR" />
+    <result column="latitude" property="latitude" jdbcType="VARCHAR" />
+    <result column="show" property="show" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="AreaResultMap" type="com.website.mybatis.bean.ext.ExtArea">
+        <id column="code" property="code" jdbcType="CHAR"/>
+        <result column="name" property="name" jdbcType="VARCHAR"/>
+        <result column="isprovince" property="isprovince" jdbcType="INTEGER"/>
+        <result column="iscity" property="iscity" jdbcType="INTEGER"/>
+    </resultMap>
+  <select id="selectUsList" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.WebsiteFiliale">
+  		select 
+  		*
+  		from website_filiale b
+		where b.show = '1'
+		<if test="filialeName != null and filialeName != ''">
+             and b.filiale_name like CONCAT('%',#{filialeName, jdbcType=VARCHAR},'%')
+        </if>
+        <if test="tel != null and tel != ''">
+             and b.tel like CONCAT('%',#{tel, jdbcType=VARCHAR},'%')
+        </if>
+      <if test="province != null and province != ''">
+          and b.province like CONCAT('%',#{province, jdbcType=VARCHAR},'%')
+      </if>
+        order by b.id desc
+  </select>
+  
+  <!-- 获取所有的省 -->
+    <select id="findProvinceList" resultMap="AreaResultMap">
+        SELECT
+        `code`,
+        `name`
+        FROM `website_area` za
+        <where>
+            `isprovince` = 1
+        </where>
+    </select>
+
+    <select id="getFilialeProList" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.WebsiteFiliale">
+        select distinct (b.province)
+        from website_filiale b
+        where b.show = '1'
+        order by b.id desc
+    </select>
+</mapper>

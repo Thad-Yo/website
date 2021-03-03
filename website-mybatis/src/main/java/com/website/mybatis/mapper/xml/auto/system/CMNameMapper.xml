@@ -1,0 +1,404 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.system.CMNameMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.system.CMName" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="name_class" property="nameClass" jdbcType="VARCHAR" />
+    <result column="name_cd" property="nameCd" jdbcType="VARCHAR" />
+    <result column="name" property="name" jdbcType="VARCHAR" />
+    <result column="sort_key" property="sortKey" jdbcType="VARCHAR" />
+    <result column="data" property="data" jdbcType="VARCHAR" />
+    <result column="reserve01" property="reserve01" jdbcType="VARCHAR" />
+    <result column="reserve02" property="reserve02" jdbcType="VARCHAR" />
+    <result column="reserve03" property="reserve03" jdbcType="VARCHAR" />
+    <result column="notes" property="notes" jdbcType="VARCHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="VARCHAR" />
+    <result column="create_user_cd" property="createUserCd" jdbcType="VARCHAR" />
+    <result column="create_group_cd" property="createGroupCd" jdbcType="VARCHAR" />
+    <result column="create_date" property="createDate" jdbcType="VARCHAR" />
+    <result column="update_user_cd" property="updateUserCd" jdbcType="VARCHAR" />
+    <result column="update_group_cd" property="updateGroupCd" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, name_class, name_cd, `name`, sort_key, `data`, reserve01, reserve02, reserve03, 
+    notes, del_flag, create_user_cd, create_group_cd, create_date, update_user_cd, update_group_cd, 
+    update_date
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.system.CMNameExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from c_m_name
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from c_m_name
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from c_m_name
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.system.CMNameExample" >
+    delete from c_m_name
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.system.CMName" >
+    insert into c_m_name (id, name_class, name_cd, 
+      `name`, sort_key, `data`, 
+      reserve01, reserve02, reserve03, 
+      notes, del_flag, create_user_cd, 
+      create_group_cd, create_date, update_user_cd, 
+      update_group_cd, update_date)
+    values (#{id,jdbcType=INTEGER}, #{nameClass,jdbcType=VARCHAR}, #{nameCd,jdbcType=VARCHAR}, 
+      #{name,jdbcType=VARCHAR}, #{sortKey,jdbcType=VARCHAR}, #{data,jdbcType=VARCHAR}, 
+      #{reserve01,jdbcType=VARCHAR}, #{reserve02,jdbcType=VARCHAR}, #{reserve03,jdbcType=VARCHAR}, 
+      #{notes,jdbcType=VARCHAR}, #{delFlag,jdbcType=VARCHAR}, #{createUserCd,jdbcType=VARCHAR}, 
+      #{createGroupCd,jdbcType=VARCHAR}, #{createDate,jdbcType=VARCHAR}, #{updateUserCd,jdbcType=VARCHAR}, 
+      #{updateGroupCd,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.system.CMName" >
+    insert into c_m_name
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="nameClass != null" >
+        name_class,
+      </if>
+      <if test="nameCd != null" >
+        name_cd,
+      </if>
+      <if test="name != null" >
+        `name`,
+      </if>
+      <if test="sortKey != null" >
+        sort_key,
+      </if>
+      <if test="data != null" >
+        `data`,
+      </if>
+      <if test="reserve01 != null" >
+        reserve01,
+      </if>
+      <if test="reserve02 != null" >
+        reserve02,
+      </if>
+      <if test="reserve03 != null" >
+        reserve03,
+      </if>
+      <if test="notes != null" >
+        notes,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createUserCd != null" >
+        create_user_cd,
+      </if>
+      <if test="createGroupCd != null" >
+        create_group_cd,
+      </if>
+      <if test="createDate != null" >
+        create_date,
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd,
+      </if>
+      <if test="updateGroupCd != null" >
+        update_group_cd,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="nameClass != null" >
+        #{nameClass,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCd != null" >
+        #{nameCd,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sortKey != null" >
+        #{sortKey,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve01 != null" >
+        #{reserve01,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve02 != null" >
+        #{reserve02,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve03 != null" >
+        #{reserve03,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserCd != null" >
+        #{createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createGroupCd != null" >
+        #{createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateGroupCd != null" >
+        #{updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.system.CMNameExample" resultType="java.lang.Integer" >
+    select count(*) from c_m_name
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update c_m_name
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.nameClass != null" >
+        name_class = #{record.nameClass,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nameCd != null" >
+        name_cd = #{record.nameCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.name != null" >
+        `name` = #{record.name,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortKey != null" >
+        sort_key = #{record.sortKey,jdbcType=VARCHAR},
+      </if>
+      <if test="record.data != null" >
+        `data` = #{record.data,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve01 != null" >
+        reserve01 = #{record.reserve01,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve02 != null" >
+        reserve02 = #{record.reserve02,jdbcType=VARCHAR},
+      </if>
+      <if test="record.reserve03 != null" >
+        reserve03 = #{record.reserve03,jdbcType=VARCHAR},
+      </if>
+      <if test="record.notes != null" >
+        notes = #{record.notes,jdbcType=VARCHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserCd != null" >
+        create_user_cd = #{record.createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createGroupCd != null" >
+        create_group_cd = #{record.createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createDate != null" >
+        create_date = #{record.createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserCd != null" >
+        update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateGroupCd != null" >
+        update_group_cd = #{record.updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update c_m_name
+    set id = #{record.id,jdbcType=INTEGER},
+      name_class = #{record.nameClass,jdbcType=VARCHAR},
+      name_cd = #{record.nameCd,jdbcType=VARCHAR},
+      `name` = #{record.name,jdbcType=VARCHAR},
+      sort_key = #{record.sortKey,jdbcType=VARCHAR},
+      `data` = #{record.data,jdbcType=VARCHAR},
+      reserve01 = #{record.reserve01,jdbcType=VARCHAR},
+      reserve02 = #{record.reserve02,jdbcType=VARCHAR},
+      reserve03 = #{record.reserve03,jdbcType=VARCHAR},
+      notes = #{record.notes,jdbcType=VARCHAR},
+      del_flag = #{record.delFlag,jdbcType=VARCHAR},
+      create_user_cd = #{record.createUserCd,jdbcType=VARCHAR},
+      create_group_cd = #{record.createGroupCd,jdbcType=VARCHAR},
+      create_date = #{record.createDate,jdbcType=VARCHAR},
+      update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      update_group_cd = #{record.updateGroupCd,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.system.CMName" >
+    update c_m_name
+    <set >
+      <if test="nameClass != null" >
+        name_class = #{nameClass,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCd != null" >
+        name_cd = #{nameCd,jdbcType=VARCHAR},
+      </if>
+      <if test="name != null" >
+        `name` = #{name,jdbcType=VARCHAR},
+      </if>
+      <if test="sortKey != null" >
+        sort_key = #{sortKey,jdbcType=VARCHAR},
+      </if>
+      <if test="data != null" >
+        `data` = #{data,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve01 != null" >
+        reserve01 = #{reserve01,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve02 != null" >
+        reserve02 = #{reserve02,jdbcType=VARCHAR},
+      </if>
+      <if test="reserve03 != null" >
+        reserve03 = #{reserve03,jdbcType=VARCHAR},
+      </if>
+      <if test="notes != null" >
+        notes = #{notes,jdbcType=VARCHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserCd != null" >
+        create_user_cd = #{createUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createGroupCd != null" >
+        create_group_cd = #{createGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="createDate != null" >
+        create_date = #{createDate,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateGroupCd != null" >
+        update_group_cd = #{updateGroupCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.system.CMName" >
+    update c_m_name
+    set name_class = #{nameClass,jdbcType=VARCHAR},
+      name_cd = #{nameCd,jdbcType=VARCHAR},
+      `name` = #{name,jdbcType=VARCHAR},
+      sort_key = #{sortKey,jdbcType=VARCHAR},
+      `data` = #{data,jdbcType=VARCHAR},
+      reserve01 = #{reserve01,jdbcType=VARCHAR},
+      reserve02 = #{reserve02,jdbcType=VARCHAR},
+      reserve03 = #{reserve03,jdbcType=VARCHAR},
+      notes = #{notes,jdbcType=VARCHAR},
+      del_flag = #{delFlag,jdbcType=VARCHAR},
+      create_user_cd = #{createUserCd,jdbcType=VARCHAR},
+      create_group_cd = #{createGroupCd,jdbcType=VARCHAR},
+      create_date = #{createDate,jdbcType=VARCHAR},
+      update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      update_group_cd = #{updateGroupCd,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" "http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <!-- 总管理类 如果将lazy-init='false'那么容器启动就会执行调度程序 -->
+    <bean id="startTestTask" lazy-init="false" autowire="no" class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                <!-- ******************** 开启定时任务添加在该List列表当中 ******************** -->
+				<!-- 检查用户活跃天数定时  -->
+				<ref bean="HrconfigTime"/>
+
+			</list>
+        </property>
+    </bean>
+
+	<!-- 检查用户活跃天数 定时  -->
+	<bean id="HrconfigTask" class="com.website.web.system.recruit.HrconfigTask"></bean>
+	<!-- 定义调用对象和调用对象的方法 -->
+	<bean id="HrconfigJob" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<!--调用的类-->
+		<property name="targetObject" >
+			<ref bean="HrconfigTask" />
+		</property>
+		<!--调用类中的方法-->
+		<property name="targetMethod">
+			<value>Hrconfig</value>
+		</property>
+	</bean>
+	<!-- 定义触发时间 -->
+	<bean id="HrconfigTime" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail">
+			<ref bean="HrconfigJob" />
+		</property>
+		<!--cron表达式 每天运行一次-->
+		<!--<property name="cronExpression" value="0 0/10 * * * ?" />-->
+		 <property name="cronExpression" value="0 0 1 * * ?" />
+	</bean>
+	
+	
+</beans>

@@ -1,0 +1,363 @@
+@charset "UTF-8";
+body {
+    margin: 0;
+    padding: 0;
+    height: auto;
+    min-width: 1100px;
+    font-family: "Microsoft YaHei"!important;
+    font-size:16px;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+ul {
+    list-style: none;
+}
+
+a {
+    text-decoration: none !important;
+    outline:none !important;
+}
+
+html {
+    height: auto;
+    font-size: .6em;
+}
+
+.hide {
+    display: none;
+}
+
+.textCN {
+    display: none;
+}
+
+.textEN {
+    display: none;
+}
+
+/*面包屑导航栏开始*/
+.nav-ul {
+    padding: 0;
+    position: fixed;
+    right: 20px;
+    top: 50%;
+    width: 12px;
+    z-index: 66666;
+    margin-bottom: 0;
+}
+
+.nav-ul li {
+    padding: 0;
+    list-style: none;
+    margin: 10px 0;
+    position: relative;
+}
+
+.nav-ul li::after {
+    content: " ";
+    display: block;
+    width: 10px;
+    height: 10px;
+    border-radius: 50%;
+    border: 1px solid gainsboro;
+    background: transparent;
+    margin: 5px 0;
+    cursor: pointer;
+}
+
+.nav-ul li.active {
+    background: transparent !important;
+}
+
+.nav-ul li.active::after {
+    background: #ba0c2f;
+    border-color: #ba0c2f;
+    box-shadow: 0 0 10px 3px #ba0c2f;
+}
+
+.nav-ul li:hover::after {
+    background: #ba0c2f;
+    border-color: #ba0c2f;
+}
+
+.nav-ul li:hover p {
+    opacity: 1;
+}
+
+.nav-ul li p {
+    position: absolute;
+    right: 20px;
+    top: -5px;
+    font-size: 1.4rem;
+    line-height: 14px;
+    white-space: nowrap;
+    background: #ba0c2f;
+    color: #fff;
+    padding: 5px;
+    border-radius: 5px;
+    transition: opacity .3s;
+    opacity: 0;
+    text-transform: capitalize;
+}
+
+.nav-active {
+    background: #b90b2c !important;
+}
+
+/*面包屑导航栏结束*/
+
+/*backTop开始*/
+.backTop {
+    width: 45px;
+    height: 45px;
+    border-radius: 5px;
+    position: fixed;
+    bottom: 15px;
+    right: 15px;
+    background: #D20814;
+    text-align: center;
+    line-height: 45px;
+    cursor: pointer;
+    z-index: 999999;
+    display: none;
+}
+
+.backTop i {
+    font-size: 25px;
+    color: #fff;
+    line-height: 45px;
+}
+
+/*backTop结束*/
+
+section {
+    width: 100%;
+    height: auto;
+    overflow: hidden;
+}
+
+.gray {
+    background: #f7f7f7;
+}
+
+section .section-body {
+    width: 1100px;
+    margin: auto;
+    padding-bottom: 70px;
+}
+
+/*通用链接按钮*/
+.link-btn{
+    border: 1px gainsboro solid;
+    background: #fff;
+    border-radius: 25px;
+    height: 33px;
+    display: inline-block;
+    position: relative;
+    text-indent: 0;
+    line-height: 15px;
+}
+
+.link-btn i{
+    border-radius: 50%;
+    width: 15px;
+    height: 15px;
+    background: #ba0c2f;
+    color: #fff;
+
+    /*定位*/
+    position: absolute;
+    left: 15px;
+    top: 10px;
+    font-size: 15px;
+}
+.link-btn i:before {
+    content: "\e602";
+    position: absolute;
+    top: -1px;
+    left: 0;
+}
+
+.link-btn span {
+    color: #000;
+    font-size: 15px;
+    line-height: 35px;
+    margin: 0 20px 0 40px;
+}
+.link-btn:hover{
+    border-color: #ba0c2f;
+    background: #ba0c2f;
+}
+.link-btn:hover i {
+    color: #ba0c2f;
+    background: #fff;
+}
+.link-btn:hover span {
+    color: #fff;
+}
+.link-btn:active{
+    border-color: gainsboro;
+    background: #fff;
+}
+.link-btn:active i {
+    background: #ba0c2f;
+    color: #fff;
+}
+.link-btn:active span {
+    color: #000;
+}
+
+/*section标题栏开始*/
+section .section-title {
+    margin: 40px auto;
+    display: table;
+    position: relative;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+    cursor: default;
+}
+
+section .section-title .section-title-EN {
+    text-transform: Uppercase;
+    font-size: 3.4rem;
+    color: #b90b2c;
+    text-align: center;
+    font-weight: bold;
+    position: relative;
+    padding: 3px 120px;
+    margin: auto;
+    display: table;
+}
+
+section .section-title .section-title-EN::before {
+    content: '';
+    height: 1px;
+    width: 30px;
+    background: #b90b2c;
+
+    /* 定位 */
+    position: absolute;
+    left: 0;
+    bottom: 25px;
+}
+
+section .section-title .section-title-EN::after {
+    content: '';
+    height: 1px;
+    width: 30px;
+    background: #b90b2c;
+
+    /* 定位 */
+    position: absolute;
+    right: 0;
+    bottom: 25px;
+}
+
+section .section-title .section-title-line {
+    width: 100%;
+}
+
+section .section-title .section-title-line::before {
+    content: '';
+    height: 1px;
+    width: calc(50% - 15px);
+    background: rgba(128, 128, 128, 0.51);
+
+    /* 定位 */
+    position: absolute;
+    left: 0;
+    bottom: 0;
+}
+
+section .section-title .section-title-line::after {
+    content: '';
+    height: 1px;
+    width: calc(50% - 15px);
+    background: rgba(128, 128, 128, 0.51);
+
+    /* 定位 */
+    position: absolute;
+    right: 0;
+    bottom: 0;
+}
+
+section .section-title .section-title-CN {
+    display: block;
+    font-size: 2.4rem;
+    color: #000000;
+    text-align: center;
+    font-weight: bold;
+    padding-top: 7px;
+    position: relative;
+    width: fit-content;
+    margin: auto;
+}
+section .section-title .section-title-CN::after {
+    content: '';
+    height: 6px;
+    width: 6px;
+    border-radius: 3px;
+    background: #b90b2c;
+
+    /* 定位 */
+    position: absolute;
+    left: 50%;
+    top: -3px;
+    transform: translateX(-50%);
+}
+
+section .section-title.white .section-title-EN {
+    color: white;
+}
+
+section .section-title.white .section-title-EN::before {
+    background: white;
+}
+
+section .section-title.white .section-title-EN::after {
+    background: white;
+}
+
+section .section-title.white .section-title-line::before {
+    background: white;
+}
+
+section .section-title.white .section-title-line::after {
+    background: white;
+}
+
+section .section-title.white .section-title-CN {
+    color: white;
+}
+
+section .section-title.white .section-title-CN::after {
+    background: white;
+}
+
+/*section标题栏结束*/
+
+/*滚动分页器样式开始*/
+.lianxin-bullet {
+    display: inline-block;
+    margin: 5px;
+    width: 8px;
+    height: 8px;
+    background-color: transparent;
+    border-radius: 50%;
+    border: 1px solid gainsboro;
+    cursor: pointer;
+}
+
+.lianxin-bullet-active {
+    background-color: #ba0c2f !important;
+    border-color: #ba0c2f !important;
+}
+
+/*滚动分页器样式结束*/

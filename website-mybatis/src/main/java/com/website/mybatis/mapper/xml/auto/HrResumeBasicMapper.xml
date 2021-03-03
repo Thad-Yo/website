@@ -1,0 +1,897 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.HrResumeBasicMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.HrResumeBasic" >
+    <id column="id" property="id" jdbcType="BIGINT" />
+    <result column="resume_number" property="resumeNumber" jdbcType="BIGINT" />
+    <result column="company_id" property="companyId" jdbcType="VARCHAR" />
+    <result column="interviewer_id" property="interviewerId" jdbcType="BIGINT" />
+    <result column="get_type" property="getType" jdbcType="CHAR" />
+    <result column="apply_position" property="applyPosition" jdbcType="VARCHAR" />
+    <result column="resume_channel_id" property="resumeChannelId" jdbcType="SMALLINT" />
+    <result column="apply_date" property="applyDate" jdbcType="CHAR" />
+    <result column="is_on" property="isOn" jdbcType="CHAR" />
+    <result column="career_year" property="careerYear" jdbcType="VARCHAR" />
+    <result column="current_salary" property="currentSalary" jdbcType="VARCHAR" />
+    <result column="expect_salary" property="expectSalary" jdbcType="VARCHAR" />
+    <result column="expect_fulltime" property="expectFulltime" jdbcType="CHAR" />
+    <result column="expect_workplace" property="expectWorkplace" jdbcType="VARCHAR" />
+    <result column="expect_industry" property="expectIndustry" jdbcType="VARCHAR" />
+    <result column="expect_job" property="expectJob" jdbcType="VARCHAR" />
+    <result column="name_cn" property="nameCn" jdbcType="VARCHAR" />
+    <result column="gender" property="gender" jdbcType="CHAR" />
+    <result column="birth_date" property="birthDate" jdbcType="VARCHAR" />
+    <result column="marriage" property="marriage" jdbcType="CHAR" />
+    <result column="phone_mobile" property="phoneMobile" jdbcType="VARCHAR" />
+    <result column="email_person" property="emailPerson" jdbcType="VARCHAR" />
+    <result column="address_detail" property="addressDetail" jdbcType="VARCHAR" />
+    <result column="register_address_detail" property="registerAddressDetail" jdbcType="VARCHAR" />
+    <result column="photo_path" property="photoPath" jdbcType="VARCHAR" />
+    <result column="certificate_detail" property="certificateDetail" jdbcType="VARCHAR" />
+    <result column="interest" property="interest" jdbcType="VARCHAR" />
+    <result column="apply_letter_content" property="applyLetterContent" jdbcType="VARCHAR" />
+    <result column="attachment_name" property="attachmentName" jdbcType="VARCHAR" />
+    <result column="attachment_path" property="attachmentPath" jdbcType="VARCHAR" />
+    <result column="resume_status" property="resumeStatus" jdbcType="CHAR" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="CHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="CHAR" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="update_user_name" property="updateUserName" jdbcType="VARCHAR" />
+    <result column="special_offer_status" property="specialOfferStatus" jdbcType="CHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.website.mybatis.bean.auto.HrResumeBasicWithBLOBs" extends="BaseResultMap" >
+    <result column="self_evaluation" property="selfEvaluation" jdbcType="LONGVARCHAR" />
+    <result column="study_situation" property="studySituation" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, resume_number, company_id, interviewer_id, get_type, apply_position, resume_channel_id, 
+    apply_date, is_on, career_year, current_salary, expect_salary, expect_fulltime, expect_workplace, 
+    expect_industry, expect_job, name_cn, gender, birth_date, marriage, phone_mobile, 
+    email_person, address_detail, register_address_detail, photo_path, certificate_detail, 
+    interest, apply_letter_content, attachment_name, attachment_path, resume_status, 
+    del_flag, create_time, create_user_id, create_user_name, update_time, update_user_id, 
+    update_user_name, special_offer_status
+  </sql>
+  <sql id="Blob_Column_List" >
+    self_evaluation, study_situation
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.website.mybatis.bean.auto.HrResumeBasicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hr_resume_basic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.HrResumeBasicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from hr_resume_basic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Long" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from hr_resume_basic
+    where id = #{id,jdbcType=BIGINT}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Long" >
+    delete from hr_resume_basic
+    where id = #{id,jdbcType=BIGINT}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.HrResumeBasicExample" >
+    delete from hr_resume_basic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.HrResumeBasicWithBLOBs" >
+    insert into hr_resume_basic (id, resume_number, company_id, 
+      interviewer_id, get_type, apply_position, 
+      resume_channel_id, apply_date, is_on, 
+      career_year, current_salary, expect_salary, 
+      expect_fulltime, expect_workplace, expect_industry, 
+      expect_job, name_cn, gender, 
+      birth_date, marriage, phone_mobile, 
+      email_person, address_detail, register_address_detail, 
+      photo_path, certificate_detail, interest, 
+      apply_letter_content, attachment_name, attachment_path, 
+      resume_status, del_flag, create_time, 
+      create_user_id, create_user_name, update_time, 
+      update_user_id, update_user_name, special_offer_status, 
+      self_evaluation, study_situation)
+    values (#{id,jdbcType=BIGINT}, #{resumeNumber,jdbcType=BIGINT}, #{companyId,jdbcType=VARCHAR}, 
+      #{interviewerId,jdbcType=BIGINT}, #{getType,jdbcType=CHAR}, #{applyPosition,jdbcType=VARCHAR}, 
+      #{resumeChannelId,jdbcType=SMALLINT}, #{applyDate,jdbcType=CHAR}, #{isOn,jdbcType=CHAR}, 
+      #{careerYear,jdbcType=VARCHAR}, #{currentSalary,jdbcType=VARCHAR}, #{expectSalary,jdbcType=VARCHAR}, 
+      #{expectFulltime,jdbcType=CHAR}, #{expectWorkplace,jdbcType=VARCHAR}, #{expectIndustry,jdbcType=VARCHAR}, 
+      #{expectJob,jdbcType=VARCHAR}, #{nameCn,jdbcType=VARCHAR}, #{gender,jdbcType=CHAR}, 
+      #{birthDate,jdbcType=VARCHAR}, #{marriage,jdbcType=CHAR}, #{phoneMobile,jdbcType=VARCHAR}, 
+      #{emailPerson,jdbcType=VARCHAR}, #{addressDetail,jdbcType=VARCHAR}, #{registerAddressDetail,jdbcType=VARCHAR}, 
+      #{photoPath,jdbcType=VARCHAR}, #{certificateDetail,jdbcType=VARCHAR}, #{interest,jdbcType=VARCHAR}, 
+      #{applyLetterContent,jdbcType=VARCHAR}, #{attachmentName,jdbcType=VARCHAR}, #{attachmentPath,jdbcType=VARCHAR}, 
+      #{resumeStatus,jdbcType=CHAR}, #{delFlag,jdbcType=CHAR}, #{createTime,jdbcType=CHAR}, 
+      #{createUserId,jdbcType=VARCHAR}, #{createUserName,jdbcType=VARCHAR}, #{updateTime,jdbcType=CHAR}, 
+      #{updateUserId,jdbcType=VARCHAR}, #{updateUserName,jdbcType=VARCHAR}, #{specialOfferStatus,jdbcType=CHAR}, 
+      #{selfEvaluation,jdbcType=LONGVARCHAR}, #{studySituation,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.HrResumeBasicWithBLOBs" >
+    insert into hr_resume_basic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="resumeNumber != null" >
+        resume_number,
+      </if>
+      <if test="companyId != null" >
+        company_id,
+      </if>
+      <if test="interviewerId != null" >
+        interviewer_id,
+      </if>
+      <if test="getType != null" >
+        get_type,
+      </if>
+      <if test="applyPosition != null" >
+        apply_position,
+      </if>
+      <if test="resumeChannelId != null" >
+        resume_channel_id,
+      </if>
+      <if test="applyDate != null" >
+        apply_date,
+      </if>
+      <if test="isOn != null" >
+        is_on,
+      </if>
+      <if test="careerYear != null" >
+        career_year,
+      </if>
+      <if test="currentSalary != null" >
+        current_salary,
+      </if>
+      <if test="expectSalary != null" >
+        expect_salary,
+      </if>
+      <if test="expectFulltime != null" >
+        expect_fulltime,
+      </if>
+      <if test="expectWorkplace != null" >
+        expect_workplace,
+      </if>
+      <if test="expectIndustry != null" >
+        expect_industry,
+      </if>
+      <if test="expectJob != null" >
+        expect_job,
+      </if>
+      <if test="nameCn != null" >
+        name_cn,
+      </if>
+      <if test="gender != null" >
+        gender,
+      </if>
+      <if test="birthDate != null" >
+        birth_date,
+      </if>
+      <if test="marriage != null" >
+        marriage,
+      </if>
+      <if test="phoneMobile != null" >
+        phone_mobile,
+      </if>
+      <if test="emailPerson != null" >
+        email_person,
+      </if>
+      <if test="addressDetail != null" >
+        address_detail,
+      </if>
+      <if test="registerAddressDetail != null" >
+        register_address_detail,
+      </if>
+      <if test="photoPath != null" >
+        photo_path,
+      </if>
+      <if test="certificateDetail != null" >
+        certificate_detail,
+      </if>
+      <if test="interest != null" >
+        interest,
+      </if>
+      <if test="applyLetterContent != null" >
+        apply_letter_content,
+      </if>
+      <if test="attachmentName != null" >
+        attachment_name,
+      </if>
+      <if test="attachmentPath != null" >
+        attachment_path,
+      </if>
+      <if test="resumeStatus != null" >
+        resume_status,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUserId != null" >
+        create_user_id,
+      </if>
+      <if test="createUserName != null" >
+        create_user_name,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id,
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name,
+      </if>
+      <if test="specialOfferStatus != null" >
+        special_offer_status,
+      </if>
+      <if test="selfEvaluation != null" >
+        self_evaluation,
+      </if>
+      <if test="studySituation != null" >
+        study_situation,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=BIGINT},
+      </if>
+      <if test="resumeNumber != null" >
+        #{resumeNumber,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewerId != null" >
+        #{interviewerId,jdbcType=BIGINT},
+      </if>
+      <if test="getType != null" >
+        #{getType,jdbcType=CHAR},
+      </if>
+      <if test="applyPosition != null" >
+        #{applyPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeChannelId != null" >
+        #{resumeChannelId,jdbcType=SMALLINT},
+      </if>
+      <if test="applyDate != null" >
+        #{applyDate,jdbcType=CHAR},
+      </if>
+      <if test="isOn != null" >
+        #{isOn,jdbcType=CHAR},
+      </if>
+      <if test="careerYear != null" >
+        #{careerYear,jdbcType=VARCHAR},
+      </if>
+      <if test="currentSalary != null" >
+        #{currentSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="expectSalary != null" >
+        #{expectSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="expectFulltime != null" >
+        #{expectFulltime,jdbcType=CHAR},
+      </if>
+      <if test="expectWorkplace != null" >
+        #{expectWorkplace,jdbcType=VARCHAR},
+      </if>
+      <if test="expectIndustry != null" >
+        #{expectIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="expectJob != null" >
+        #{expectJob,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCn != null" >
+        #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        #{gender,jdbcType=CHAR},
+      </if>
+      <if test="birthDate != null" >
+        #{birthDate,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null" >
+        #{marriage,jdbcType=CHAR},
+      </if>
+      <if test="phoneMobile != null" >
+        #{phoneMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="emailPerson != null" >
+        #{emailPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null" >
+        #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="registerAddressDetail != null" >
+        #{registerAddressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="photoPath != null" >
+        #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateDetail != null" >
+        #{certificateDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="interest != null" >
+        #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="applyLetterContent != null" >
+        #{applyLetterContent,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentName != null" >
+        #{attachmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentPath != null" >
+        #{attachmentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeStatus != null" >
+        #{resumeStatus,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="createUserId != null" >
+        #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null" >
+        #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="updateUserId != null" >
+        #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="specialOfferStatus != null" >
+        #{specialOfferStatus,jdbcType=CHAR},
+      </if>
+      <if test="selfEvaluation != null" >
+        #{selfEvaluation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="studySituation != null" >
+        #{studySituation,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.HrResumeBasicExample" resultType="java.lang.Integer" >
+    select count(*) from hr_resume_basic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update hr_resume_basic
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=BIGINT},
+      </if>
+      <if test="record.resumeNumber != null" >
+        resume_number = #{record.resumeNumber,jdbcType=BIGINT},
+      </if>
+      <if test="record.companyId != null" >
+        company_id = #{record.companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interviewerId != null" >
+        interviewer_id = #{record.interviewerId,jdbcType=BIGINT},
+      </if>
+      <if test="record.getType != null" >
+        get_type = #{record.getType,jdbcType=CHAR},
+      </if>
+      <if test="record.applyPosition != null" >
+        apply_position = #{record.applyPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resumeChannelId != null" >
+        resume_channel_id = #{record.resumeChannelId,jdbcType=SMALLINT},
+      </if>
+      <if test="record.applyDate != null" >
+        apply_date = #{record.applyDate,jdbcType=CHAR},
+      </if>
+      <if test="record.isOn != null" >
+        is_on = #{record.isOn,jdbcType=CHAR},
+      </if>
+      <if test="record.careerYear != null" >
+        career_year = #{record.careerYear,jdbcType=VARCHAR},
+      </if>
+      <if test="record.currentSalary != null" >
+        current_salary = #{record.currentSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expectSalary != null" >
+        expect_salary = #{record.expectSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expectFulltime != null" >
+        expect_fulltime = #{record.expectFulltime,jdbcType=CHAR},
+      </if>
+      <if test="record.expectWorkplace != null" >
+        expect_workplace = #{record.expectWorkplace,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expectIndustry != null" >
+        expect_industry = #{record.expectIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="record.expectJob != null" >
+        expect_job = #{record.expectJob,jdbcType=VARCHAR},
+      </if>
+      <if test="record.nameCn != null" >
+        name_cn = #{record.nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.gender != null" >
+        gender = #{record.gender,jdbcType=CHAR},
+      </if>
+      <if test="record.birthDate != null" >
+        birth_date = #{record.birthDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.marriage != null" >
+        marriage = #{record.marriage,jdbcType=CHAR},
+      </if>
+      <if test="record.phoneMobile != null" >
+        phone_mobile = #{record.phoneMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="record.emailPerson != null" >
+        email_person = #{record.emailPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="record.addressDetail != null" >
+        address_detail = #{record.addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.registerAddressDetail != null" >
+        register_address_detail = #{record.registerAddressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.photoPath != null" >
+        photo_path = #{record.photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.certificateDetail != null" >
+        certificate_detail = #{record.certificateDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="record.interest != null" >
+        interest = #{record.interest,jdbcType=VARCHAR},
+      </if>
+      <if test="record.applyLetterContent != null" >
+        apply_letter_content = #{record.applyLetterContent,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachmentName != null" >
+        attachment_name = #{record.attachmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.attachmentPath != null" >
+        attachment_path = #{record.attachmentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="record.resumeStatus != null" >
+        resume_status = #{record.resumeStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=CHAR},
+      </if>
+      <if test="record.createUserId != null" >
+        create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUserName != null" >
+        create_user_name = #{record.createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=CHAR},
+      </if>
+      <if test="record.updateUserId != null" >
+        update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserName != null" >
+        update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.specialOfferStatus != null" >
+        special_offer_status = #{record.specialOfferStatus,jdbcType=CHAR},
+      </if>
+      <if test="record.selfEvaluation != null" >
+        self_evaluation = #{record.selfEvaluation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.studySituation != null" >
+        study_situation = #{record.studySituation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update hr_resume_basic
+    set id = #{record.id,jdbcType=BIGINT},
+      resume_number = #{record.resumeNumber,jdbcType=BIGINT},
+      company_id = #{record.companyId,jdbcType=VARCHAR},
+      interviewer_id = #{record.interviewerId,jdbcType=BIGINT},
+      get_type = #{record.getType,jdbcType=CHAR},
+      apply_position = #{record.applyPosition,jdbcType=VARCHAR},
+      resume_channel_id = #{record.resumeChannelId,jdbcType=SMALLINT},
+      apply_date = #{record.applyDate,jdbcType=CHAR},
+      is_on = #{record.isOn,jdbcType=CHAR},
+      career_year = #{record.careerYear,jdbcType=VARCHAR},
+      current_salary = #{record.currentSalary,jdbcType=VARCHAR},
+      expect_salary = #{record.expectSalary,jdbcType=VARCHAR},
+      expect_fulltime = #{record.expectFulltime,jdbcType=CHAR},
+      expect_workplace = #{record.expectWorkplace,jdbcType=VARCHAR},
+      expect_industry = #{record.expectIndustry,jdbcType=VARCHAR},
+      expect_job = #{record.expectJob,jdbcType=VARCHAR},
+      name_cn = #{record.nameCn,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=CHAR},
+      birth_date = #{record.birthDate,jdbcType=VARCHAR},
+      marriage = #{record.marriage,jdbcType=CHAR},
+      phone_mobile = #{record.phoneMobile,jdbcType=VARCHAR},
+      email_person = #{record.emailPerson,jdbcType=VARCHAR},
+      address_detail = #{record.addressDetail,jdbcType=VARCHAR},
+      register_address_detail = #{record.registerAddressDetail,jdbcType=VARCHAR},
+      photo_path = #{record.photoPath,jdbcType=VARCHAR},
+      certificate_detail = #{record.certificateDetail,jdbcType=VARCHAR},
+      interest = #{record.interest,jdbcType=VARCHAR},
+      apply_letter_content = #{record.applyLetterContent,jdbcType=VARCHAR},
+      attachment_name = #{record.attachmentName,jdbcType=VARCHAR},
+      attachment_path = #{record.attachmentPath,jdbcType=VARCHAR},
+      resume_status = #{record.resumeStatus,jdbcType=CHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=CHAR},
+      create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      create_user_name = #{record.createUserName,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=CHAR},
+      update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      special_offer_status = #{record.specialOfferStatus,jdbcType=CHAR},
+      self_evaluation = #{record.selfEvaluation,jdbcType=LONGVARCHAR},
+      study_situation = #{record.studySituation,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update hr_resume_basic
+    set id = #{record.id,jdbcType=BIGINT},
+      resume_number = #{record.resumeNumber,jdbcType=BIGINT},
+      company_id = #{record.companyId,jdbcType=VARCHAR},
+      interviewer_id = #{record.interviewerId,jdbcType=BIGINT},
+      get_type = #{record.getType,jdbcType=CHAR},
+      apply_position = #{record.applyPosition,jdbcType=VARCHAR},
+      resume_channel_id = #{record.resumeChannelId,jdbcType=SMALLINT},
+      apply_date = #{record.applyDate,jdbcType=CHAR},
+      is_on = #{record.isOn,jdbcType=CHAR},
+      career_year = #{record.careerYear,jdbcType=VARCHAR},
+      current_salary = #{record.currentSalary,jdbcType=VARCHAR},
+      expect_salary = #{record.expectSalary,jdbcType=VARCHAR},
+      expect_fulltime = #{record.expectFulltime,jdbcType=CHAR},
+      expect_workplace = #{record.expectWorkplace,jdbcType=VARCHAR},
+      expect_industry = #{record.expectIndustry,jdbcType=VARCHAR},
+      expect_job = #{record.expectJob,jdbcType=VARCHAR},
+      name_cn = #{record.nameCn,jdbcType=VARCHAR},
+      gender = #{record.gender,jdbcType=CHAR},
+      birth_date = #{record.birthDate,jdbcType=VARCHAR},
+      marriage = #{record.marriage,jdbcType=CHAR},
+      phone_mobile = #{record.phoneMobile,jdbcType=VARCHAR},
+      email_person = #{record.emailPerson,jdbcType=VARCHAR},
+      address_detail = #{record.addressDetail,jdbcType=VARCHAR},
+      register_address_detail = #{record.registerAddressDetail,jdbcType=VARCHAR},
+      photo_path = #{record.photoPath,jdbcType=VARCHAR},
+      certificate_detail = #{record.certificateDetail,jdbcType=VARCHAR},
+      interest = #{record.interest,jdbcType=VARCHAR},
+      apply_letter_content = #{record.applyLetterContent,jdbcType=VARCHAR},
+      attachment_name = #{record.attachmentName,jdbcType=VARCHAR},
+      attachment_path = #{record.attachmentPath,jdbcType=VARCHAR},
+      resume_status = #{record.resumeStatus,jdbcType=CHAR},
+      del_flag = #{record.delFlag,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=CHAR},
+      create_user_id = #{record.createUserId,jdbcType=VARCHAR},
+      create_user_name = #{record.createUserName,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=CHAR},
+      update_user_id = #{record.updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      special_offer_status = #{record.specialOfferStatus,jdbcType=CHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.HrResumeBasicWithBLOBs" >
+    update hr_resume_basic
+    <set >
+      <if test="resumeNumber != null" >
+        resume_number = #{resumeNumber,jdbcType=BIGINT},
+      </if>
+      <if test="companyId != null" >
+        company_id = #{companyId,jdbcType=VARCHAR},
+      </if>
+      <if test="interviewerId != null" >
+        interviewer_id = #{interviewerId,jdbcType=BIGINT},
+      </if>
+      <if test="getType != null" >
+        get_type = #{getType,jdbcType=CHAR},
+      </if>
+      <if test="applyPosition != null" >
+        apply_position = #{applyPosition,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeChannelId != null" >
+        resume_channel_id = #{resumeChannelId,jdbcType=SMALLINT},
+      </if>
+      <if test="applyDate != null" >
+        apply_date = #{applyDate,jdbcType=CHAR},
+      </if>
+      <if test="isOn != null" >
+        is_on = #{isOn,jdbcType=CHAR},
+      </if>
+      <if test="careerYear != null" >
+        career_year = #{careerYear,jdbcType=VARCHAR},
+      </if>
+      <if test="currentSalary != null" >
+        current_salary = #{currentSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="expectSalary != null" >
+        expect_salary = #{expectSalary,jdbcType=VARCHAR},
+      </if>
+      <if test="expectFulltime != null" >
+        expect_fulltime = #{expectFulltime,jdbcType=CHAR},
+      </if>
+      <if test="expectWorkplace != null" >
+        expect_workplace = #{expectWorkplace,jdbcType=VARCHAR},
+      </if>
+      <if test="expectIndustry != null" >
+        expect_industry = #{expectIndustry,jdbcType=VARCHAR},
+      </if>
+      <if test="expectJob != null" >
+        expect_job = #{expectJob,jdbcType=VARCHAR},
+      </if>
+      <if test="nameCn != null" >
+        name_cn = #{nameCn,jdbcType=VARCHAR},
+      </if>
+      <if test="gender != null" >
+        gender = #{gender,jdbcType=CHAR},
+      </if>
+      <if test="birthDate != null" >
+        birth_date = #{birthDate,jdbcType=VARCHAR},
+      </if>
+      <if test="marriage != null" >
+        marriage = #{marriage,jdbcType=CHAR},
+      </if>
+      <if test="phoneMobile != null" >
+        phone_mobile = #{phoneMobile,jdbcType=VARCHAR},
+      </if>
+      <if test="emailPerson != null" >
+        email_person = #{emailPerson,jdbcType=VARCHAR},
+      </if>
+      <if test="addressDetail != null" >
+        address_detail = #{addressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="registerAddressDetail != null" >
+        register_address_detail = #{registerAddressDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="photoPath != null" >
+        photo_path = #{photoPath,jdbcType=VARCHAR},
+      </if>
+      <if test="certificateDetail != null" >
+        certificate_detail = #{certificateDetail,jdbcType=VARCHAR},
+      </if>
+      <if test="interest != null" >
+        interest = #{interest,jdbcType=VARCHAR},
+      </if>
+      <if test="applyLetterContent != null" >
+        apply_letter_content = #{applyLetterContent,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentName != null" >
+        attachment_name = #{attachmentName,jdbcType=VARCHAR},
+      </if>
+      <if test="attachmentPath != null" >
+        attachment_path = #{attachmentPath,jdbcType=VARCHAR},
+      </if>
+      <if test="resumeStatus != null" >
+        resume_status = #{resumeStatus,jdbcType=CHAR},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=CHAR},
+      </if>
+      <if test="createUserId != null" >
+        create_user_id = #{createUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="createUserName != null" >
+        create_user_name = #{createUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=CHAR},
+      </if>
+      <if test="updateUserId != null" >
+        update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="specialOfferStatus != null" >
+        special_offer_status = #{specialOfferStatus,jdbcType=CHAR},
+      </if>
+      <if test="selfEvaluation != null" >
+        self_evaluation = #{selfEvaluation,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="studySituation != null" >
+        study_situation = #{studySituation,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.website.mybatis.bean.auto.HrResumeBasicWithBLOBs" >
+    update hr_resume_basic
+    set resume_number = #{resumeNumber,jdbcType=BIGINT},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      interviewer_id = #{interviewerId,jdbcType=BIGINT},
+      get_type = #{getType,jdbcType=CHAR},
+      apply_position = #{applyPosition,jdbcType=VARCHAR},
+      resume_channel_id = #{resumeChannelId,jdbcType=SMALLINT},
+      apply_date = #{applyDate,jdbcType=CHAR},
+      is_on = #{isOn,jdbcType=CHAR},
+      career_year = #{careerYear,jdbcType=VARCHAR},
+      current_salary = #{currentSalary,jdbcType=VARCHAR},
+      expect_salary = #{expectSalary,jdbcType=VARCHAR},
+      expect_fulltime = #{expectFulltime,jdbcType=CHAR},
+      expect_workplace = #{expectWorkplace,jdbcType=VARCHAR},
+      expect_industry = #{expectIndustry,jdbcType=VARCHAR},
+      expect_job = #{expectJob,jdbcType=VARCHAR},
+      name_cn = #{nameCn,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      birth_date = #{birthDate,jdbcType=VARCHAR},
+      marriage = #{marriage,jdbcType=CHAR},
+      phone_mobile = #{phoneMobile,jdbcType=VARCHAR},
+      email_person = #{emailPerson,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      register_address_detail = #{registerAddressDetail,jdbcType=VARCHAR},
+      photo_path = #{photoPath,jdbcType=VARCHAR},
+      certificate_detail = #{certificateDetail,jdbcType=VARCHAR},
+      interest = #{interest,jdbcType=VARCHAR},
+      apply_letter_content = #{applyLetterContent,jdbcType=VARCHAR},
+      attachment_name = #{attachmentName,jdbcType=VARCHAR},
+      attachment_path = #{attachmentPath,jdbcType=VARCHAR},
+      resume_status = #{resumeStatus,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=CHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_user_name = #{createUserName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=CHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      special_offer_status = #{specialOfferStatus,jdbcType=CHAR},
+      self_evaluation = #{selfEvaluation,jdbcType=LONGVARCHAR},
+      study_situation = #{studySituation,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.HrResumeBasic" >
+    update hr_resume_basic
+    set resume_number = #{resumeNumber,jdbcType=BIGINT},
+      company_id = #{companyId,jdbcType=VARCHAR},
+      interviewer_id = #{interviewerId,jdbcType=BIGINT},
+      get_type = #{getType,jdbcType=CHAR},
+      apply_position = #{applyPosition,jdbcType=VARCHAR},
+      resume_channel_id = #{resumeChannelId,jdbcType=SMALLINT},
+      apply_date = #{applyDate,jdbcType=CHAR},
+      is_on = #{isOn,jdbcType=CHAR},
+      career_year = #{careerYear,jdbcType=VARCHAR},
+      current_salary = #{currentSalary,jdbcType=VARCHAR},
+      expect_salary = #{expectSalary,jdbcType=VARCHAR},
+      expect_fulltime = #{expectFulltime,jdbcType=CHAR},
+      expect_workplace = #{expectWorkplace,jdbcType=VARCHAR},
+      expect_industry = #{expectIndustry,jdbcType=VARCHAR},
+      expect_job = #{expectJob,jdbcType=VARCHAR},
+      name_cn = #{nameCn,jdbcType=VARCHAR},
+      gender = #{gender,jdbcType=CHAR},
+      birth_date = #{birthDate,jdbcType=VARCHAR},
+      marriage = #{marriage,jdbcType=CHAR},
+      phone_mobile = #{phoneMobile,jdbcType=VARCHAR},
+      email_person = #{emailPerson,jdbcType=VARCHAR},
+      address_detail = #{addressDetail,jdbcType=VARCHAR},
+      register_address_detail = #{registerAddressDetail,jdbcType=VARCHAR},
+      photo_path = #{photoPath,jdbcType=VARCHAR},
+      certificate_detail = #{certificateDetail,jdbcType=VARCHAR},
+      interest = #{interest,jdbcType=VARCHAR},
+      apply_letter_content = #{applyLetterContent,jdbcType=VARCHAR},
+      attachment_name = #{attachmentName,jdbcType=VARCHAR},
+      attachment_path = #{attachmentPath,jdbcType=VARCHAR},
+      resume_status = #{resumeStatus,jdbcType=CHAR},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=CHAR},
+      create_user_id = #{createUserId,jdbcType=VARCHAR},
+      create_user_name = #{createUserName,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=CHAR},
+      update_user_id = #{updateUserId,jdbcType=VARCHAR},
+      update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      special_offer_status = #{specialOfferStatus,jdbcType=CHAR}
+    where id = #{id,jdbcType=BIGINT}
+  </update>
+</mapper>

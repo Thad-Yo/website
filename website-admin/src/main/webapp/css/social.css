@@ -1,0 +1,44 @@
+@CHARSET "UTF-8";
+.companyDynamic .allContent .menuBox{
+	width:100%;
+	margin:0;
+}
+.company .conentDiv .grayBox ul{
+	width:200px;
+}
+.company .conentDiv .grayBox .borderBox{
+	width:110px;
+}
+.companyDynamic .allContent .menuBox .mid .right {
+    width: 120px;
+    height: 34px;
+    border: 1px solid #d2d2d2;
+    font-size: 14px;
+    box-sizing: border-box;
+    text-align: center;
+    border-radius: 34px;
+    line-height: 31px;
+    position: relative;
+    cursor: pointer;
+    margin-bottom:10px;
+}
+.arrow2
+{
+    margin: 3px 8px 4px 0;
+    border-left: 5px dashed transparent;
+    border-bottom: 5px dashed transparent;
+    border-top: 5px dashed transparent;
+    border-right: 5px solid #ccc;
+    display: inline-block;
+    vertical-align: middle;
+}
+.arrow3
+{
+    margin: 3px 0 4px 8px;
+    border-top: 5px dashed transparent;
+    border-bottom: 5px dashed transparent;
+    border-right: 5px dashed transparent;
+    border-left: 5px solid #ccc;
+    display: inline-block;
+    vertical-align: middle;
+}

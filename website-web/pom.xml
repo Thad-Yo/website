@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <artifactId>website</artifactId>
+        <groupId>com.website</groupId>
+        <version>1.0-SNAPSHOT</version>
+    </parent>
+    <modelVersion>4.0.0</modelVersion>
+
+    <packaging>war</packaging>
+    <artifactId>website-web</artifactId>
+
+    <dependencies>
+    	<dependency>
+			<groupId>org.quartz-scheduler</groupId>
+			<artifactId>quartz</artifactId>
+			<version>2.2.1</version>
+		</dependency>
+        <dependency>
+            <groupId>com.website</groupId>
+            <artifactId>website-common</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.website</groupId>
+            <artifactId>website-mybatis</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+        <dependency>
+            <groupId>com.website</groupId>
+            <artifactId>website-service</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
+    </dependencies>
+    <properties>
+        <dui.devMode>false</dui.devMode>
+        <dui.suffix>.min</dui.suffix>
+    </properties>
+    <build>
+        <!-- 利用yuicompressor-maven-plugin 插件，当打包项目时，自动压缩文件 -->
+        <plugins>
+            <plugin>
+                <groupId>net.alchim31.maven</groupId>
+                <artifactId>yuicompressor-maven-plugin</artifactId>
+                <version>1.5.1</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compress</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <!-- 压缩文件编码 -->
+                    <encoding>UTF-8</encoding>
+                    <!-- 排除已压缩的文件，例如jquery-1.8.2.min.js -->
+                    <excludes>
+                        <exclude>*.min.js</exclude>
+                        <include>*.min.css</include>
+                    </excludes>
+                    <includes>
+                        <include>*.js</include>
+                        <include>*.css</include>
+                    </includes>
+
+                    <!-- 不使用后缀 -->
+                    <nosuffix>true</nosuffix>
+                    <!-- 把文件压缩成一行 -->
+                    <linebreakpos>-1</linebreakpos>
+                    <!-- 指定需要压缩文件的目录，这是我的目录（修改为你自己的目录吧..) -->
+                    <sourceDirectory>${basedir}/src/main/webapp</sourceDirectory>
+                </configuration>
+            </plugin>
+        </plugins>
+       <!-- <resources>
+            &lt;!&ndash; 直接复制不用压缩的文件，图片，已经压缩的css，js &ndash;&gt;
+            <resource>
+                <directory>${basedir}/src/main/webapp</directory>
+                <includes>
+                    <include>*.min.js</include>
+                    <include>*.min.css</include>
+                </includes>
+            </resource>
+        </resources>-->
+    </build>
+</project>

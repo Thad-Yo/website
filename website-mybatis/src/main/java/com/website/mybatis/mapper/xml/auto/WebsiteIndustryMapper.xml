@@ -1,0 +1,362 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.WebsiteIndustryMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteIndustry" >
+    <id column="id" property="id" jdbcType="VARCHAR" />
+    <result column="img_url_zh" property="imgUrlZh" jdbcType="VARCHAR" />
+    <result column="img_url_en" property="imgUrlEn" jdbcType="VARCHAR" />
+    <result column="industry_name_zh" property="industryNameZh" jdbcType="VARCHAR" />
+    <result column="industry_name_en" property="industryNameEn" jdbcType="VARCHAR" />
+    <result column="has_en" property="hasEn" jdbcType="VARCHAR" />
+    <result column="update_user_cd" property="updateUserCd" jdbcType="VARCHAR" />
+    <result column="update_user_name" property="updateUserName" jdbcType="VARCHAR" />
+    <result column="update_date" property="updateDate" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.website.mybatis.bean.auto.WebsiteIndustryWithBLOBs" extends="BaseResultMap" >
+    <result column="industry_info_zh" property="industryInfoZh" jdbcType="LONGVARCHAR" />
+    <result column="industry_info_en" property="industryInfoEn" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, img_url_zh, img_url_en, industry_name_zh, industry_name_en, has_en, update_user_cd, 
+    update_user_name, update_date
+  </sql>
+  <sql id="Blob_Column_List" >
+    industry_info_zh, industry_info_en
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.website.mybatis.bean.auto.WebsiteIndustryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_industry
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.WebsiteIndustryExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from website_industry
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.String" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_industry
+    where id = #{id,jdbcType=VARCHAR}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from website_industry
+    where id = #{id,jdbcType=VARCHAR}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.WebsiteIndustryExample" >
+    delete from website_industry
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.WebsiteIndustryWithBLOBs" >
+    insert into website_industry (id, img_url_zh, img_url_en, 
+      industry_name_zh, industry_name_en, has_en, 
+      update_user_cd, update_user_name, update_date, 
+      industry_info_zh, industry_info_en)
+    values (#{id,jdbcType=VARCHAR}, #{imgUrlZh,jdbcType=VARCHAR}, #{imgUrlEn,jdbcType=VARCHAR}, 
+      #{industryNameZh,jdbcType=VARCHAR}, #{industryNameEn,jdbcType=VARCHAR}, #{hasEn,jdbcType=VARCHAR}, 
+      #{updateUserCd,jdbcType=VARCHAR}, #{updateUserName,jdbcType=VARCHAR}, #{updateDate,jdbcType=VARCHAR}, 
+      #{industryInfoZh,jdbcType=LONGVARCHAR}, #{industryInfoEn,jdbcType=LONGVARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.WebsiteIndustryWithBLOBs" >
+    insert into website_industry
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="imgUrlZh != null" >
+        img_url_zh,
+      </if>
+      <if test="imgUrlEn != null" >
+        img_url_en,
+      </if>
+      <if test="industryNameZh != null" >
+        industry_name_zh,
+      </if>
+      <if test="industryNameEn != null" >
+        industry_name_en,
+      </if>
+      <if test="hasEn != null" >
+        has_en,
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd,
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name,
+      </if>
+      <if test="updateDate != null" >
+        update_date,
+      </if>
+      <if test="industryInfoZh != null" >
+        industry_info_zh,
+      </if>
+      <if test="industryInfoEn != null" >
+        industry_info_en,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrlZh != null" >
+        #{imgUrlZh,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrlEn != null" >
+        #{imgUrlEn,jdbcType=VARCHAR},
+      </if>
+      <if test="industryNameZh != null" >
+        #{industryNameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="industryNameEn != null" >
+        #{industryNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="hasEn != null" >
+        #{hasEn,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="industryInfoZh != null" >
+        #{industryInfoZh,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="industryInfoEn != null" >
+        #{industryInfoEn,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.WebsiteIndustryExample" resultType="java.lang.Integer" >
+    select count(*) from website_industry
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update website_industry
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgUrlZh != null" >
+        img_url_zh = #{record.imgUrlZh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgUrlEn != null" >
+        img_url_en = #{record.imgUrlEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industryNameZh != null" >
+        industry_name_zh = #{record.industryNameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industryNameEn != null" >
+        industry_name_en = #{record.industryNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.hasEn != null" >
+        has_en = #{record.hasEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserCd != null" >
+        update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUserName != null" >
+        update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateDate != null" >
+        update_date = #{record.updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="record.industryInfoZh != null" >
+        industry_info_zh = #{record.industryInfoZh,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.industryInfoEn != null" >
+        industry_info_en = #{record.industryInfoEn,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update website_industry
+    set id = #{record.id,jdbcType=VARCHAR},
+      img_url_zh = #{record.imgUrlZh,jdbcType=VARCHAR},
+      img_url_en = #{record.imgUrlEn,jdbcType=VARCHAR},
+      industry_name_zh = #{record.industryNameZh,jdbcType=VARCHAR},
+      industry_name_en = #{record.industryNameEn,jdbcType=VARCHAR},
+      has_en = #{record.hasEn,jdbcType=VARCHAR},
+      update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=VARCHAR},
+      industry_info_zh = #{record.industryInfoZh,jdbcType=LONGVARCHAR},
+      industry_info_en = #{record.industryInfoEn,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update website_industry
+    set id = #{record.id,jdbcType=VARCHAR},
+      img_url_zh = #{record.imgUrlZh,jdbcType=VARCHAR},
+      img_url_en = #{record.imgUrlEn,jdbcType=VARCHAR},
+      industry_name_zh = #{record.industryNameZh,jdbcType=VARCHAR},
+      industry_name_en = #{record.industryNameEn,jdbcType=VARCHAR},
+      has_en = #{record.hasEn,jdbcType=VARCHAR},
+      update_user_cd = #{record.updateUserCd,jdbcType=VARCHAR},
+      update_user_name = #{record.updateUserName,jdbcType=VARCHAR},
+      update_date = #{record.updateDate,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.WebsiteIndustryWithBLOBs" >
+    update website_industry
+    <set >
+      <if test="imgUrlZh != null" >
+        img_url_zh = #{imgUrlZh,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrlEn != null" >
+        img_url_en = #{imgUrlEn,jdbcType=VARCHAR},
+      </if>
+      <if test="industryNameZh != null" >
+        industry_name_zh = #{industryNameZh,jdbcType=VARCHAR},
+      </if>
+      <if test="industryNameEn != null" >
+        industry_name_en = #{industryNameEn,jdbcType=VARCHAR},
+      </if>
+      <if test="hasEn != null" >
+        has_en = #{hasEn,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserCd != null" >
+        update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUserName != null" >
+        update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      </if>
+      <if test="updateDate != null" >
+        update_date = #{updateDate,jdbcType=VARCHAR},
+      </if>
+      <if test="industryInfoZh != null" >
+        industry_info_zh = #{industryInfoZh,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="industryInfoEn != null" >
+        industry_info_en = #{industryInfoEn,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.website.mybatis.bean.auto.WebsiteIndustryWithBLOBs" >
+    update website_industry
+    set img_url_zh = #{imgUrlZh,jdbcType=VARCHAR},
+      img_url_en = #{imgUrlEn,jdbcType=VARCHAR},
+      industry_name_zh = #{industryNameZh,jdbcType=VARCHAR},
+      industry_name_en = #{industryNameEn,jdbcType=VARCHAR},
+      has_en = #{hasEn,jdbcType=VARCHAR},
+      update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR},
+      industry_info_zh = #{industryInfoZh,jdbcType=LONGVARCHAR},
+      industry_info_en = #{industryInfoEn,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.WebsiteIndustry" >
+    update website_industry
+    set img_url_zh = #{imgUrlZh,jdbcType=VARCHAR},
+      img_url_en = #{imgUrlEn,jdbcType=VARCHAR},
+      industry_name_zh = #{industryNameZh,jdbcType=VARCHAR},
+      industry_name_en = #{industryNameEn,jdbcType=VARCHAR},
+      has_en = #{hasEn,jdbcType=VARCHAR},
+      update_user_cd = #{updateUserCd,jdbcType=VARCHAR},
+      update_user_name = #{updateUserName,jdbcType=VARCHAR},
+      update_date = #{updateDate,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=VARCHAR}
+  </update>
+</mapper>

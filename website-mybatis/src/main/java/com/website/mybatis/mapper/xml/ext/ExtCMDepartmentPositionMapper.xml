@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.ExtCMDepartmentPositionMapper" >
+  <resultMap id="positionResultMap" type="com.website.mybatis.bean.ext.ExtCMDepartmentPosition" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="department_id" property="departmentId" jdbcType="INTEGER" />
+    <result column="position_type_id" property="positionTypeId" jdbcType="INTEGER" />
+    <result column="position_id" property="positionId" jdbcType="INTEGER" />
+    <result column="position_name" property="positionName" jdbcType="VARCHAR" />
+    <result column="position_code" property="positionCode" jdbcType="VARCHAR" />
+    <result column="create_time" property="createTime" jdbcType="CHAR" />
+    <result column="create_user_id" property="createUserId" jdbcType="VARCHAR" />
+    <result column="create_user_name" property="createUserName" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="CHAR" />
+    <result column="update_user_id" property="updateUserId" jdbcType="VARCHAR" />
+    <result column="update_user_name" property="updateUserName" jdbcType="VARCHAR" />
+    <result column="position_type_name" property="positionTypeName" jdbcType="VARCHAR" />
+    <result column="position_type_code" property="positionTypeCode" jdbcType="VARCHAR" />
+  </resultMap>
+  <select id="selectDepartmentPositionFromDepartment" resultMap="positionResultMap" parameterType="com.website.mybatis.bean.ext.ExtCMDepartmentPosition">
+    SELECT
+    cp.id,
+    cp.department_id,
+    cp.position_type_id,
+    cp.position_id,
+    cp.position_name,
+    cp.position_code,
+    cp.create_time,
+    cp.create_user_id,
+    cp.create_user_name,
+    cp.update_time,
+    cp.update_user_id,
+    cp.update_user_name,
+    ht.position_type_name,
+    ht.position_type_code
+    FROM
+    c_m_department_position cp
+    LEFT JOIN hr_config_position_type ht on ht.id = cp.position_type_id
+    WHERE
+    1=1
+    <if test="departmentId != null and departmentId != ''">
+      AND cp.department_id = #{departmentId}
+    </if>
+    <if test="positionTypeId != null and positionTypeId != ''">
+      AND cp.position_type_id = #{positionTypeId}
+    </if>
+    <if test="groupby != null and groupby !=''">
+      GROUP BY cp.position_type_id
+    </if>
+  </select>
+</mapper>

@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.WebsiteShortIntroduceMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteShortIntroduce" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="title_cn" property="titleCn" jdbcType="VARCHAR" />
+    <result column="title_en" property="titleEn" jdbcType="VARCHAR" />
+    <result column="introduce_cn" property="introduceCn" jdbcType="VARCHAR" />
+    <result column="introduce_en" property="introduceEn" jdbcType="VARCHAR" />
+    <result column="img_url_cn" property="imgUrlCn" jdbcType="VARCHAR" />
+    <result column="img_url_en" property="imgUrlEn" jdbcType="VARCHAR" />
+    <result column="sort_number" property="sortNumber" jdbcType="INTEGER" />
+    <result column="del_flag" property="delFlag" jdbcType="CHAR" />
+    <result column="create_time" property="createTime" jdbcType="VARCHAR" />
+    <result column="create_user" property="createUser" jdbcType="VARCHAR" />
+    <result column="update_time" property="updateTime" jdbcType="VARCHAR" />
+    <result column="update_user" property="updateUser" jdbcType="VARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, title_cn, title_en, introduce_cn, introduce_en, img_url_cn, img_url_en, sort_number, 
+    del_flag, create_time, create_user, update_time, update_user
+  </sql>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.WebsiteShortIntroduceExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from website_short_introduce
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    from website_short_introduce
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from website_short_introduce
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.WebsiteShortIntroduceExample" >
+    delete from website_short_introduce
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.WebsiteShortIntroduce" >
+    insert into website_short_introduce (id, title_cn, title_en, 
+      introduce_cn, introduce_en, img_url_cn, 
+      img_url_en, sort_number, del_flag, 
+      create_time, create_user, update_time, 
+      update_user)
+    values (#{id,jdbcType=INTEGER}, #{titleCn,jdbcType=VARCHAR}, #{titleEn,jdbcType=VARCHAR}, 
+      #{introduceCn,jdbcType=VARCHAR}, #{introduceEn,jdbcType=VARCHAR}, #{imgUrlCn,jdbcType=VARCHAR}, 
+      #{imgUrlEn,jdbcType=VARCHAR}, #{sortNumber,jdbcType=INTEGER}, #{delFlag,jdbcType=CHAR}, 
+      #{createTime,jdbcType=VARCHAR}, #{createUser,jdbcType=VARCHAR}, #{updateTime,jdbcType=VARCHAR}, 
+      #{updateUser,jdbcType=VARCHAR})
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.WebsiteShortIntroduce" >
+    insert into website_short_introduce
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="titleCn != null" >
+        title_cn,
+      </if>
+      <if test="titleEn != null" >
+        title_en,
+      </if>
+      <if test="introduceCn != null" >
+        introduce_cn,
+      </if>
+      <if test="introduceEn != null" >
+        introduce_en,
+      </if>
+      <if test="imgUrlCn != null" >
+        img_url_cn,
+      </if>
+      <if test="imgUrlEn != null" >
+        img_url_en,
+      </if>
+      <if test="sortNumber != null" >
+        sort_number,
+      </if>
+      <if test="delFlag != null" >
+        del_flag,
+      </if>
+      <if test="createTime != null" >
+        create_time,
+      </if>
+      <if test="createUser != null" >
+        create_user,
+      </if>
+      <if test="updateTime != null" >
+        update_time,
+      </if>
+      <if test="updateUser != null" >
+        update_user,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="titleCn != null" >
+        #{titleCn,jdbcType=VARCHAR},
+      </if>
+      <if test="titleEn != null" >
+        #{titleEn,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceCn != null" >
+        #{introduceCn,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceEn != null" >
+        #{introduceEn,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrlCn != null" >
+        #{imgUrlCn,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrlEn != null" >
+        #{imgUrlEn,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNumber != null" >
+        #{sortNumber,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.WebsiteShortIntroduceExample" resultType="java.lang.Integer" >
+    select count(*) from website_short_introduce
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update website_short_introduce
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.titleCn != null" >
+        title_cn = #{record.titleCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.titleEn != null" >
+        title_en = #{record.titleEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduceCn != null" >
+        introduce_cn = #{record.introduceCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduceEn != null" >
+        introduce_en = #{record.introduceEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgUrlCn != null" >
+        img_url_cn = #{record.imgUrlCn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.imgUrlEn != null" >
+        img_url_en = #{record.imgUrlEn,jdbcType=VARCHAR},
+      </if>
+      <if test="record.sortNumber != null" >
+        sort_number = #{record.sortNumber,jdbcType=INTEGER},
+      </if>
+      <if test="record.delFlag != null" >
+        del_flag = #{record.delFlag,jdbcType=CHAR},
+      </if>
+      <if test="record.createTime != null" >
+        create_time = #{record.createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.createUser != null" >
+        create_user = #{record.createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateTime != null" >
+        update_time = #{record.updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="record.updateUser != null" >
+        update_user = #{record.updateUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update website_short_introduce
+    set id = #{record.id,jdbcType=INTEGER},
+      title_cn = #{record.titleCn,jdbcType=VARCHAR},
+      title_en = #{record.titleEn,jdbcType=VARCHAR},
+      introduce_cn = #{record.introduceCn,jdbcType=VARCHAR},
+      introduce_en = #{record.introduceEn,jdbcType=VARCHAR},
+      img_url_cn = #{record.imgUrlCn,jdbcType=VARCHAR},
+      img_url_en = #{record.imgUrlEn,jdbcType=VARCHAR},
+      sort_number = #{record.sortNumber,jdbcType=INTEGER},
+      del_flag = #{record.delFlag,jdbcType=CHAR},
+      create_time = #{record.createTime,jdbcType=VARCHAR},
+      create_user = #{record.createUser,jdbcType=VARCHAR},
+      update_time = #{record.updateTime,jdbcType=VARCHAR},
+      update_user = #{record.updateUser,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.WebsiteShortIntroduce" >
+    update website_short_introduce
+    <set >
+      <if test="titleCn != null" >
+        title_cn = #{titleCn,jdbcType=VARCHAR},
+      </if>
+      <if test="titleEn != null" >
+        title_en = #{titleEn,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceCn != null" >
+        introduce_cn = #{introduceCn,jdbcType=VARCHAR},
+      </if>
+      <if test="introduceEn != null" >
+        introduce_en = #{introduceEn,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrlCn != null" >
+        img_url_cn = #{imgUrlCn,jdbcType=VARCHAR},
+      </if>
+      <if test="imgUrlEn != null" >
+        img_url_en = #{imgUrlEn,jdbcType=VARCHAR},
+      </if>
+      <if test="sortNumber != null" >
+        sort_number = #{sortNumber,jdbcType=INTEGER},
+      </if>
+      <if test="delFlag != null" >
+        del_flag = #{delFlag,jdbcType=CHAR},
+      </if>
+      <if test="createTime != null" >
+        create_time = #{createTime,jdbcType=VARCHAR},
+      </if>
+      <if test="createUser != null" >
+        create_user = #{createUser,jdbcType=VARCHAR},
+      </if>
+      <if test="updateTime != null" >
+        update_time = #{updateTime,jdbcType=VARCHAR},
+      </if>
+      <if test="updateUser != null" >
+        update_user = #{updateUser,jdbcType=VARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.WebsiteShortIntroduce" >
+    update website_short_introduce
+    set title_cn = #{titleCn,jdbcType=VARCHAR},
+      title_en = #{titleEn,jdbcType=VARCHAR},
+      introduce_cn = #{introduceCn,jdbcType=VARCHAR},
+      introduce_en = #{introduceEn,jdbcType=VARCHAR},
+      img_url_cn = #{imgUrlCn,jdbcType=VARCHAR},
+      img_url_en = #{imgUrlEn,jdbcType=VARCHAR},
+      sort_number = #{sortNumber,jdbcType=INTEGER},
+      del_flag = #{delFlag,jdbcType=CHAR},
+      create_time = #{createTime,jdbcType=VARCHAR},
+      create_user = #{createUser,jdbcType=VARCHAR},
+      update_time = #{updateTime,jdbcType=VARCHAR},
+      update_user = #{updateUser,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

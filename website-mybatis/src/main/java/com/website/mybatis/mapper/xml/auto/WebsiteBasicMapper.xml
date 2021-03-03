@@ -1,0 +1,364 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.auto.WebsiteBasicMapper" >
+  <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteBasic" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="kh_count" property="khCount" jdbcType="VARCHAR" />
+    <result column="ry_count" property="ryCount" jdbcType="VARCHAR" />
+    <result column="fgs_count" property="fgsCount" jdbcType="VARCHAR" />
+    <result column="video_share_adress" property="videoShareAdress" jdbcType="VARCHAR" />
+    <result column="video_chinese_adress" property="videoChineseAdress" jdbcType="VARCHAR" />
+    <result column="video_english_adress" property="videoEnglishAdress" jdbcType="VARCHAR" />
+    <result column="checked" property="checked" jdbcType="VARCHAR" />
+  </resultMap>
+  <resultMap id="ResultMapWithBLOBs" type="com.website.mybatis.bean.auto.WebsiteBasicWithBLOBs" extends="BaseResultMap" >
+    <result column="introduce" property="introduce" jdbcType="LONGVARCHAR" />
+    <result column="introduce_eng" property="introduceEng" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  <sql id="Example_Where_Clause" >
+    <where >
+      <foreach collection="oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Update_By_Example_Where_Clause" >
+    <where >
+      <foreach collection="example.oredCriteria" item="criteria" separator="or" >
+        <if test="criteria.valid" >
+          <trim prefix="(" suffix=")" prefixOverrides="and" >
+            <foreach collection="criteria.criteria" item="criterion" >
+              <choose >
+                <when test="criterion.noValue" >
+                  and ${criterion.condition}
+                </when>
+                <when test="criterion.singleValue" >
+                  and ${criterion.condition} #{criterion.value}
+                </when>
+                <when test="criterion.betweenValue" >
+                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
+                </when>
+                <when test="criterion.listValue" >
+                  and ${criterion.condition}
+                  <foreach collection="criterion.value" item="listItem" open="(" close=")" separator="," >
+                    #{listItem}
+                  </foreach>
+                </when>
+              </choose>
+            </foreach>
+          </trim>
+        </if>
+      </foreach>
+    </where>
+  </sql>
+  <sql id="Base_Column_List" >
+    id, `time`, kh_count, ry_count, fgs_count, video_share_adress, video_chinese_adress, 
+    video_english_adress, `checked`
+  </sql>
+  <sql id="Blob_Column_List" >
+    introduce, introduce_eng
+  </sql>
+  <select id="selectByExampleWithBLOBs" resultMap="ResultMapWithBLOBs" parameterType="com.website.mybatis.bean.auto.WebsiteBasicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_basic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByExample" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.WebsiteBasicExample" >
+    select
+    <if test="distinct" >
+      distinct
+    </if>
+    <include refid="Base_Column_List" />
+    from website_basic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+    <if test="orderByClause != null" >
+      order by ${orderByClause}
+    </if>
+    <if test="limitStart >= 0" >
+      limit #{limitStart} , #{limitEnd}
+    </if>
+  </select>
+  <select id="selectByPrimaryKey" resultMap="ResultMapWithBLOBs" parameterType="java.lang.Integer" >
+    select 
+    <include refid="Base_Column_List" />
+    ,
+    <include refid="Blob_Column_List" />
+    from website_basic
+    where id = #{id,jdbcType=INTEGER}
+  </select>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.Integer" >
+    delete from website_basic
+    where id = #{id,jdbcType=INTEGER}
+  </delete>
+  <delete id="deleteByExample" parameterType="com.website.mybatis.bean.auto.WebsiteBasicExample" >
+    delete from website_basic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </delete>
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.WebsiteBasicWithBLOBs" >
+    insert into website_basic (id, `time`, kh_count, 
+      ry_count, fgs_count, video_share_adress, 
+      video_chinese_adress, video_english_adress, 
+      `checked`, introduce, introduce_eng
+      )
+    values (#{id,jdbcType=INTEGER}, #{time,jdbcType=VARCHAR}, #{khCount,jdbcType=VARCHAR}, 
+      #{ryCount,jdbcType=VARCHAR}, #{fgsCount,jdbcType=VARCHAR}, #{videoShareAdress,jdbcType=VARCHAR}, 
+      #{videoChineseAdress,jdbcType=VARCHAR}, #{videoEnglishAdress,jdbcType=VARCHAR}, 
+      #{checked,jdbcType=VARCHAR}, #{introduce,jdbcType=LONGVARCHAR}, #{introduceEng,jdbcType=LONGVARCHAR}
+      )
+  </insert>
+  <insert id="insertSelective" parameterType="com.website.mybatis.bean.auto.WebsiteBasicWithBLOBs" >
+    insert into website_basic
+    <trim prefix="(" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        id,
+      </if>
+      <if test="time != null" >
+        `time`,
+      </if>
+      <if test="khCount != null" >
+        kh_count,
+      </if>
+      <if test="ryCount != null" >
+        ry_count,
+      </if>
+      <if test="fgsCount != null" >
+        fgs_count,
+      </if>
+      <if test="videoShareAdress != null" >
+        video_share_adress,
+      </if>
+      <if test="videoChineseAdress != null" >
+        video_chinese_adress,
+      </if>
+      <if test="videoEnglishAdress != null" >
+        video_english_adress,
+      </if>
+      <if test="checked != null" >
+        `checked`,
+      </if>
+      <if test="introduce != null" >
+        introduce,
+      </if>
+      <if test="introduceEng != null" >
+        introduce_eng,
+      </if>
+    </trim>
+    <trim prefix="values (" suffix=")" suffixOverrides="," >
+      <if test="id != null" >
+        #{id,jdbcType=INTEGER},
+      </if>
+      <if test="time != null" >
+        #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="khCount != null" >
+        #{khCount,jdbcType=VARCHAR},
+      </if>
+      <if test="ryCount != null" >
+        #{ryCount,jdbcType=VARCHAR},
+      </if>
+      <if test="fgsCount != null" >
+        #{fgsCount,jdbcType=VARCHAR},
+      </if>
+      <if test="videoShareAdress != null" >
+        #{videoShareAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoChineseAdress != null" >
+        #{videoChineseAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoEnglishAdress != null" >
+        #{videoEnglishAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="checked != null" >
+        #{checked,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        #{introduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="introduceEng != null" >
+        #{introduceEng,jdbcType=LONGVARCHAR},
+      </if>
+    </trim>
+  </insert>
+  <select id="countByExample" parameterType="com.website.mybatis.bean.auto.WebsiteBasicExample" resultType="java.lang.Integer" >
+    select count(*) from website_basic
+    <if test="_parameter != null" >
+      <include refid="Example_Where_Clause" />
+    </if>
+  </select>
+  <update id="updateByExampleSelective" parameterType="map" >
+    update website_basic
+    <set >
+      <if test="record.id != null" >
+        id = #{record.id,jdbcType=INTEGER},
+      </if>
+      <if test="record.time != null" >
+        `time` = #{record.time,jdbcType=VARCHAR},
+      </if>
+      <if test="record.khCount != null" >
+        kh_count = #{record.khCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.ryCount != null" >
+        ry_count = #{record.ryCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.fgsCount != null" >
+        fgs_count = #{record.fgsCount,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoShareAdress != null" >
+        video_share_adress = #{record.videoShareAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoChineseAdress != null" >
+        video_chinese_adress = #{record.videoChineseAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.videoEnglishAdress != null" >
+        video_english_adress = #{record.videoEnglishAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="record.checked != null" >
+        `checked` = #{record.checked,jdbcType=VARCHAR},
+      </if>
+      <if test="record.introduce != null" >
+        introduce = #{record.introduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="record.introduceEng != null" >
+        introduce_eng = #{record.introduceEng,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExampleWithBLOBs" parameterType="map" >
+    update website_basic
+    set id = #{record.id,jdbcType=INTEGER},
+      `time` = #{record.time,jdbcType=VARCHAR},
+      kh_count = #{record.khCount,jdbcType=VARCHAR},
+      ry_count = #{record.ryCount,jdbcType=VARCHAR},
+      fgs_count = #{record.fgsCount,jdbcType=VARCHAR},
+      video_share_adress = #{record.videoShareAdress,jdbcType=VARCHAR},
+      video_chinese_adress = #{record.videoChineseAdress,jdbcType=VARCHAR},
+      video_english_adress = #{record.videoEnglishAdress,jdbcType=VARCHAR},
+      `checked` = #{record.checked,jdbcType=VARCHAR},
+      introduce = #{record.introduce,jdbcType=LONGVARCHAR},
+      introduce_eng = #{record.introduceEng,jdbcType=LONGVARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByExample" parameterType="map" >
+    update website_basic
+    set id = #{record.id,jdbcType=INTEGER},
+      `time` = #{record.time,jdbcType=VARCHAR},
+      kh_count = #{record.khCount,jdbcType=VARCHAR},
+      ry_count = #{record.ryCount,jdbcType=VARCHAR},
+      fgs_count = #{record.fgsCount,jdbcType=VARCHAR},
+      video_share_adress = #{record.videoShareAdress,jdbcType=VARCHAR},
+      video_chinese_adress = #{record.videoChineseAdress,jdbcType=VARCHAR},
+      video_english_adress = #{record.videoEnglishAdress,jdbcType=VARCHAR},
+      `checked` = #{record.checked,jdbcType=VARCHAR}
+    <if test="_parameter != null" >
+      <include refid="Update_By_Example_Where_Clause" />
+    </if>
+  </update>
+  <update id="updateByPrimaryKeySelective" parameterType="com.website.mybatis.bean.auto.WebsiteBasicWithBLOBs" >
+    update website_basic
+    <set >
+      <if test="time != null" >
+        `time` = #{time,jdbcType=VARCHAR},
+      </if>
+      <if test="khCount != null" >
+        kh_count = #{khCount,jdbcType=VARCHAR},
+      </if>
+      <if test="ryCount != null" >
+        ry_count = #{ryCount,jdbcType=VARCHAR},
+      </if>
+      <if test="fgsCount != null" >
+        fgs_count = #{fgsCount,jdbcType=VARCHAR},
+      </if>
+      <if test="videoShareAdress != null" >
+        video_share_adress = #{videoShareAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoChineseAdress != null" >
+        video_chinese_adress = #{videoChineseAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="videoEnglishAdress != null" >
+        video_english_adress = #{videoEnglishAdress,jdbcType=VARCHAR},
+      </if>
+      <if test="checked != null" >
+        `checked` = #{checked,jdbcType=VARCHAR},
+      </if>
+      <if test="introduce != null" >
+        introduce = #{introduce,jdbcType=LONGVARCHAR},
+      </if>
+      <if test="introduceEng != null" >
+        introduce_eng = #{introduceEng,jdbcType=LONGVARCHAR},
+      </if>
+    </set>
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKeyWithBLOBs" parameterType="com.website.mybatis.bean.auto.WebsiteBasicWithBLOBs" >
+    update website_basic
+    set `time` = #{time,jdbcType=VARCHAR},
+      kh_count = #{khCount,jdbcType=VARCHAR},
+      ry_count = #{ryCount,jdbcType=VARCHAR},
+      fgs_count = #{fgsCount,jdbcType=VARCHAR},
+      video_share_adress = #{videoShareAdress,jdbcType=VARCHAR},
+      video_chinese_adress = #{videoChineseAdress,jdbcType=VARCHAR},
+      video_english_adress = #{videoEnglishAdress,jdbcType=VARCHAR},
+      `checked` = #{checked,jdbcType=VARCHAR},
+      introduce = #{introduce,jdbcType=LONGVARCHAR},
+      introduce_eng = #{introduceEng,jdbcType=LONGVARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+  <update id="updateByPrimaryKey" parameterType="com.website.mybatis.bean.auto.WebsiteBasic" >
+    update website_basic
+    set `time` = #{time,jdbcType=VARCHAR},
+      kh_count = #{khCount,jdbcType=VARCHAR},
+      ry_count = #{ryCount,jdbcType=VARCHAR},
+      fgs_count = #{fgsCount,jdbcType=VARCHAR},
+      video_share_adress = #{videoShareAdress,jdbcType=VARCHAR},
+      video_chinese_adress = #{videoChineseAdress,jdbcType=VARCHAR},
+      video_english_adress = #{videoEnglishAdress,jdbcType=VARCHAR},
+      `checked` = #{checked,jdbcType=VARCHAR}
+    where id = #{id,jdbcType=INTEGER}
+  </update>
+</mapper>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.system.ExtMenuMapper">
+	<resultMap id="selectLeftMenuTreeMap" type="com.website.mybatis.bean.ext.system.ExtMenuModel">
+		<result column="parent_menu_id" property="parentMenuId" jdbcType="VARCHAR" />
+		<result column="menu_id" property="menuId" jdbcType="VARCHAR" />
+		<result column="menu_name" property="menuName" jdbcType="VARCHAR" />
+		<result column="menu_url" property="menuUrl" jdbcType="VARCHAR" />
+		<result column="menu_icon" property="menuIcon" jdbcType="VARCHAR" />
+		<result column="sort_key" property="sortKey" jdbcType="VARCHAR" />
+	</resultMap>
+	<select id="selectLeftMenuTree" resultMap="selectLeftMenuTreeMap" parameterType="com.website.mybatis.bean.ext.system.ExtMenuModel">
+		SELECT DISTINCT
+      		m.parent_menu_id AS parent_menu_id,
+			m.menu_id AS menu_id,
+			m.menu_name AS menu_name,
+			m.menu_url AS menu_url,
+			m.menu_icon AS menu_icon,
+			m.sort_key AS sort_key
+		FROM
+		    c_m_user u
+		INNER JOIN c_m_user_role ur ON u.user_id = ur.user_id AND ur.del_flag = '0'
+		INNER JOIN c_m_role_menu_permission rmp ON ur.role_id = rmp.role_id and rmp.del_flag = '0'
+		INNER JOIN c_m_menu m ON rmp.menu_id = m.menu_id AND m.del_flag = '0'
+		INNER JOIN c_m_menu_permission mp ON mp.menu_id = m.menu_id AND mp.del_flag = '0'
+		WHERE
+			u.user_id = #{userCd, jdbcType=VARCHAR}
+		AND mp.permission = #{permission, jdbcType=VARCHAR}
+		AND u.del_flag = '0'
+		ORDER BY
+			m.sort_key ASC
+	</select>
+</mapper>

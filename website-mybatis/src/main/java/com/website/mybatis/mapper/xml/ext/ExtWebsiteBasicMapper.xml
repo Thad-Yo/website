@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.website.mybatis.mapper.ext.ExtWebsiteBasicMapper" >
+ <resultMap id="BaseResultMap" type="com.website.mybatis.bean.auto.WebsiteBasicWithBLOBs" >
+    <id column="id" property="id" jdbcType="INTEGER" />
+    <result column="time" property="time" jdbcType="VARCHAR" />
+    <result column="kh_count" property="khCount" jdbcType="VARCHAR" />
+    <result column="ry_count" property="ryCount" jdbcType="VARCHAR" />
+    <result column="fgs_count" property="fgsCount" jdbcType="VARCHAR" />
+    <result column="video_share_adress" property="videoShareAdress" jdbcType="VARCHAR" />
+    <result column="video_chinese_adress" property="videoChineseAdress" jdbcType="VARCHAR" />
+    <result column="video_english_adress" property="videoEnglishAdress" jdbcType="VARCHAR" />
+    <result column="checked" property="checked" jdbcType="VARCHAR" />
+    <result column="introduce" property="introduce" jdbcType="LONGVARCHAR" />
+    <result column="introduce_eng" property="introduceEng" jdbcType="LONGVARCHAR" />
+  </resultMap>
+  
+  <delete id="delete" parameterType="java.lang.Integer" >
+    delete from website_basic
+    where 1=1
+  </delete>
+  
+  <insert id="insert" parameterType="com.website.mybatis.bean.auto.WebsiteBasicWithBLOBs" >
+    insert into website_basic (id, kh_count, 
+      ry_count, fgs_count, checked,video_share_adress, 
+      video_chinese_adress, video_english_adress, introduce, introduce_eng)
+    values (#{id,jdbcType=INTEGER}, #{khCount,jdbcType=VARCHAR}, 
+      #{ryCount,jdbcType=VARCHAR}, #{fgsCount,jdbcType=VARCHAR}, #{checked,jdbcType=VARCHAR},#{videoShareAdress,jdbcType=VARCHAR}, 
+      #{videoChineseAdress,jdbcType=VARCHAR}, #{videoEnglishAdress,jdbcType=VARCHAR}, #{introduce,jdbcType=VARCHAR}, 
+      #{introduceEng,jdbcType=VARCHAR})
+  </insert>
+  
+  <select id="select" resultMap="BaseResultMap" parameterType="com.website.mybatis.bean.auto.WebsiteBasicWithBLOBs">
+  		select 
+  		b.id,FROM_UNIXTIME(b.time,'%Y-%m-%d %H:%i:%S') time,b.checked,b.kh_count,b.ry_count,b.fgs_count,b.video_share_adress,
+  		b.video_chinese_adress,b.video_english_adress,b.introduce,b.introduce_eng
+  		 from website_basic b
+  		 where id=(select MAX(id) from website_basic )
+		
+  </select>
+  
+</mapper>
